@@ -1,0 +1,3 @@
+suites:
+  oxygen_core_suite:
+    namespace: Oxygen\Core
