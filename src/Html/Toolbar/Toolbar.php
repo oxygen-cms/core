@@ -80,7 +80,7 @@ class Toolbar {
      */
 
     public function addItem(ToolbarItem $item) {
-        $this->itemsPool[$item->getIdentifier()] = $item;
+        $this->itemsPool[$item->getIdentifier()] = clone $item;
     }
 
     /**

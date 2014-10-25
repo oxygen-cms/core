@@ -19,6 +19,7 @@ class Field {
     const TYPE_CHECKBOX     = 'checkbox';
     const TYPE_TOGGLE       = 'toggle';
     const TYPE_SELECT       = 'select';
+    const TYPE_RADIO        = 'radio';
     const TYPE_DATE         = 'date';
     const TYPE_TAGS         = 'tags';
 

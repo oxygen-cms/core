@@ -11,6 +11,7 @@ class Header {
 
     use RenderableTrait;
 
+    const TYPE_TINY    = 3;
     const TYPE_SMALL   = 0;
     const TYPE_NORMAL  = 1;
     const TYPE_MAIN    = 2;
@@ -66,8 +67,8 @@ class Header {
     /**
      * Constructs the Header.
      *
-     * @param string $title
-     * @param Model $model
+     * @param string  $title
+     * @param array   $arguments
      * @param integer $type
      */
 

@@ -29,15 +29,22 @@ class StringView extends View {
     /**
      * Create a new view instance.
      *
-     * @param  \Illuminate\View\Factory  $factory
-     * @param  \Illuminate\View\Engines\EngineInterface  $engine
-     * @param  string  $contents
-     * @param  string  $path
-     * @param  string  $lastModified
-     * @param  array   $data
+     * @param  Factory         $factory
+     * @param  EngineInterface $engine
+     * @param  string          $contents
+     * @param  string          $path
+     * @param  string          $lastModified
+     * @param  array           $data
      */
 
-    public function __construct(Factory $factory, EngineInterface $engine, $contents, $path, $lastModified, $data = []) {
+    public function __construct(
+        Factory $factory,
+        EngineInterface $engine,
+        $contents,
+        $path,
+        $lastModified,
+        $data = []
+    ) {
         $this->contents     = $contents;
         $this->path         = $path;
         $this->lastModified = $lastModified;
@@ -107,7 +114,7 @@ class StringView extends View {
      */
 
     protected function gatherInfo() {
-        $info = new stdClass();
+        $info               = new stdClass();
         $info->contents     = $this->contents;
         $info->path         = $this->path;
         $info->lastModified = $this->lastModified;

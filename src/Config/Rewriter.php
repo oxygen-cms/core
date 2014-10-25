@@ -7,10 +7,6 @@ use Illuminate\Filesystem\Filesystem;
 /**
  * Known bugs:
  *
- * When using a single backslash in a single quoted string eg: 'foo\bar'
- *   Cause: compileSearchForString()
- *   Fix: use double slash 'foo\\bar'
- *
  * Constants & functions
  *   Cause: compileSearchForValue()
  *   Fix: don't use constants or functions
@@ -26,7 +22,8 @@ class Rewriter {
      * @param  string $contents
      * @param  string $key
      * @param  mixed  $oldValue
-     * @param  mixed  $value
+     * @param         $newValue
+     * @throws \Oxygen\Core\Config\RewriteException
      * @return void
      */
 
@@ -60,6 +57,7 @@ class Rewriter {
      * Replaces the entire file.
      *
      * @param string $value
+     * @return string
      */
 
     protected function replaceEntireFile($value) {
@@ -70,7 +68,8 @@ class Rewriter {
      * Compiles a regex that will search for the given key and value.
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
+     * @return string
      */
 
     protected function compileSearchFor($key, $value) {
@@ -113,7 +112,8 @@ class Rewriter {
         $slashed = addslashes($string); // places a \ before ' or " or \
         $quoted = '[\'"]' . $this->quote($slashed) . '[\'"]'; // escapes the string and inserts quotes around it
         $optionalSlashes = preg_replace('/\\\\([\'"])/', '[\\\\\\]?$1', $quoted); // matches \' or \" and makes it optional
-        return $optionalSlashes;
+        $optionalBackslashes = str_replace('\\\\\\\\', '\\\\\\\\?', $quoted); // matches \\
+        return $optionalBackslashes;
     }
 
     /**
