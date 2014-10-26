@@ -1,4 +1,4 @@
-# Oxygen Core Framework
+# Oxygen - Core Framework
 
 This repository contains the core framework for Oxygen.
 
