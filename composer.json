@@ -1,6 +1,7 @@
 {
     "name": "oxygen/core",
     "description": "The Core Framework For Oxygen",
+    "license": "MIT",
     "keywords": [
         "laravel",
         "cms",
