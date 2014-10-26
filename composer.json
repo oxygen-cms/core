@@ -3,11 +3,9 @@
     "description": "The Core Framework For Oxygen",
     "license": "MIT",
     "keywords": [
-        "laravel",
         "cms",
         "framework",
-        "OxygenExtension",
-        "oxygen"
+        "OxygenExtension"
     ],
     "authors": [
         {
@@ -17,7 +15,8 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "laravel/framework": "~4.2"
+        "laravel/framework": "~4.2",
+        "watson/validating": "~0.1"
     },
     "autoload": {
         "psr-4": {
