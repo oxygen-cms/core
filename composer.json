@@ -1,15 +1,22 @@
 {
     "name": "oxygen/core",
-    "description": "",
+    "description": "The Core Framework For Oxygen",
+    "keywords": [
+        "laravel",
+        "cms",
+        "framework",
+        "OxygenExtension",
+        "oxygen"
+    ],
     "authors": [
         {
             "name": "Chris Chamberlain",
-            "email": "neon64bit@gmail.com"
+            "email": "c.chamberlain@iinet.net.au"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.2.*"
+        "laravel/framework": "~4.2"
     },
     "autoload": {
         "psr-4": {
@@ -19,5 +26,49 @@
             "src/Support/helpers.php"
         ]
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "title": "Oxygen Core",
+        "readme": "oxygen.md",
+        "changes": "changes.md",
+        "icon": "icon.png",
+        "providers": [
+            {
+                "name": "Core",
+                "class": "Oxygen\\Core\\CoreServiceProvider",
+                "description": "Core Service Provider of Oxygen"
+            },
+
+            {
+                "name": "Console",
+                "class": "Oxygen\\Core\\Console\\ConsoleServiceProvider",
+                "description": "Adds Console Commands"
+            },
+            {
+                "name": "Config",
+                "class": "Oxygen\\Core\\Config\\ConfigServiceProvider",
+                "description": "Adds Writable Config to Illuminate\\Config"
+            },
+            {
+                "name": "Routing",
+                "class": "Oxygen\\Core\\Routing\\RoutingServiceProvider",
+                "description": "Adds Blueprint Routing to Illuminate\\Routing"
+            },
+            {
+                "name": "Translation",
+                "class": "Oxygen\\Core\\Translation\\TranslationServiceProvider",
+                "description": "Adds Bulk Replacements to Illuminate\\Translation"
+            },
+            {
+                "name": "Validation",
+                "class": "Oxygen\\Core\\Validation\\ValidationServiceProvider",
+                "description": "Extra Validation Rules"
+            },
+            {
+                "name": "View",
+                "class": "Oxygen\\Core\\View\\ViewServiceProvider",
+                "description": "Compiles Views from a String"
+            }
+        ]
+    }
 }

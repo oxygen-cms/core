@@ -18,9 +18,8 @@ class Translator extends BaseTranslator {
     /**
      * Create a new translator instance.
      *
-     * @param  \Illuminate\Translation\LoaderInterface  $loader
-     * @param  string  $locale
-     * @return void
+     * @param  LoaderInterface $loader
+     * @param  string          $locale
      */
 
     public function __construct(LoaderInterface $loader, $locale) {
