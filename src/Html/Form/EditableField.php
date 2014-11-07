@@ -33,7 +33,7 @@ class EditableField extends Field {
         if(Input::old($this->getMeta()->name)) {
             return Input::old($this->getMeta()->name);
         } else if($this->value !== null) {
-            return $this->value;
+            return parent::getValue();
         } else {
             return null;
         }

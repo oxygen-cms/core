@@ -198,8 +198,9 @@ class Blueprint {
     /**
      * Set the display name of the Blueprint.
      *
-     * @param string    $name
-     * @param int       $type
+     * @param string   $name
+     * @param boolean  $type
+     * @return void
      */
 
     public function setDisplayName($name, $type = self::SINGULAR) {
@@ -213,7 +214,7 @@ class Blueprint {
     /**
      * Get the display name of the model.
      *
-     * @param int $type
+     * @param boolean $type
      * @throws InvalidArgumentException If $type is not valid
      * @return string
      */

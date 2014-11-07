@@ -33,6 +33,14 @@ class Header {
     protected $subtitle;
 
     /**
+     * Icon of the section header.
+     *
+     * @var string
+     */
+
+    protected $icon;
+
+    /**
      * Toolbar instance containing ToolbarItems
      *
      * @var Toolbar
@@ -123,6 +131,37 @@ class Header {
     }
 
     /**
+     * Determines if the icon exists.
+     *
+     * @return boolean
+     */
+
+    public function hasIcon() {
+        return $this->icon !== null;
+    }
+
+    /**
+     * Returns the icon.
+     *
+     * @return string
+     */
+
+    public function getIcon() {
+        return $this->icon;
+    }
+
+    /**
+     * Sets the icon.
+     *
+     * @param string $icon
+     * @return void
+     */
+
+    public function setIcon($icon) {
+        $this->icon = $icon;
+    }
+
+    /**
      * Returns the toolbar.
      *
      * @return Toolbar
@@ -185,7 +224,7 @@ class Header {
 
     public static function fromBlueprint(Blueprint $blueprint, $title = null, array $arguments = [], $type = self::TYPE_MAIN, $fillFromToolbar = 'section') {
         if($title === null) {
-            $title = $arguments['model']->{$blueprint->getTitleField()};
+            $title = $arguments['model']->getAttribute($blueprint->getTitleField());
         }
 
         $object = new static(

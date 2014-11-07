@@ -2,7 +2,6 @@
 
 namespace Oxygen\Core\Html\Form;
 
-use Oxygen\Core\Model\Model;
 use Oxygen\Core\Form\Field as FieldMeta;
 use Oxygen\Core\Html\RenderableTrait;
 
@@ -21,12 +20,12 @@ class StaticField extends Field {
     /**
      * Constructs the object.
      *
-     * @param FieldMeta $field
-     * @param string $value
-     * @param boolean $pretty
+     * @param FieldMeta $meta
+     * @param string    $value
+     * @param boolean   $pretty
      */
 
-    public function __construct(FieldMeta $meta, $value = '', $pretty = false) {
+    public function __construct(FieldMeta $meta, $value = '', $pretty = true) {
         parent::__construct($meta, $value);
         $this->pretty = $pretty;
     }
@@ -42,28 +41,28 @@ class StaticField extends Field {
     }
 
      /**
-     * Is the field pretty?
+     * Get the presented value of the field.
      *
      * @return boolean
      */
 
     public function getPresentedValue() {
         $presenter = $this->getMeta()->presenter;
-        return $presenter($this->getValue(), $this->getModel());
+        return $presenter($this->getValue(), $this->getEntity());
     }
 
     /**
-     * Create a field from meta and a model
+     * Create a field from metadata and an entity
      *
      * @param FieldMeta $meta
-     * @param Model $model
+     * @param object $entity
      * @param boolean $pretty
      * @return Oxygen\Core\Html\Form\Field
      */
 
-    public static function fromModel(FieldMeta $meta, Model $model, $pretty = false) {
-        $instance = new static($meta, $model->getAttribute($meta->name), $pretty);
-        $instance->setModel($model);
+    public static function fromEntity(FieldMeta $meta, $entity, $pretty = true) {
+        $instance = new static($meta, $entity->getAttribute($meta->name), $pretty);
+        $instance->setEntity($entity);
         return $instance;
     }
 

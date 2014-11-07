@@ -28,7 +28,7 @@ trait VersionableTrait {
     /**
      * Returns all the versions of the Resource.
      *
-     * @return Relation|QueryBuilder
+     * @return QueryBuilder
      */
 
     public function versions() {

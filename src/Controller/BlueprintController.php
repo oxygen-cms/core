@@ -13,7 +13,7 @@ class BlueprintController extends Controller {
     /**
      * Blueprint for the Resource.
      *
-     * @var Oxygen\Core\Blueprint
+     * @var Oxygen\Core\Blueprint\Blueprint
      */
 
     protected $blueprint;

@@ -35,9 +35,9 @@ class Factory extends BaseFactory {
      * @return Illuminate\View\View
      */
     public function model($model, $field, $data = [], $mergeData = []) {
-        $contents = $model->$field;
+        $contents = $model->getAttribute($field);
         $path = $this->pathFromModel($model, $field);
-        $timestamp = $model->usesTimestamps() ? strtotime($model->{$model->getUpdatedAtColumn()}) : 0;
+        $timestamp = class_uses($model, 'Oxygen\Data\Behaviour\Timestamps') ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
 
         return $this->string($contents, $path, $timestamp, $data, $mergeData);
     }
@@ -51,7 +51,7 @@ class Factory extends BaseFactory {
      */
 
     protected function pathFromModel($model, $field) {
-        $path = 'db_' . $model->getTable() . '_' . $model->getKey() . '_' . $field;
+        $path = 'db_' . get_class($model) . '_' . $model->getId() . '_' . $field;
         return strtolower(str_replace(['-', '.'], '_', $path));
     }
 

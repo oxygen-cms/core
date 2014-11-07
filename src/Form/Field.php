@@ -2,9 +2,11 @@
 
 namespace Oxygen\Core\Form;
 
+use Closure;
+use DateTime;
 use Exception;
 
-use Illuminate\Support\Str;
+use Str;
 use Carbon\Carbon;
 
 class Field {
@@ -22,6 +24,7 @@ class Field {
     const TYPE_RADIO        = 'radio';
     const TYPE_DATE         = 'date';
     const TYPE_TAGS         = 'tags';
+    const TYPE_RELATIONSHIP = 'relationship';
 
     /**
      * Field name in the database.
@@ -126,11 +129,12 @@ class Field {
      *
      * @param string $name
      * @param string $type
+     * @param bool   $editable
      */
 
     public function __construct($name, $type = self::TYPE_TEXT, $editable = false) {
         $this->name             = $name;
-        $this->label            = Str::title(str_replace(['_', '-'], ' ', last(explode('.', $name))));
+        $this->label            = Str::title(Str::camelToWords($name));
         $this->description      = null;
         $this->placeholder      = null;
         $this->type             = $type;
@@ -174,11 +178,14 @@ class Field {
                 return 'true';
             } else if($value === false) {
                 return 'false';
-            } else if($value instanceof Carbon) {
+            } else if($value instanceof DateTime) {
+                $value = new Carbon($value->format('Y-m-d H:i:s'), $value->getTimezone());
                 return $value->toDayDateTimeString();
-            } else {
-                return $value;
+            } else if(is_object($value)) {
+                return 'Object';
             }
+
+            return $value;
         };
     }
 

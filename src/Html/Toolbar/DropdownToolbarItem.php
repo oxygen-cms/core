@@ -70,7 +70,7 @@ class DropdownToolbarItem extends ToolbarItem {
         $this->itemsToDisplay = [];
         $this->label          = $label;
         $this->color          = 'white';
-        $this->icon           = 'chevron-down';
+        $this->icon           = 'angle-down';
         $this->identifier     = camel_case($this->label);
     }
 

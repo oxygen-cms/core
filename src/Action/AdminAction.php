@@ -28,7 +28,7 @@ class AdminAction extends Action {
         $this->routeParametersCallback = function($action, array $options) {
             if(isset($options['model'])) {
                 return [
-                    $options['model']->getKey()
+                    $options['model']->getId()
                 ];
             } else {
                 return [];

@@ -2,7 +2,7 @@
 
 namespace Oxygen\Core\Html\Form;
 
-use Oxygen\Core\Model\Model;
+use DateTime;
 use Oxygen\Core\Form\Field as FieldMeta;
 
 abstract class Field {
@@ -28,18 +28,18 @@ abstract class Field {
     protected $value;
 
     /**
-     * The model associated with the field.
+     * The entity associated with the form.
      *
-     * @var Model
+     * @var object
      */
 
-    protected $model;
+    protected $entity;
 
     /**
      * Constructs the object.
      *
-     * @param Oxygen\Core\Form\Field $field
-     * @param string $value
+     * @param FieldMeta $meta
+     * @param string    $value
      */
 
     public function __construct(FieldMeta $meta, $value = '') {
@@ -50,7 +50,7 @@ abstract class Field {
     /**
      * Returns the metadata about the form field.
      *
-     * @return Oxygen\Core\Form\Field
+     * @return FieldMeta
      */
 
     public function getMeta() {
@@ -64,40 +64,43 @@ abstract class Field {
      */
 
     public function getValue() {
+        if($this->value instanceof DateTime) {
+            return $this->value->format('Y-m-d H:i:s');
+        }
         return $this->value;
     }
 
     /**
-     * Sets the model associated with the field.
+     * Sets the entity associated with the field.
      *
-     * @param Model $model
+     * @param object $entity
      */
 
-    public function setModel($model) {
-        $this->model = $model;
+    public function setEntity($entity) {
+        $this->entity = $entity;
     }
 
     /**
-     * Get model.
+     * Get the entity.
      *
-     * @return Model
+     * @return object
      */
 
-    public function getModel() {
-        return $this->model;
+    public function getEntity() {
+        return $this->entity;
     }
 
     /**
      * Create a field from meta and a model
      *
      * @param FieldMeta $meta
-     * @param Model $model
+     * @param object $entity
      * @return Oxygen\Core\Html\Form\Field
      */
 
-    public static function fromModel(FieldMeta $meta, Model $model) {
-        $instance = new static($meta, $model->getAttribute($meta->name));
-        $instance->setModel($model);
+    public static function fromEntity(FieldMeta $meta, $entity) {
+        $instance = new static($meta, $entity->getAttribute($meta->name));
+        $instance->setEntity($entity);
         return $instance;
     }
 
