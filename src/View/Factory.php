@@ -28,12 +28,13 @@ class Factory extends BaseFactory {
      * Get the evaluated view contents for the given model and field.
      * If the model doesn't use timestamps then the view will be re-compiled on every request.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  object  $model
      * @param  string  $field
      * @param  array   $data
      * @param  array   $mergeData
      * @return Illuminate\View\View
      */
+
     public function model($model, $field, $data = [], $mergeData = []) {
         $contents = $model->getAttribute($field);
         $path = $this->pathFromModel($model, $field);
