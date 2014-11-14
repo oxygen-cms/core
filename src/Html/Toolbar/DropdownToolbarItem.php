@@ -37,7 +37,7 @@ class DropdownToolbarItem extends ToolbarItem {
     /**
      * The label of the dropdown button
      *
-     * @var array
+     * @var string|ToolbarItem
      */
 
     public $label;
@@ -71,7 +71,11 @@ class DropdownToolbarItem extends ToolbarItem {
         $this->label          = $label;
         $this->color          = 'white';
         $this->icon           = 'angle-down';
-        $this->identifier     = camel_case($this->label);
+        if(is_object($this->label)) {
+            $this->identifier     = $this->label->getIdentifier();
+        } else {
+            $this->identifier     = camel_case($this->label);
+        }
     }
 
     /**
@@ -108,7 +112,7 @@ class DropdownToolbarItem extends ToolbarItem {
             }
         }
 
-        return !empty($this->itemsToDisplay); // if there aren't any items in the dropdown then we won't display it
+        return !empty($this->itemsToDisplay) || is_object($this->label); // if there aren't any items in the dropdown then we won't display it
     }
 
 }

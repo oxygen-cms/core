@@ -87,7 +87,7 @@ class Toolbar {
      * Get a ToolbarItem.
      *
      * @param string $identifier
-     * @return void
+     * @return ToolbarItem
      */
 
     public function getItem($identifier) {
@@ -96,6 +96,17 @@ class Toolbar {
         }
 
         return $this->itemsPool[$identifier];
+    }
+
+    /**
+     * Determines a ToolbarItem exists.
+     *
+     * @param string $identifier
+     * @return boolean
+     */
+
+    public function hasItem($identifier) {
+        return isset($this->itemsPool[$this->prefix . '.' . $identifier]) || isset($this->itemsPool[$identifier]);
     }
 
     /**
@@ -112,6 +123,9 @@ class Toolbar {
             if($value === 'spacer' || $value === '|') {
                 $this->itemsOrdered[] = $this->spacer;
             } elseif(is_array($value)) {
+                if($this->hasItem($label)) {
+                    $label = $this->getItem($label);
+                }
                 $dropdown = new DropdownToolbarItem($label);
                 foreach($value as $dropdownItem) {
                     $dropdown->addItem($this->getItem($dropdownItem));
