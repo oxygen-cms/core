@@ -143,7 +143,7 @@ class Field {
         $this->validationRules  = [];
         $this->attributes       = [];
         $this->options          = [];
-        $this->presenter        = static::getDefaultPresenter();
+        $this->presenter        = $this->getDefaultPresenter();
     }
 
     /**
@@ -172,7 +172,7 @@ class Field {
      * @return Closure
      */
 
-    public static function getDefaultPresenter() {
+    public function getDefaultPresenter() {
         return function($value) {
             if($value === true) {
                 return 'true';
@@ -183,6 +183,10 @@ class Field {
                 return $value->toDayDateTimeString();
             } else if(is_object($value)) {
                 return 'Object';
+            }
+
+            if($this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) {
+                return '<pre><code>' . $value . '</code></pre>';
             }
 
             return $value;
