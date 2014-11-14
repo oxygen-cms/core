@@ -73,7 +73,7 @@ abstract class ActionToolbarItem extends ToolbarItem {
     /**
      * Determines if the button should be rendered.
      *
-     * @param array $options
+     * @param array $arguments
      * @return boolean
      */
 

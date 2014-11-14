@@ -19,6 +19,14 @@ class Dialog {
     const TYPE_CONFIRM = 'confirm';
 
     /**
+     * Will display a dialog box with a message.
+     *
+     * @var string
+     */
+
+    const TYPE_ALERT = 'alert';
+
+    /**
      * Message to be displayed in the Dialog.
      *
      * @var string

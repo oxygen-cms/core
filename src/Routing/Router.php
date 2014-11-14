@@ -42,9 +42,9 @@ class Router extends BaseRouter {
                 $callback($action, $route);
             };
 
-            if($action->registerAtEnd) {
+            if($action->register === 'atEnd') {
                 $this->container['app']->before($closure);
-            } else {
+            } else if($action->register) {
                 $closure();
             }
         }

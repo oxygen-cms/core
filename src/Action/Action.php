@@ -110,7 +110,7 @@ class Action {
      * @var boolean
      */
 
-    public $registerAtEnd;
+    public $register;
 
     /**
      * Whether to load the link via AJAX.
@@ -138,6 +138,7 @@ class Action {
         $this->afterFilters  = [];
         $this->permissions   = null;
         $this->uses          = $uses;
+        $this->register      = true;
         $this->routeParametersCallback = function($action, array $options) {
             return [];
         };
