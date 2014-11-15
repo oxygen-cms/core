@@ -123,10 +123,14 @@ class Toolbar {
             if($value === 'spacer' || $value === '|') {
                 $this->itemsOrdered[] = $this->spacer;
             } elseif(is_array($value)) {
-                if($this->hasItem($label)) {
-                    $label = $this->getItem($label);
+                $parts = explode(',', $label);
+                if($this->hasItem($parts[0])) {
+                    $dropdown = new DropdownToolbarItem($parts[1]);
+                    $dropdown->button = $this->getItem($parts[0]);
+                } else {
+                    $dropdown = new DropdownToolbarItem($parts[0]);
                 }
-                $dropdown = new DropdownToolbarItem($label);
+
                 foreach($value as $dropdownItem) {
                     $dropdown->addItem($this->getItem($dropdownItem));
                 }

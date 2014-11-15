@@ -2,9 +2,11 @@
 
 namespace Oxygen\Core\Html\Toolbar;
 
+use Exception;
 use InvalidArgumentException;
 
 use Oxygen\Core\Html\RenderableTrait;
+use Oxygen\Core\Html\RendererInterface;
 
 class DropdownToolbarItem extends ToolbarItem {
 
@@ -43,6 +45,14 @@ class DropdownToolbarItem extends ToolbarItem {
     public $label;
 
     /**
+     * A primary action for the toolbar item.
+     *
+     * @var ToolbarItem
+     */
+
+    public $button;
+
+    /**
      * Icon of the dropdown button.
      *
      * @var string
@@ -59,6 +69,14 @@ class DropdownToolbarItem extends ToolbarItem {
     public $identifier;
 
     /**
+     * Stores if the button should be rendered.
+     *
+     * @var boolean
+     */
+
+    public $shouldRenderButton;
+
+    /**
      * Constructs the DropdownToolbarItem.
      *
      * @param string $label
@@ -71,11 +89,7 @@ class DropdownToolbarItem extends ToolbarItem {
         $this->label          = $label;
         $this->color          = 'white';
         $this->icon           = 'angle-down';
-        if(is_object($this->label)) {
-            $this->identifier     = $this->label->getIdentifier();
-        } else {
-            $this->identifier     = camel_case($this->label);
-        }
+        $this->identifier     = camel_case($this->label);
     }
 
     /**
@@ -101,18 +115,47 @@ class DropdownToolbarItem extends ToolbarItem {
     /**
      * Determines if the button should be rendered.
      *
-     * @param array $options
+     * @param array $arguments
      * @return boolean
      */
 
-    public function shouldRender(array $options = []) {
+    public function shouldRender(array $arguments = []) {
         foreach($this->items as $item) {
-            if($item->shouldRender($options)) {
+            if($item->shouldRender($arguments)) {
                 $this->itemsToDisplay[] = $item;
             }
         }
 
-        return !empty($this->itemsToDisplay) || is_object($this->label); // if there aren't any items in the dropdown then we won't display it
+        $this->shouldRenderButton = $this->button !== null && $this->button->shouldRender($arguments);
+
+        // if there any items in the dropdown then we'll display it
+        // or if the primary action should be displayed
+        return !empty($this->itemsToDisplay) || $this->shouldRenderButton;
+    }
+
+    /**
+     * Renders the object.
+     *
+     * @param array             $arguments
+     * @param RendererInterface $renderer
+     * @throws \Exception
+     * @return string the rendered object
+     */
+
+    public function render(array $arguments = [], RendererInterface $renderer = null) {
+        if($renderer === null) {
+            if(static::$defaultRenderer === null) {
+                throw new Exception('No Default Renderer Exists for Class ' . get_class());
+            } else {
+                $renderer = static::$defaultRenderer;
+            }
+        }
+
+        if(empty($this->itemsToDisplay)) {
+            return $this->button->render($arguments);
+        }
+
+        return $renderer->render($this, $arguments);
     }
 
 }

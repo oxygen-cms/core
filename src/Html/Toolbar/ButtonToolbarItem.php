@@ -70,8 +70,9 @@ class ButtonToolbarItem extends ActionToolbarItem {
      * Renders the object.
      * Before rendering all 'dynamic callbacks' will be excecuted.
      *
-     * @param array $arguments
+     * @param array             $arguments
      * @param RendererInterface $renderer
+     * @throws \Exception
      * @return string the rendered object
      */
 
