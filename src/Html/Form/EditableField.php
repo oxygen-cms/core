@@ -15,8 +15,8 @@ class EditableField extends Field {
     /**
      * Constructs the object.
      *
-     * @param FieldMeta $field
-     * @param string $value
+     * @param FieldMeta $meta
+     * @param string    $value
      */
 
     public function __construct(FieldMeta $meta, $value = '') {

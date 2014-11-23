@@ -465,6 +465,17 @@ class Blueprint {
     }
 
     /**
+     * Determines if the form field exists.
+     *
+     * @param string $name
+     * @return boolean
+     */
+
+    public function hasField($name) {
+        return isset($this->formFields[$name]);
+    }
+
+    /**
      * Get an action by its name.
      *
      * @param string $name

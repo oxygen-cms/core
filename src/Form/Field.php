@@ -23,6 +23,7 @@ class Field {
     const TYPE_SELECT       = 'select';
     const TYPE_RADIO        = 'radio';
     const TYPE_DATE         = 'date';
+    const TYPE_NUMBER       = 'number';
     const TYPE_TAGS         = 'tags';
     const TYPE_RELATIONSHIP = 'relationship';
 
@@ -117,12 +118,20 @@ class Field {
     public $datalist;
 
     /**
-     * Closure that will be used to modify the field's value.
+     * Closure that will be used to modify the field's input value.
      *
      * @var Closure
      */
 
-    public $presenter;
+    public $inputTransformer;
+
+    /**
+     * Closure that will be used to modify the field's output value.
+     *
+     * @var Closure
+     */
+
+    public $outputTransformer;
 
     /**
      * Construct the object.
@@ -133,17 +142,18 @@ class Field {
      */
 
     public function __construct($name, $type = self::TYPE_TEXT, $editable = false) {
-        $this->name             = $name;
-        $this->label            = Str::title(Str::camelToWords($name));
-        $this->description      = null;
-        $this->placeholder      = null;
-        $this->type             = $type;
-        $this->editable         = $editable;
-        $this->fillable         = false;
-        $this->validationRules  = [];
-        $this->attributes       = [];
-        $this->options          = [];
-        $this->presenter        = $this->getDefaultPresenter();
+        $this->name              = $name;
+        $this->label             = Str::title(Str::camelToWords($name));
+        $this->description       = null;
+        $this->placeholder       = null;
+        $this->type              = $type;
+        $this->editable          = $editable;
+        $this->fillable          = false;
+        $this->validationRules   = [];
+        $this->attributes        = [];
+        $this->options           = [];
+        $this->inputTransformer  = $this->getDefaultInputTransformer();
+        $this->outputTransformer = $this->getDefaultOutputTransformer();
     }
 
     /**
@@ -167,12 +177,32 @@ class Field {
     }
 
     /**
-     * Returns the default presenter to be used if none is set.
+     * Returns the input transformer to be used if none is set.
      *
      * @return Closure
      */
 
-    public function getDefaultPresenter() {
+    public function getDefaultInputTransformer() {
+        return function($value) {
+            if($this->type === self::TYPE_CHECKBOX || $this->type === self::TYPE_TOGGLE) {
+                $value = $value === 'true' ?  true : false;
+            }
+
+            if($this->type === self::TYPE_NUMBER) {
+                $value = (int) $value;
+            }
+
+            return $value;
+        };
+    }
+
+    /**
+     * Returns the default output transformer to be used if none is set.
+     *
+     * @return Closure
+     */
+
+    public function getDefaultOutputTransformer() {
         return function($value) {
             if($value === true) {
                 return 'true';
@@ -185,12 +215,24 @@ class Field {
                 return 'Object';
             }
 
-            if($this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) {
+            if($this->type === self::TYPE_TEXTAREA || $this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) {
                 return '<pre><code>' . $value . '</code></pre>';
             }
 
             return $value;
         };
+    }
+
+    /**
+     * Transforms user input.
+     *
+     * @param $input
+     * @return mixed
+     */
+
+    public function transformInput($input) {
+        $transformer = $this->inputTransformer;
+        return $transformer($input);
     }
 
     /**

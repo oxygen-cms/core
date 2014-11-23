@@ -46,8 +46,8 @@ class StaticField extends Field {
      * @return boolean
      */
 
-    public function getPresentedValue() {
-        $presenter = $this->getMeta()->presenter;
+    public function getPrettyValue() {
+        $presenter = $this->getMeta()->outputTransformer;
         return $presenter($this->getValue(), $this->getEntity());
     }
 
@@ -57,7 +57,7 @@ class StaticField extends Field {
      * @param FieldMeta $meta
      * @param object $entity
      * @param boolean $pretty
-     * @return Oxygen\Core\Html\Form\Field
+     * @return Field
      */
 
     public static function fromEntity(FieldMeta $meta, $entity, $pretty = true) {

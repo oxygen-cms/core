@@ -64,9 +64,6 @@ abstract class Field {
      */
 
     public function getValue() {
-        if($this->value instanceof DateTime) {
-            return $this->value->format('Y-m-d H:i:s');
-        }
         return $this->value;
     }
 
