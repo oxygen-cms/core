@@ -73,9 +73,20 @@ class Toolbar {
     }
 
     /**
+     * Sets a shared items pool for the toolbar.
+     *
+     * @param $items
+     * @return void
+     */
+
+    public function setSharedItemsPool(&$items) {
+        $this->itemsPool = &$items;
+    }
+
+    /**
      * Adds a ToolbarItem.
      *
-     * @param Oxygen\Core\Html\Toolbar\ToolbarItem $item
+     * @param ToolbarItem $item
      * @return void
      */
 

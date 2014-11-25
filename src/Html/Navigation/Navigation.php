@@ -52,6 +52,9 @@ class Navigation {
             'primary'   => new Toolbar(),
             'secondary' => new Toolbar()
         ];
+        $itemsPool = [];
+        $this->toolbars['primary']->setSharedItemsPool($itemsPool);
+        $this->toolbars['secondary']->setSharedItemsPool($itemsPool);
         $this->spacer = new SpacerToolbarItem();
     }
 
@@ -67,15 +70,14 @@ class Navigation {
     }
 
     /**
-     * Adds a ToolbarItem to a toolbar.
+     * Adds a ToolbarItem to the toolbar.
      *
      * @param ToolbarItem $item
-     * @param integer $toolbar Which toolbar to use
      * @return void
      */
 
-    public function add(ToolbarItem $item, $toolbar = self::PRIMARY) {
-        $this->toolbars[$toolbar]->addItem($item);
+    public function add(ToolbarItem $item) {
+        $this->toolbars['primary']->addItem($item);
     }
 
     /**
