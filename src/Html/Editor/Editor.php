@@ -44,6 +44,14 @@ class Editor {
     public static $defaultStylesheets = [];
 
     /**
+     * Include editor scripts if it will be displayed on the page.
+     *
+     * @var boolean
+     */
+
+    public static $includeScripts = false;
+
+    /**
      * Name of the code editor.
      *
      * @var string
@@ -164,6 +172,8 @@ class Editor {
      */
 
     public function getCreateScript() {
+        static::$includeScripts = true;
+
         $text = '<script>';
         $text .= 'editors = ( typeof editors != "undefined" && editors instanceof Array ) ? editors : [];';
         $text .= 'editors.push({';
