@@ -15,6 +15,7 @@ class Header {
     const TYPE_SMALL   = 0;
     const TYPE_NORMAL  = 1;
     const TYPE_MAIN    = 2;
+    const TYPE_BLOCK   = 4;
 
     /**
      * Title of the section header.
@@ -71,6 +72,14 @@ class Header {
      */
 
     protected $backLink;
+
+    /**
+     * Content
+     *
+     * @var string
+     */
+
+    protected $content;
 
     /**
      * Constructs the Header.
@@ -209,6 +218,36 @@ class Header {
 
     public function getBackLink() {
         return $this->backLink;
+    }
+
+    /**
+     * Sets the content
+     *
+     * @param string $content
+     */
+
+    public function setContent($content) {
+        $this->content = $content;
+    }
+
+    /**
+     * Returns the content.
+     *
+     * @return string
+     */
+
+    public function getContent() {
+        return $this->content;
+    }
+
+    /**
+     * Determines if there is any content
+     *
+     * @return boolean
+     */
+
+    public function hasContent() {
+        return $this->content !== null;
     }
 
     /**
