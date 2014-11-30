@@ -60,11 +60,6 @@
                 "description": "Adds Bulk Replacements to Illuminate\\Translation"
             },
             {
-                "name": "Validation",
-                "class": "Oxygen\\Core\\Validation\\ValidationServiceProvider",
-                "description": "Extra Validation Rules"
-            },
-            {
                 "name": "View",
                 "class": "Oxygen\\Core\\View\\ViewServiceProvider",
                 "description": "Compiles Views from a String"
