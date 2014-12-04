@@ -9,7 +9,9 @@ use Oxygen\Core\Html\RendererInterface;
 
 class VoidButtonToolbarItem extends ActionToolbarItem {
 
-    use RenderableTrait;
+    use RenderableTrait {
+        RenderableTrait::render as baseRender;
+    }
 
     /**
      * Label for the button.
@@ -84,23 +86,15 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      * Before rendering all 'dynamic callbacks' will be excecuted.
      *
      * @param array             $arguments
-     * @param RendererInterface $renderer
+     * @param RendererInterface|callable $renderer
      * @throws Exception
      * @return string the rendered object
      */
 
-    public function render(array $arguments = [], RendererInterface $renderer = null) {
+    public function render(array $arguments = [], $renderer = null) {
         $this->runDynamicCallbacks($arguments);
 
-        if($renderer === null) {
-            if(static::$defaultRenderer === null) {
-                throw new Exception('No Default Renderer Exists for Class ' . get_class());
-            } else {
-                $renderer = static::$defaultRenderer;
-            }
-        }
-
-        return $renderer->render($this, $arguments);
+        return $this->baseRender($arguments, $renderer);
     }
 
 }

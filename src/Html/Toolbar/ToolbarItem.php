@@ -4,7 +4,7 @@ namespace Oxygen\Core\Html\Toolbar;
 
 use Oxygen\Core\Html\RendererInterface;
 
-abstract class ToolbarItem {
+interface ToolbarItem {
 
     /**
      * Returns a unique identifier for the ToolbarItem
@@ -12,7 +12,7 @@ abstract class ToolbarItem {
      * @return string
      */
 
-    public abstract function getIdentifier();
+    public function getIdentifier();
 
     /**
      * Determines if the ToolbarItem should be rendered.
@@ -21,7 +21,7 @@ abstract class ToolbarItem {
      * @return boolean
      */
 
-    public abstract function shouldRender(array $arguments = array());
+    public function shouldRender(array $arguments = array());
 
     /**
      * Renders the object.
@@ -31,6 +31,6 @@ abstract class ToolbarItem {
      * @return string the rendered object
      */
 
-    public abstract function render(array $arguments = [], RendererInterface $renderer = null);
+    public function render(array $arguments = [], $renderer = null);
 
 }

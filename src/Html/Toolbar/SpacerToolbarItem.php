@@ -4,7 +4,7 @@ namespace Oxygen\Core\Html\Toolbar;
 
 use Oxygen\Core\Html\RenderableTrait;
 
-class SpacerToolbarItem extends ToolbarItem{
+class SpacerToolbarItem implements ToolbarItem {
 
     use RenderableTrait;
 

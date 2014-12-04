@@ -44,6 +44,14 @@ class Navigation {
     protected $toolbars;
 
     /**
+     * Callbacks to set the order of navigation items.
+     *
+     * @var array
+     */
+
+    protected $lazyOrders;
+
+    /**
      * Construct the Navigation.
      */
 
@@ -56,6 +64,11 @@ class Navigation {
         $this->toolbars['primary']->setSharedItemsPool($itemsPool);
         $this->toolbars['secondary']->setSharedItemsPool($itemsPool);
         $this->spacer = new SpacerToolbarItem();
+
+        $this->lazyOrders = [
+            self::PRIMARY => [],
+            self::SECONDARY => []
+        ];
     }
 
     /**
@@ -66,6 +79,8 @@ class Navigation {
      */
 
     public function all($toolbar = self::PRIMARY) {
+        $this->loadLazyOrders($toolbar);
+
         return $this->toolbars[$toolbar]->getItems();
     }
 
@@ -84,12 +99,16 @@ class Navigation {
      * Orders the toolbar.
      *
      * @param integer $toolbar Which toolbar to use
-     * @param array $keys
+     * @param array|callable $keys
      * @return void
      */
 
-    public function order($toolbar, array $keys) {
-        $this->toolbars[$toolbar]->setOrder($keys);
+    public function order($toolbar, $keys) {
+        if(is_callable($keys)) {
+            $this->addLazyOrder($toolbar, $keys);
+        } else {
+            $this->toolbars[$toolbar]->setOrder($keys);
+        }
     }
 
     /**
@@ -101,6 +120,31 @@ class Navigation {
 
     public function getToolbar($toolbar) {
         return $this->toolbars[$toolbar];
+    }
+
+    /**
+     * Loads orders of the navigation items.
+     *
+     * @param string $toolbar
+     * @return void
+     */
+
+    protected function loadLazyOrders($toolbar) {
+        foreach($this->lazyOrders[$toolbar] as $callback) {
+            $this->order($toolbar, $callback());
+        }
+    }
+
+    /**
+     * Adds a lazy ordering function.
+     *
+     * @param string $toolbar
+     * @param callable $callback
+     * @return void
+     */
+
+    protected function addLazyOrder($toolbar, $callback) {
+        $this->lazyOrders[$toolbar][] = $callback;
     }
 
 }

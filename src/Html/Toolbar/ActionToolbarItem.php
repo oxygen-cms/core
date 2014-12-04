@@ -11,7 +11,7 @@ use Request;
 
 use Oxygen\Core\Action\Action;
 
-abstract class ActionToolbarItem extends ToolbarItem {
+abstract class ActionToolbarItem implements ToolbarItem {
 
     /**
      * The parent action.

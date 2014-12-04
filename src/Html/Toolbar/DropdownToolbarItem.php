@@ -8,9 +8,11 @@ use InvalidArgumentException;
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\RendererInterface;
 
-class DropdownToolbarItem extends ToolbarItem {
+class DropdownToolbarItem implements ToolbarItem {
 
-    use RenderableTrait;
+    use RenderableTrait {
+        RenderableTrait::render as baseRender;
+    }
 
     /**
      * The list of items
@@ -137,25 +139,17 @@ class DropdownToolbarItem extends ToolbarItem {
      * Renders the object.
      *
      * @param array             $arguments
-     * @param RendererInterface $renderer
+     * @param RendererInterface|callable $renderer
      * @throws \Exception
      * @return string the rendered object
      */
 
-    public function render(array $arguments = [], RendererInterface $renderer = null) {
-        if($renderer === null) {
-            if(static::$defaultRenderer === null) {
-                throw new Exception('No Default Renderer Exists for Class ' . get_class());
-            } else {
-                $renderer = static::$defaultRenderer;
-            }
-        }
-
+    public function render(array $arguments = [], $renderer = null) {
         if(empty($this->itemsToDisplay)) {
             return $this->button->render($arguments);
         }
 
-        return $renderer->render($this, $arguments);
+        return $this->baseRender($arguments, $renderer);
     }
 
 }

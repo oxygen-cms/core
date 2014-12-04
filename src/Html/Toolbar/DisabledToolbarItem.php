@@ -4,7 +4,7 @@ namespace Oxygen\Core\Html\Toolbar;
 
 use Oxygen\Core\Html\RenderableTrait;
 
-class DisabledToolbarItem extends ToolbarItem {
+class DisabledToolbarItem implements ToolbarItem {
 
     use RenderableTrait;
 
