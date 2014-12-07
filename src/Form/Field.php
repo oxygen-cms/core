@@ -215,7 +215,7 @@ class Field {
                 return 'Object';
             }
 
-            if($this->type === self::TYPE_TEXTAREA || $this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) {
+            if(($this->type === self::TYPE_TEXTAREA || $this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) && $value) {
                 return '<pre><code>' . e($value) . '</code></pre>';
             }
 
