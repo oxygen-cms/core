@@ -22,8 +22,8 @@ class DatabaseServiceProvider extends ServiceProvider {
      */
 
     public function register() {
-        $this->app['db']->connection()->getSchemaBuilder()->blueprintResolver(function($table, $callback) {
-            return new Blueprint($table, $callback);
+        $this->app->bindShared('oxygen.autoMigrator', function() {
+           return new AutomaticMigrator(base_path() . '/vendor');
         });
     }
 
