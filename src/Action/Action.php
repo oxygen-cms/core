@@ -152,7 +152,7 @@ class Action {
      */
 
     public function getName() {
-        return ($this->group->hasName() ? $this->group->name . '.' : '') . $this->name;
+        return ($this->group->hasName() ? $this->group->getName() . '.' : '') . $this->name;
     }
 
     /**
@@ -162,7 +162,7 @@ class Action {
      */
 
     public function getPattern() {
-        return ($this->group->hasPattern() ? $this->group->pattern . ($this->pattern === '/' ? '' : '/') : '') . $this->pattern;
+        return ($this->group->hasPattern() ? $this->group->getPattern() . ($this->pattern === '/' ? '' : '/') : '') . $this->pattern;
     }
 
     /**

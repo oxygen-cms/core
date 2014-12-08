@@ -13,7 +13,7 @@ class Group {
      * @var string
      */
 
-    public $pattern;
+    protected $pattern;
 
     /**
      * Name of the group, in camelCase. Used in permissions strings.
@@ -23,7 +23,7 @@ class Group {
      * @var string
      */
 
-    public $name;
+    protected $name;
 
     /**
      * Constructs the Group.
@@ -38,6 +38,16 @@ class Group {
     }
 
     /**
+     * Returns the pattern of the group.
+     *
+     * @return string
+     */
+
+    public function getPattern() {
+        return $this->pattern;
+    }
+
+    /**
      * Determines whether the group has a pattern.
      *
      * @return boolean
@@ -45,6 +55,16 @@ class Group {
 
     public function hasPattern() {
         return $this->pattern !== null;
+    }
+
+    /**
+     * Returns the name of the group.
+     *
+     * @return string
+     */
+
+    public function getName() {
+        return $this->name;
     }
 
     /**

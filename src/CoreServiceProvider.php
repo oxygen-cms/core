@@ -51,7 +51,8 @@ class CoreServiceProvider extends ServiceProvider {
                 $app['Illuminate\Http\Request'],
                 $app['Illuminate\Support\Facades\Response'],
                 $app['Illuminate\Routing\Redirector'],
-                $app['Illuminate\Routing\UrlGenerator']
+                $app['Illuminate\Routing\UrlGenerator'],
+                $app['auth']->user()->getPreferences()
             );
         });
 

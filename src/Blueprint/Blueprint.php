@@ -299,7 +299,7 @@ class Blueprint {
     /**
      * Get the primary toolbar item.
      *
-     * @return Oxygen\Core\Html\Toolbar\ToolbarItem
+     * @return ToolbarItem
      */
 
     public function getPrimaryToolbarItem() {

@@ -2,6 +2,7 @@
 
 namespace spec\Oxygen\Core\Action;
 
+use Oxygen\Core\Action\Group;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -21,6 +22,46 @@ class ActionSpec extends ObjectBehavior {
 
     function it_has_a_pattern() {
         $this->getPattern()->shouldReturn('test-action');
+    }
+
+    function it_has_a_method() {
+        // must return uppercase
+        $this->getMethod()->shouldReturn('GET');
+        $this->method = 'post';
+        $this->getMethod()->shouldReturn('POST');
+    }
+
+    function it_has_a_uses_property() {
+        $this->getUses()->shouldReturn('TestActionController@foo');
+    }
+
+    function it_can_be_in_a_group(Group $group) {
+        $group->hasName()->willReturn(true);
+        $group->hasPattern()->willReturn(true);
+        $group->getName()->willReturn('groupName');
+        $group->getPattern()->willReturn('group-pattern');
+        $this->group = $group;
+
+        $this->getName()->shouldReturn('groupName.testAction');
+        $this->getPattern()->shouldReturn('group-pattern/test-action');
+    }
+
+    function it_has_before_an_after_filters() {
+        $this->getBeforeFilters()->shouldReturn([]);
+        $this->getAfterFilters()->shouldReturn([]);
+
+        $this->permissions = 'my.permissions';
+        $this->getBeforeFilters()->shouldReturn(['oxygen.permissions:my.permissions']);
+    }
+
+    function it_has_route_parameters() {
+        $this->getRouteParameters([])->shouldReturn([]);
+    }
+
+    function it_can_be_valid_or_not() {
+        $this->isValid()->shouldReturn(true);
+        $this->uses = null;
+        $this->isValid()->shouldReturn(false);
     }
 
 }

@@ -8,7 +8,6 @@ use Oxygen\Core\Blueprint\Blueprint;
 
 class AdminAction extends Action {
 
-    const PERMISSIONS_FILTER_NAME = 'oxygen.permissions';
     const AUTH_FILTER_NAME = 'oxygen.auth';
     const CSRF_FILTER_NAME = 'oxygen.csrf';
 
@@ -23,7 +22,7 @@ class AdminAction extends Action {
 
     public function __construct($name, $pattern, $uses, Group $group = null) {
         parent::__construct($name, $pattern, $uses, $group);
-        $this->permissions = ($this->group->hasName() ? $this->group->name . '.' : '') . $this->name;
+        $this->permissions = ($this->group->hasName() ? $this->group->getName() . '.' : '') . $this->name;
         $this->useSmoothState = true;
         $this->routeParametersCallback = function($action, array $options) {
             if(isset($options['model'])) {

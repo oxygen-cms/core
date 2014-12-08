@@ -2,7 +2,9 @@
 
 namespace spec\Oxygen\Core\Blueprint;
 
+use Oxygen\Core\Action\Action;
 use Oxygen\Core\Blueprint\Blueprint;;
+use Oxygen\Core\Html\Toolbar\ToolbarItem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -44,6 +46,31 @@ class BlueprintSpec extends ObjectBehavior {
         // single toolbar
         $this->setToolbarOrder('foo', 'baz');
         $this->getToolbarOrder('foo')->shouldReturn('baz');
+    }
+
+    function it_stores_actions(Action $action) {
+        $action->name = 'testAction';
+        $this->addAction($action);
+        $this->getAction('testAction')->shouldReturn($action);
+    }
+
+    function it_stores_toolbar_items(ToolbarItem $item) {
+        $item->getIdentifier()->willReturn('test-identifier');
+        $this->addToolbarItem($item);
+        $this->getToolbarItem('test-identifier')->shouldReturn($item);
+        $this->removeToolbarItem('test-identifier');
+    }
+
+    function it_can_make_toolbar_items(Action $action) {
+        $action->name = 'testAction';
+        $this->addAction($action);
+
+        $this->makeToolbarItem([
+            'action' => 'testAction',
+            'identifier' => 'test-identifier',
+            'label' => 'Foo'
+        ]);
+        $this->getToolbarItem('test-identifier')->shouldBeAnInstanceOf('Oxygen\Core\Html\Toolbar\ToolbarItem');
     }
 
 }
