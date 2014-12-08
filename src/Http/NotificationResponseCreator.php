@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Routing\Redirector as Redirect;
 use Illuminate\Routing\UrlGenerator as URL;
 
-use Oxygen\Core\Http\Notification;
+use Oxygen\Preferences\Repository;
 
 class NotificationResponseCreator {
 
@@ -17,7 +17,7 @@ class NotificationResponseCreator {
      * Dependencies for the NotificationResponseCreator.
      */
 
-    protected $session, $request, $response, $redirect, $url;
+    protected $session, $request, $response, $redirect, $url, $preferences;
 
     /**
      * Injects dependencies for the NotificationResponseCreator.
@@ -27,14 +27,16 @@ class NotificationResponseCreator {
      * @param Response $response
      * @param Redirect $redirect
      * @param URL $url
+     * @param Repository $preferences
      */
 
-    public function __construct(Session $session, Request $request, Response $response, Redirect $redirect, URL $url) {
+    public function __construct(Session $session, Request $request, Response $response, Redirect $redirect, URL $url, Repository $preferences) {
         $this->session = $session;
         $this->request = $request;
         $this->response = $response;
         $this->redirect = $redirect;
         $this->url = $url;
+        $this->preferences = $preferences;
     }
 
     /**
@@ -82,13 +84,19 @@ class NotificationResponseCreator {
             $url = $this->urlFromRoute($parameters['redirect']);
         }
 
+        $return = [
+            'redirect' => $url
+        ];
+
         // display the message on the new page
-        $this->session->flash('adminMessage', $notification);
+        if($this->preferences->get('smoothState.enabled', true) === true) {
+            $return = array_merge($return, $notification);
+        } else {
+            $this->session->flash('adminMessage', $notification);
+        }
 
         // send the redirect command
-        return $this->makeCustomResponse($this->response->json(array(
-            'redirect' => $url
-        )), $parameters);
+        return $this->makeCustomResponse($this->response->json($return), $parameters);
     }
 
     /**
