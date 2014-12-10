@@ -30,7 +30,7 @@ class NotificationResponseCreator {
      * @param Repository $preferences
      */
 
-    public function __construct(Session $session, Request $request, Response $response, Redirect $redirect, URL $url, Repository $preferences) {
+    public function __construct(Session $session, Request $request, Response $response, Redirect $redirect, URL $url, Repository $preferences = null) {
         $this->session = $session;
         $this->request = $request;
         $this->response = $response;
@@ -88,8 +88,13 @@ class NotificationResponseCreator {
             'redirect' => $url
         ];
 
+        if(isset($parameters['hardRedirect'])) {
+            $return['hardRedirect'] = $parameters['hardRedirect'];
+            $hardRedirect = true;
+        }
+
         // display the message on the new page
-        if($this->preferences->get('smoothState.enabled', true) === true) {
+        if(($this->preferences === null || $this->preferences->get('smoothState.enabled', true) === true) && !isset($hardRedirect)) {
             $return = array_merge($return, $notification);
         } else {
             $this->session->flash('adminMessage', $notification);
