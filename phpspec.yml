@@ -1,3 +1,4 @@
 suites:
   oxygen_core_suite:
     namespace: Oxygen\Core
+    psr4_prefix: Oxygen\Core

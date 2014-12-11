@@ -25,6 +25,17 @@ return [
     |
     */
 
-    'layout' => 'oxygen/core-views::layout.main'
+    'layout' => 'oxygen/core-views::layout.main',
+
+    /*
+   |--------------------------------------------------------------------------
+   | Theme
+   |--------------------------------------------------------------------------
+   |
+   | The current theme used for the front-end.
+   |
+   */
+
+    'theme' => null
 
 ];

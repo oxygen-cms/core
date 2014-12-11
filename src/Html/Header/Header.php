@@ -82,6 +82,22 @@ class Header {
     protected $content;
 
     /**
+     * Classes to be applied to the Header.
+     *
+     * @var array
+     */
+
+    protected $classes;
+
+    /**
+     * Unique index for the header.
+     *
+     * @var string|int
+     */
+
+    protected $index;
+
+    /**
      * Constructs the Header.
      *
      * @param string  $title
@@ -96,6 +112,7 @@ class Header {
         $this->arguments     = $arguments;
         $this->type          = $type;
         $this->backLink      = null;
+        $this->classes       = [];
     }
 
     /**
@@ -248,6 +265,47 @@ class Header {
 
     public function hasContent() {
         return $this->content !== null;
+    }
+
+    /**
+     * Adds a class
+     *
+     * @param string $class
+     */
+
+    public function addClass($class) {
+        $this->classes[] = $class;
+    }
+
+    /**
+     * Returns the classes
+     *
+     * @return array
+     */
+
+    public function getClasses() {
+        return $this->classes;
+    }
+
+    /**
+     * Sets the index
+     *
+     * @param string|int $index
+     * @return void
+     */
+
+    public function setIndex($index) {
+        $this->index = $index;
+    }
+
+    /**
+     * Returns the index
+     *
+     * @return string|int
+     */
+
+    public function getIndex() {
+        return $this->index;
     }
 
     /**
