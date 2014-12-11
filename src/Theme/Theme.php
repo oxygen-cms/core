@@ -37,6 +37,14 @@ class Theme {
     protected $image;
 
     /**
+     * Booting callback
+     *
+     * @var callable
+     */
+
+    protected $bootCallback;
+
+    /**
      * Constructs the Theme.
      *
      * @param $key
@@ -45,6 +53,7 @@ class Theme {
     public function __construct($key) {
         $this->key = $key;
         $this->provides = [];
+        $this->bootCallback = function() {};
     }
 
     /**
@@ -132,6 +141,27 @@ class Theme {
     }
 
     /**
+     * Sets the boot callback.
+     *
+     * @param $callback
+     */
+
+    public function setBootCallback($callback) {
+        $this->bootCallback = $callback;
+    }
+
+    /**
+     * Boots the theme.
+     *
+     * @return void
+     */
+
+    public function boot() {
+        $callback = $this->bootCallback;
+        $callback();
+    }
+
+    /**
      * Fills the theme info from an array.
      *
      * @param array $arguments
@@ -149,6 +179,10 @@ class Theme {
 
         if(isset($arguments['provides'])) {
             $this->provides = $arguments['provides'];
+        }
+
+        if(isset($arguments['boot'])) {
+            $this->bootCallback = $arguments['boot'];
         }
     }
 }
