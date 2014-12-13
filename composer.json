@@ -16,7 +16,7 @@
     "require": {
         "php": ">=5.4.0",
         "laravel/framework": "~4.2",
-        "oxygen/data": "dev-master"
+        "oxygen/data": "~0.1.0"
     },
     "autoload": {
         "psr-4": {
