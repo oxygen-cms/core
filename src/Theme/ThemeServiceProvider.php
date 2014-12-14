@@ -22,7 +22,7 @@ class ThemeServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->app->before(function() {
-            $this->app['oxygen.themeManager']->current()->boot();
+            $this->app['Oxygen\Core\Theme\ThemeManager']->current()->boot();
         });
     }
 
@@ -33,7 +33,7 @@ class ThemeServiceProvider extends ServiceProvider {
      */
 
     public function register() {
-        $this->app->bindShared(['oxygen.themeManager' => 'Oxygen\Core\Theme\ThemeManager'], function($app) {
+        $this->app->bindShared('Oxygen\Core\Theme\ThemeManager', function($app) {
             return new ThemeManager($app['config']);
         });
     }
@@ -46,7 +46,6 @@ class ThemeServiceProvider extends ServiceProvider {
 
     public function provides() {
         return [
-            'oxygen.themeManager',
             'Oxygen\Core\Theme\ThemeManager'
         ];
     }

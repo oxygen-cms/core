@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 class Theme extends Facade {
 
     protected static function getFacadeAccessor() {
-        return 'oxygen.themeManager';
+        return 'Oxygen\Core\Theme\ThemeManager';
     }
 
 }
