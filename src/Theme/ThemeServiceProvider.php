@@ -12,7 +12,7 @@ class ThemeServiceProvider extends ServiceProvider {
      * @var bool
      */
 
-    protected $defer = true;
+    protected $defer = false;
 
     /**
      * Bootstrap the application events.
@@ -22,7 +22,7 @@ class ThemeServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->app->before(function() {
-            $this->app['Oxygen\Core\Theme\ThemeManager']->current()->boot();
+            $this->app['oxygen.themeManager']->current()->boot();
         });
     }
 
@@ -33,7 +33,7 @@ class ThemeServiceProvider extends ServiceProvider {
      */
 
     public function register() {
-        $this->app->bindShared('Oxygen\Core\Theme\ThemeManager', function($app) {
+        $this->app->bindShared(['oxygen.themeManager' => 'Oxygen\Core\Theme\ThemeManager'], function($app) {
             return new ThemeManager($app['config']);
         });
     }
@@ -46,7 +46,8 @@ class ThemeServiceProvider extends ServiceProvider {
 
     public function provides() {
         return [
-            'Oxygen\Core\Theme\ThemeManager'
+            'Oxygen\Core\Theme\ThemeManager',
+            'oxygen.themeManager'
         ];
     }
 
