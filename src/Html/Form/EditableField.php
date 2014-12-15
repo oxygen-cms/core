@@ -4,7 +4,6 @@ namespace Oxygen\Core\Html\Form;
 
 use Input;
 
-use Oxygen\Core\Model\Model;
 use Oxygen\Core\Form\Field as FieldMeta;
 use Oxygen\Core\Html\RenderableTrait;
 
