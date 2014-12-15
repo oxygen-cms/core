@@ -22,7 +22,10 @@ class ThemeServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->app->before(function() {
-            $this->app['oxygen.themeManager']->current()->boot();
+            $currentTheme = $this->app['oxygen.themeManager']->current();
+            if($currentTheme) {
+                $currentTheme->boot();
+            }
         });
     }
 
