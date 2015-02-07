@@ -4,14 +4,12 @@ namespace Oxygen\Core\Blueprint;
 
 use InvalidArgumentException;
 
-use Illuminate\Config\Repository as Config;
-
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Action\Group;
 use Oxygen\Core\Action\Factory\AdminActionFactory;
 use Oxygen\Core\Html\Toolbar\ToolbarItem;
 use Oxygen\Core\Html\Toolbar\Factory\ButtonToolbarItemFactory;
-use Oxygen\Core\Form\Field;
+use Oxygen\Core\Form\FieldMetadata;
 use Oxygen\Core\Factory\FactoryInterface;
 use Oxygen\Core\Support\Str;
 
@@ -305,6 +303,8 @@ class Blueprint {
     public function getPrimaryToolbarItem() {
         if($this->hasPrimaryToolbarItem()) {
             return $this->getToolbarItem($this->primaryToolbarItem);
+        } else {
+            return null;
         }
     }
 
@@ -382,7 +382,7 @@ class Blueprint {
      * Get a form field by its name.
      *
      * @param string $name
-     * @return void
+     * @return FieldMetadata
      */
 
     public function getField($name) {
@@ -416,11 +416,11 @@ class Blueprint {
     /**
      * Add a form field.
      *
-     * @param Field $field
+     * @param FieldMetadata $field
      * @return void
      */
 
-    public function addField(Field $field) {
+    public function addField(FieldMetadata $field) {
         $this->formFields[$field->name] = $field;
     }
 
@@ -432,7 +432,7 @@ class Blueprint {
      */
 
     public function makeField(array $parameters) {
-        $field = new Field($parameters['name']);
+        $field = new FieldMetadata($parameters['name']);
         unset($parameters['name']);
         foreach($parameters as $key => $value) {
             $field->$key = $value;
@@ -715,7 +715,7 @@ class Blueprint {
     /**
      * Uses a pre-configured trait.
      *
-     * @param string $trait the trait instance
+     * @param BlueprintTraitInterface $trait the trait instance
      * @return void
      */
 

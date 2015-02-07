@@ -3,7 +3,7 @@
 namespace Oxygen\Core\Html\Editor;
 
 use Oxygen\Core\Html\RenderableTrait;
-use Oxygen\Core\Form\Field;
+use Oxygen\Core\Form\FieldMetadata;
 
 class Editor {
 
@@ -15,7 +15,7 @@ class Editor {
      * @var int
      */
 
-    const TYPE_MAIN = Field::TYPE_EDITOR;
+    const TYPE_MAIN = 'editor';
 
     /**
      * A mini code editor.
@@ -23,7 +23,7 @@ class Editor {
      * @var int
      */
 
-    const TYPE_MINI = Field::TYPE_EDITOR_MINI;
+    const TYPE_MINI = 'editor-mini';
 
     /**
      * Default options.

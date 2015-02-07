@@ -2,8 +2,7 @@
 
 namespace Oxygen\Core\Html\Form;
 
-use DateTime;
-use Oxygen\Core\Form\Field as FieldMeta;
+use Oxygen\Core\Form\FieldMetadata;
 
 abstract class Field {
 
@@ -14,7 +13,7 @@ abstract class Field {
      * per-session information such as the
      * current value of the field.
      *
-     * @var Oxygen\Core\Form\Field
+     * @var Oxygen\Core\Form\FieldMetadata
      */
 
     protected $meta;
@@ -38,11 +37,11 @@ abstract class Field {
     /**
      * Constructs the object.
      *
-     * @param FieldMeta $meta
+     * @param FieldMetadata $meta
      * @param string    $value
      */
 
-    public function __construct(FieldMeta $meta, $value = '') {
+    public function __construct(FieldMetadata $meta, $value = '') {
         $this->meta = $meta;
         $this->value = $value;
     }
@@ -50,7 +49,7 @@ abstract class Field {
     /**
      * Returns the metadata about the form field.
      *
-     * @return FieldMeta
+     * @return FieldMetadata
      */
 
     public function getMeta() {
@@ -60,7 +59,7 @@ abstract class Field {
     /**
      * Get the value of the field.
      *
-     * @return string
+     * @return mixed
      */
 
     public function getValue() {
@@ -88,14 +87,25 @@ abstract class Field {
     }
 
     /**
+     * Renders the object.
+     *
+     * @param array             $arguments
+     * @param RendererInterface|callable $renderer
+     * @throws Exception if no renderer has been set
+     * @return string the rendered object
+     */
+
+    public abstract function render(array $arguments = [], $renderer = null);
+
+    /**
      * Create a field from meta and a model
      *
-     * @param FieldMeta $meta
+     * @param FieldMetadata $meta
      * @param object $entity
      * @return Oxygen\Core\Html\Form\Field
      */
 
-    public static function fromEntity(FieldMeta $meta, $entity) {
+    public static function fromEntity(FieldMetadata $meta, $entity) {
         $instance = new static($meta, $entity->getAttribute($meta->name));
         $instance->setEntity($entity);
         return $instance;

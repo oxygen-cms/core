@@ -9,9 +9,9 @@ use Exception;
 use Str;
 use Carbon\Carbon;
 
-class Field {
+class FieldMetadata {
 
-    const TYPE_TEXT         = 'text';
+    /*public static $TYPE_TEXT  = new SimpleType();
     const TYPE_TEXT_LONG    = 'text-long';
     const TYPE_TEXTAREA     = 'textarea';
     const TYPE_EDITOR_MINI  = 'editor-mini';
@@ -25,7 +25,7 @@ class Field {
     const TYPE_DATE         = 'date';
     const TYPE_NUMBER       = 'number';
     const TYPE_TAGS         = 'tags';
-    const TYPE_RELATIONSHIP = 'relationship';
+    const TYPE_RELATIONSHIP = 'relationship';*/
 
     /**
      * Field name in the database.
@@ -134,6 +134,22 @@ class Field {
     public $outputTransformer;
 
     /**
+     * Type objects that customize the field.
+     *
+     * @var array
+     */
+
+    protected static $types;
+
+    /**
+     * The default type.
+     *
+     * @var FieldType
+     */
+
+    protected static $defaultType;
+
+    /**
      * Construct the object.
      *
      * @param string $name
@@ -141,7 +157,7 @@ class Field {
      * @param bool   $editable
      */
 
-    public function __construct($name, $type = self::TYPE_TEXT, $editable = false) {
+    public function __construct($name, $type = 'text', $editable = false) {
         $this->name              = $name;
         $this->label             = Str::title(Str::camelToWords($name));
         $this->description       = null;
@@ -204,17 +220,6 @@ class Field {
 
     public function getDefaultOutputTransformer() {
         return function($value) {
-            if($value === true) {
-                return 'true';
-            } else if($value === false) {
-                return 'false';
-            } else if($value instanceof DateTime) {
-                $value = new Carbon($value->format('Y-m-d H:i:s'), $value->getTimezone());
-                return $value->toDayDateTimeString();
-            } else if(is_object($value)) {
-                return 'Object';
-            }
-
             if(($this->type === self::TYPE_TEXTAREA || $this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) && $value) {
                 return '<pre><code>' . e($value) . '</code></pre>';
             }
@@ -224,27 +229,53 @@ class Field {
     }
 
     /**
-     * Transforms user input.
-     *
-     * @param $input
-     * @return mixed
-     */
-
-    public function transformInput($input) {
-        $transformer = $this->inputTransformer;
-        return $transformer($input);
-    }
-
-    /**
      * Throws an exception when trying to set a non-existent property.
      *
      * @param string $variable name of the variable
-     * @param dynamic $value value of the variable
+     * @param mixed $value value of the variable
      * @throws Exception
      */
 
     public function __set($variable, $value) {
         throw new Exception('Resource\Form\Field: Unknown key "' . $variable . '"');
+    }
+
+    /**
+     * Returns the type.
+     *
+     * @return FieldType
+     * @throws Exception if the type doesn't exist
+     */
+
+    public function getType() {
+        if(isset(static::$types[$this->type])) {
+            return static::$types[$this->type];
+        } else if(static::$defaultType !== null) {
+            return static::$defaultType;
+        } else  {
+            throw new Exception('No `FieldType` Object Set For Field Type "' . $this->type . '" And No Default Set');
+        }
+    }
+
+    /**
+     * Adds a type.
+     *
+     * @param string                      $name
+     * @param \Oxygen\Core\Form\FieldType $type
+     */
+
+    public static function addType($name, FieldType $type) {
+        static::$types[$name] = $type;
+    }
+
+    /**
+     * Sets the default type.
+     *
+     * @param \Oxygen\Core\Form\FieldType $type
+     */
+
+    public static function setDefaultType(FieldType $type) {
+        static::$defaultType = $type;
     }
 
 }

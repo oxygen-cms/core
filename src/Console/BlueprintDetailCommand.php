@@ -9,7 +9,7 @@ use Oxygen\Core\Console\Formatter;
 
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Action\Action;
-use Oxygen\Core\Form\Field;
+use Oxygen\Core\Form\FieldMetadata;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,27 +38,27 @@ class BlueprintDetailCommand extends Command {
 	 *
 	 * @var array
 	 */
-	protected $generalHeaders = array(
+	protected $generalHeaders = [
 		'Name', 'Display Names', 'Route Name', 'Route Pattern', 'Controller', 'Primary Toolbar Item', 'Title Field', 'Icon'
-	);
+	];
 
 	/**
 	 * The table headers for the command.
 	 *
 	 * @var array
 	 */
-	protected $actionHeaders = array(
+	protected $actionHeaders = [
 		'Pattern', 'Name', 'Method', 'Group', 'Before Filters', 'After Filters', 'Uses', 'Register At End', 'Use Smooth State'
-	);
+	];
 
 	/**
 	 * The table headers for the command.
 	 *
 	 * @var array
 	 */
-	protected $fieldHeaders = array(
+	protected $fieldHeaders = [
 		'Name', 'Label', 'Type', 'Editable', 'Fillable', 'Validation Rules', 'Attributes', 'Options'
-	);
+	];
 
 	/**
 	 * Create a new command instance.
@@ -151,11 +151,11 @@ class BlueprintDetailCommand extends Command {
 	/**
 	 * Get information about a Field.
 	 *
-	 * @param Field $field
+	 * @param FieldMetadata $field
 	 * @return array
 	 */
 
-	protected function getFieldInformation(Field $field) {
+	protected function getFieldInformation(FieldMetadata $field) {
 		return [
 			$field->name,
 			$field->label,
@@ -174,9 +174,9 @@ class BlueprintDetailCommand extends Command {
 	 * @return array
 	 */
 	protected function getArguments() {
-		return array(
-			array('name', InputArgument::REQUIRED, 'Name of the Blueprint.'),
-		);
+		return [
+			['name', InputArgument::REQUIRED, 'Name of the Blueprint.'],
+		];
 	}
 
 }
