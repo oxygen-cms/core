@@ -84,14 +84,6 @@ class FieldMetadata {
     public $fillable;
 
     /**
-     * Validation rules for the field.
-     *
-     * @var array
-     */
-
-    public $validationRules;
-
-    /**
      * HTML attributes for the field.
      *
      * @var array
@@ -116,22 +108,6 @@ class FieldMetadata {
      */
 
     public $datalist;
-
-    /**
-     * Closure that will be used to modify the field's input value.
-     *
-     * @var Closure
-     */
-
-    public $inputTransformer;
-
-    /**
-     * Closure that will be used to modify the field's output value.
-     *
-     * @var Closure
-     */
-
-    public $outputTransformer;
 
     /**
      * Type objects that customize the field.
