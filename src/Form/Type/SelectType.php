@@ -15,7 +15,7 @@ class SelectType extends BaseType {
      */
     public function transformInput(FieldMetadata $metadata, $value) {
         $isInt = true;
-        foreach(array_keys($metadata->options) as $key => $value) {
+        foreach(array_keys($metadata->options) as $key => $notUsed) {
             if(!is_integer($key)) {
                 $isInt = false;
             }
