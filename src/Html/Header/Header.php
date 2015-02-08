@@ -2,12 +2,13 @@
 
 namespace Oxygen\Core\Html\Header;
 
+use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Model\Model;
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\Toolbar\Toolbar;
 
-class Header {
+class Header implements RenderableInterface {
 
     use RenderableTrait;
 

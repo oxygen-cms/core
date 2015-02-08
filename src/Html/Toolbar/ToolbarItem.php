@@ -2,9 +2,9 @@
 
 namespace Oxygen\Core\Html\Toolbar;
 
-use Oxygen\Core\Html\RendererInterface;
+use Oxygen\Core\Html\RenderableInterface;
 
-interface ToolbarItem {
+interface ToolbarItem extends RenderableInterface {
 
     /**
      * Returns a unique identifier for the ToolbarItem

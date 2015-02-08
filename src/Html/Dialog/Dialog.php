@@ -2,9 +2,10 @@
 
 namespace Oxygen\Core\Html\Dialog;
 
+use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\RenderableTrait;
 
-class Dialog {
+class Dialog implements RenderableInterface {
 
     use RenderableTrait;
 

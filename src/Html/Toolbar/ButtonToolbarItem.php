@@ -47,7 +47,8 @@ class ButtonToolbarItem extends ActionToolbarItem {
     /**
      * Constructs the item.
      *
-     * @param string
+     * @param string $label the label
+     * @param Action $action the action that will be executed
      */
 
     public function __construct($label, Action $action) {

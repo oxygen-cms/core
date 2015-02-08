@@ -8,7 +8,7 @@ use Input;
 use Oxygen\Core\Form\FieldMetadata;
 use Oxygen\Core\Html\RendererInterface;
 
-class EditableField extends Field implements CellInterface {
+class EditableField extends Field {
 
     /**
      * Renderers to be used in none is supplied in the render() function.

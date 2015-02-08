@@ -6,8 +6,11 @@ use InvalidArgumentException;
 
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Blueprint\Blueprint;
+use Oxygen\Core\Html\RenderableTrait;
 
 class Toolbar {
+
+    use RenderableTrait;
 
     /**
      * Pool of items that can be displayed on the toolbar.

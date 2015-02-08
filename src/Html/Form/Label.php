@@ -3,9 +3,10 @@
 namespace Oxygen\Core\Html\Form;
 
 use Oxygen\Core\Form\FieldMetadata;
+use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\RenderableTrait;
 
-class Label {
+class Label implements RenderableInterface {
 
     use RenderableTrait;
 

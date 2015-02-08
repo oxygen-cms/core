@@ -11,22 +11,6 @@ use Carbon\Carbon;
 
 class FieldMetadata {
 
-    /*public static $TYPE_TEXT  = new SimpleType();
-    const TYPE_TEXT_LONG    = 'text-long';
-    const TYPE_TEXTAREA     = 'textarea';
-    const TYPE_EDITOR_MINI  = 'editor-mini';
-    const TYPE_EDITOR       = 'editor';
-    const TYPE_PASSWORD     = 'password';
-    const TYPE_EMAIL        = 'email';
-    const TYPE_CHECKBOX     = 'checkbox';
-    const TYPE_TOGGLE       = 'toggle';
-    const TYPE_SELECT       = 'select';
-    const TYPE_RADIO        = 'radio';
-    const TYPE_DATE         = 'date';
-    const TYPE_NUMBER       = 'number';
-    const TYPE_TAGS         = 'tags';
-    const TYPE_RELATIONSHIP = 'relationship';*/
-
     /**
      * Field name in the database.
      *
@@ -66,6 +50,14 @@ class FieldMetadata {
      */
 
     public $type;
+
+    /**
+     * A `FieldType` object instance
+     *
+     * @var FieldType
+     */
+
+    public $typeInstance;
 
     /**
      * Editable means that the field should appear on forms.
@@ -139,23 +131,11 @@ class FieldMetadata {
         $this->description       = null;
         $this->placeholder       = null;
         $this->type              = $type;
+        $this->typeInstance      = null;
         $this->editable          = $editable;
         $this->fillable          = false;
-        $this->validationRules   = [];
         $this->attributes        = [];
         $this->options           = [];
-        $this->inputTransformer  = $this->getDefaultInputTransformer();
-        $this->outputTransformer = $this->getDefaultOutputTransformer();
-    }
-
-    /**
-     * Add a validation rule.
-     *
-     * @param string $rule
-     */
-
-    public function addValidationRule($rule) {
-        $this->validationRules[] = $rule;
     }
 
     /**
@@ -166,42 +146,6 @@ class FieldMetadata {
 
     public function hasDescription() {
         return $this->description !== null;
-    }
-
-    /**
-     * Returns the input transformer to be used if none is set.
-     *
-     * @return Closure
-     */
-
-    public function getDefaultInputTransformer() {
-        return function($value) {
-            if($this->type === self::TYPE_CHECKBOX || $this->type === self::TYPE_TOGGLE) {
-                $value = $value === 'true' ?  true : false;
-            }
-
-            if($this->type === self::TYPE_NUMBER) {
-                $value = (int) $value;
-            }
-
-            return $value;
-        };
-    }
-
-    /**
-     * Returns the default output transformer to be used if none is set.
-     *
-     * @return Closure
-     */
-
-    public function getDefaultOutputTransformer() {
-        return function($value) {
-            if(($this->type === self::TYPE_TEXTAREA || $this->type === self::TYPE_EDITOR || $this->type === self::TYPE_EDITOR_MINI) && $value) {
-                return '<pre><code>' . e($value) . '</code></pre>';
-            }
-
-            return $value;
-        };
     }
 
     /**
@@ -224,9 +168,15 @@ class FieldMetadata {
      */
 
     public function getType() {
+        if($this->typeInstance !== null) {
+            return $this->typeInstance;
+        }
+
         if(isset(static::$types[$this->type])) {
+            $this->typeInstance = static::$types[$this->type];
             return static::$types[$this->type];
         } else if(static::$defaultType !== null) {
+            $this->typeInstance = static::$defaultType;
             return static::$defaultType;
         } else  {
             throw new Exception('No `FieldType` Object Set For Field Type "' . $this->type . '" And No Default Set');

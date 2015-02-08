@@ -6,7 +6,7 @@ use Exception;
 use Oxygen\Core\Form\FieldMetadata;
 use Oxygen\Core\Html\RendererInterface;
 
-class StaticField extends Field implements CellInterface {
+class StaticField extends Field {
 
     /**
      * Renderers to be used in none is supplied in the render() function.

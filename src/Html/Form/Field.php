@@ -3,8 +3,9 @@
 namespace Oxygen\Core\Html\Form;
 
 use Oxygen\Core\Form\FieldMetadata;
+use Oxygen\Core\Html\RenderableInterface;
 
-abstract class Field {
+abstract class Field implements RenderableInterface {
 
     /**
      * The $meta property holds all of

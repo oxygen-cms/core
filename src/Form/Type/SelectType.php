@@ -7,27 +7,25 @@ use Oxygen\Core\Form\FieldMetadata;
 class SelectType extends BaseType {
 
     /**
-     * Transforms the given value into a human readable representation suitable for output.
+     * Takes the given input value and transforms it into a compatible value for storage.
      *
      * @param FieldMetadata $metadata
-     * @param mixed         $value
-     * @return string
+     * @param string $value
+     * @return mixed
      */
+    public function transformInput(FieldMetadata $metadata, $value) {
+        $isInt = true;
+        foreach(array_keys($metadata->options) as $key => $value) {
+            if(!is_integer($key)) {
+                $isInt = false;
+            }
+        }
 
-    public function transformEditableOutput(FieldMetadata $metadata, $value) {
-        return $value;
-    }
-
-    /**
-     * Transforms the given value into a human readable representation suitable for output.
-     *
-     * @param FieldMetadata $metadata
-     * @param mixed         $value
-     * @return string
-     */
-
-    public function transformStaticOutput(FieldMetadata $metadata, $value) {
-        return $value;
+        if($isInt) {
+            return (int) $value;
+        } else {
+            return $value;
+        }
     }
 
 }

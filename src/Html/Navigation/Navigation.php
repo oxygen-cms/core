@@ -2,12 +2,13 @@
 
 namespace Oxygen\Core\Html\Navigation;
 
+use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\Toolbar\Toolbar;
 use Oxygen\Core\Html\Toolbar\ToolbarItem;
 use Oxygen\Core\Html\Toolbar\SpacerToolbarItem;
 use Oxygen\Core\Html\RenderableTrait;
 
-class Navigation {
+class Navigation implements RenderableInterface {
 
     use RenderableTrait;
 

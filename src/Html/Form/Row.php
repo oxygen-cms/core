@@ -3,25 +3,37 @@
 
 namespace Oxygen\Core\Html\Form;
 
+use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\RenderableTrait;
 
 class Row {
 
     use RenderableTrait;
 
-    protected $cells;
+    protected $items;
 
-    public function __construct(array $cells) {
-        $this->cells = $cells;
+    public $isFooter;
+
+    public function __construct(array $items) {
+        $this->items = $items;
     }
 
     /**
-     * Returns the cells in the row.
+     * Adds an item to the row.
+     *
+     * @param \Oxygen\Core\Html\RenderableInterface $item
+     */
+    public function addItem(RenderableInterface $item) {
+        $this->items[] = $item;
+    }
+
+    /**
+     * Returns the items in the row.
      *
      * @return array
      */
-    public function getCells() {
-        return $this->cells;
+    public function getItems() {
+        return $this->items;
     }
 
 }

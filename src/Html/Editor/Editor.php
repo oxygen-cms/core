@@ -3,9 +3,9 @@
 namespace Oxygen\Core\Html\Editor;
 
 use Oxygen\Core\Html\RenderableTrait;
-use Oxygen\Core\Form\FieldMetadata;
+use Oxygen\Core\Html\RenderableInterface;
 
-class Editor {
+class Editor implements RenderableInterface {
 
     use RenderableTrait;
 
@@ -112,7 +112,7 @@ class Editor {
      *
      * @param string     $name
      * @param mixed      $value
-     * @param string     $type
+     * @param int        $type
      * @param array      $attributes
      * @param array      $options
      */
