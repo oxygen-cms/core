@@ -25,9 +25,9 @@ class BooleanType extends BaseType {
      * @return string
      */
     public function transformOutput(FieldMetadata $metadata, $value) {
-        if($value === true) {
+        if($value === true || $value === 1) {
             return 'true';
-        } else if($value === false) {
+        } else if($value === false || $value === 0) {
             return 'false';
         } else {
             return 'unknown';
