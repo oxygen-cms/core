@@ -38,6 +38,9 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
      */
 
     public function compile($info) {
+        // resets the footer (eg: layouts)
+        $this->blade->footer = array();
+        
         $contents = $this->blade->compileString($info->contents);
 
         if (!is_null($this->cachePath)) {
