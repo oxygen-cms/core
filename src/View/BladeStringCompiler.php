@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\Compiler;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Compilers\CompilerInterface;
+use ReflectionClass;
 
 class BladeStringCompiler extends Compiler implements CompilerInterface {
 
@@ -16,6 +17,8 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
      */
 
     protected $compiler;
+
+    protected $reflect;
 
     /**
      * Create a new compiler instance.
@@ -28,6 +31,7 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
     public function __construct(Filesystem $files, BladeCompiler $compiler, $cachePath) {
         parent::__construct($files, $cachePath);
         $this->blade = $compiler;
+        $this->reflect = new ReflectionClass('Illuminate\View\Compilers\BladeCompiler');
     }
 
     /**
@@ -39,8 +43,10 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
 
     public function compile($info) {
         // resets the footer (eg: layouts)
-        $this->blade->footer = array();
-        
+        $property = $this->reflect->getProperty("footer");
+        $property->setAccessible(true);
+        $property->setValue($this->blade, []);
+
         $contents = $this->blade->compileString($info->contents);
 
         if (!is_null($this->cachePath)) {
