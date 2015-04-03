@@ -2,8 +2,10 @@
 
 namespace Oxygen\Core\Html\Form;
 
+use Exception;
 use Oxygen\Core\Form\FieldMetadata;
 use Oxygen\Core\Html\RenderableInterface;
+use Oxygen\Core\Html\RendererInterface;
 
 abstract class Field implements RenderableInterface {
 
@@ -14,7 +16,7 @@ abstract class Field implements RenderableInterface {
      * per-session information such as the
      * current value of the field.
      *
-     * @var Oxygen\Core\Form\FieldMetadata
+     * @var FieldMetadata
      */
 
     protected $meta;
@@ -103,7 +105,7 @@ abstract class Field implements RenderableInterface {
      *
      * @param FieldMetadata $meta
      * @param object $entity
-     * @return Oxygen\Core\Html\Form\Field
+     * @return FieldMetadata
      */
 
     public static function fromEntity(FieldMetadata $meta, $entity) {

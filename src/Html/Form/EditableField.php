@@ -45,7 +45,7 @@ class EditableField extends Field {
 
     public function getValue() {
         if(Input::old($this->getMeta()->name)) {
-            return Input::old($this->getMeta()->name);
+            return $this->getMeta()->getType()->transformInput($this->getMeta(), Input::old($this->getMeta()->name));
         } else if($this->value !== null) {
             return parent::getValue();
         } else {
