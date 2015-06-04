@@ -23,7 +23,6 @@ class Repository extends BaseRepository {
      * @param   string              $environment
      * @return  void
      */
-
     public function __construct(LoaderInterface $loader, WriterInterface $writer, $environment) {
         parent::__construct($loader, $environment);
 
@@ -37,7 +36,6 @@ class Repository extends BaseRepository {
      * @param mixed $value
      * @return void
      */
-
     public function write($key, $value) {
         list($namespace, $group, $item) = $this->parseKey($key);
 
@@ -54,7 +52,6 @@ class Repository extends BaseRepository {
      * @param  string  $namespace
      * @return void
      */
-
     public function package($package, $hint, $namespace = null) {
         parent::package($package, $hint, $namespace);
 

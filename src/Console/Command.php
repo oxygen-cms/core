@@ -11,7 +11,6 @@ abstract class Command extends BaseCommand {
      *
      * @param string $text
      */
-
     public function heading($text) {
         $this->info('');
         $this->info('===================');

@@ -20,7 +20,6 @@ class TranslationServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->registerLoader();
 
@@ -57,7 +56,6 @@ class TranslationServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [
             'translator',

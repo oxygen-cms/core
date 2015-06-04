@@ -26,7 +26,6 @@ class Rewriter {
      * @throws \Oxygen\Core\Config\RewriteException
      * @return void
      */
-
     public function rewrite($contents, $key, $oldValue, $newValue) {
         if($key === null || trim($key) === '') {
             return $this->replaceEntireFile($newValue);

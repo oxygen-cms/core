@@ -32,7 +32,6 @@ class EditableField extends Field {
      * @param FieldMetadata $meta
      * @param string    $value
      */
-
     public function __construct(FieldMetadata $meta, $value = '') {
         parent::__construct($meta, $value);
     }
@@ -42,7 +41,6 @@ class EditableField extends Field {
      *
      * @return mixed
      */
-
     public function getValue() {
         if(Input::old($this->getMeta()->name)) {
             return $this->getMeta()->getType()->transformInput($this->getMeta(), Input::old($this->getMeta()->name));
@@ -59,7 +57,6 @@ class EditableField extends Field {
      * @param string $type
      * @return RendererInterface|callable The renderer
      */
-
     public static function getRenderer($type) {
         return static::$renderers[$type];
     }
@@ -74,7 +71,6 @@ class EditableField extends Field {
      * @param string $type
      * @param RendererInterface|callable $renderer The default renderer
      */
-
     public static function setRenderer($type, $renderer) {
         static::$renderers[$type] = $renderer;
     }
@@ -91,7 +87,6 @@ class EditableField extends Field {
      * @throws Exception if no renderer has been set or if the field is not editable
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null) {
         if(!$this->getMeta()->editable) {
             throw new Exception('Field "' . $this->getMeta()->name . '" is not editable');

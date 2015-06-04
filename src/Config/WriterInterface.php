@@ -14,7 +14,6 @@ interface WriterInterface {
      * @param  string  $namespace
      * @return void
      */
-
     public function write($item, $value, $environment, $group, $namespace = null);
 
     /**
@@ -23,7 +22,6 @@ interface WriterInterface {
      * @param string $package usually {vendor}/{package}
      * @param string $namespace usually just {package}
      */
-
     public function addPackage($package, $namespace);
 
 }

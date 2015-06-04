@@ -13,7 +13,6 @@ class SpacerToolbarItem implements ToolbarItem {
      *
      * @return string
      */
-
     public function getIdentifier() {
         return 'spacer';
     }
@@ -24,7 +23,6 @@ class SpacerToolbarItem implements ToolbarItem {
      * @param array $arguments
      * @return boolean
      */
-
     public function shouldRender(array $arguments = array()) {
         return true;
     }

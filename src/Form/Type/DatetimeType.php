@@ -14,7 +14,6 @@ class DatetimeType extends BaseType {
      * @param mixed $value
      * @return string
      */
-
     public function transformOutput(FieldMetadata $metadata, $value) {
         return ($value instanceof DateTime) ? $value->format('Y-m-d H:i:s') : $value;
     }

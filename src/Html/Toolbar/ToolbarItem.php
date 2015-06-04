@@ -11,7 +11,6 @@ interface ToolbarItem extends RenderableInterface {
      *
      * @return string
      */
-
     public function getIdentifier();
 
     /**
@@ -20,7 +19,6 @@ interface ToolbarItem extends RenderableInterface {
      * @param array $arguments
      * @return boolean
      */
-
     public function shouldRender(array $arguments = array());
 
     /**
@@ -30,7 +28,6 @@ interface ToolbarItem extends RenderableInterface {
      * @param RendererInterface $renderer
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null);
 
 }

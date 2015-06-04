@@ -32,7 +32,6 @@ class Dialog implements RenderableInterface {
      *
      * @var string
      */
-
     public $message;
 
     /**
@@ -40,7 +39,6 @@ class Dialog implements RenderableInterface {
      *
      * @var string
      */
-
     public $type;
 
     public function __construct($message, $type = self::TYPE_CONFIRM) {

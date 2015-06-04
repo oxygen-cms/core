@@ -22,7 +22,6 @@ class ResourceController extends BlueprintController {
      * @param BlueprintManager    $manager       BlueprintManager instance
      * @param string              $blueprintName Name of the corresponding Blueprint
      */
-
     public function __construct(RepositoryInterface $repository, BlueprintManager $manager, $blueprintName = null) {
         parent::__construct($manager, $blueprintName);
         $this->repository = $repository;

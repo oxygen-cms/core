@@ -27,7 +27,6 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
      * @param  \Illuminate\View\Compilers\BladeCompiler $compiler
      * @param  string  $cachePath
      */
-
     public function __construct(Filesystem $files, BladeCompiler $compiler, $cachePath) {
         parent::__construct($files, $cachePath);
         $this->blade = $compiler;
@@ -40,7 +39,6 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
      * @param  \stdClass  $info
      * @return void
      */
-
     public function compile($info) {
         // resets the footer (eg: layouts)
         $property = $this->reflect->getProperty("footer");
@@ -60,7 +58,6 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
      * @param  \stdClass  $info
      * @return string
      */
-
     public function getCompiledPath($info) {
         return $this->cachePath . '/' . md5($info->path);
     }
@@ -71,7 +68,6 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
      * @param  \stdClass  $info
      * @return bool
      */
-
     public function isExpired($info) {
         $compiled = $this->getCompiledPath($info);
 

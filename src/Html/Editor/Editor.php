@@ -30,7 +30,6 @@ class Editor implements RenderableInterface {
      *
      * @var array
      */
-
     public static $defaultOptions = [
         'language' => 'html'
     ];
@@ -40,7 +39,6 @@ class Editor implements RenderableInterface {
      *
      * @var array
      */
-
     public static $defaultStylesheets = [];
 
     /**
@@ -48,7 +46,6 @@ class Editor implements RenderableInterface {
      *
      * @var boolean
      */
-
     public static $includeScripts = false;
 
     /**
@@ -56,7 +53,6 @@ class Editor implements RenderableInterface {
      *
      * @var string
      */
-
     public $name;
 
     /**
@@ -64,7 +60,6 @@ class Editor implements RenderableInterface {
      *
      * @var mixed
      */
-
     public $value;
 
     /**
@@ -72,7 +67,6 @@ class Editor implements RenderableInterface {
      *
      * @var int
      */
-
     public $type;
 
     /**
@@ -80,7 +74,6 @@ class Editor implements RenderableInterface {
      *
      * @var array
      */
-
     public $attributes;
 
     /**
@@ -88,7 +81,6 @@ class Editor implements RenderableInterface {
      *
      * @var array
      */
-
     public $options;
 
     /**
@@ -116,7 +108,6 @@ class Editor implements RenderableInterface {
      * @param array      $attributes
      * @param array      $options
      */
-
     public function __construct($name, $value = '', $type = self::TYPE_MAIN, array $attributes = [], array $options = []) {
         $this->name = $name;
         $this->value = $value;
@@ -138,7 +129,6 @@ class Editor implements RenderableInterface {
      * @param string $url
      * @return void
      */
-
     public function addStylesheet($name, $url) {
         $this->stylesheets[$name] = $url;
     }
@@ -149,7 +139,6 @@ class Editor implements RenderableInterface {
      * @param string $name
      * @return void
      */
-
     public function removeStylesheet($name) {
         unset($this->stylesheets[$name]);
     }
@@ -159,7 +148,6 @@ class Editor implements RenderableInterface {
      *
      * @return array
      */
-
     public function getStylesheets() {
         return $this->stylesheets;
     }
@@ -170,7 +158,6 @@ class Editor implements RenderableInterface {
      *
      * @return string
      */
-
     public function getCreateScript() {
         static::$includeScripts = true;
 

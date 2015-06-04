@@ -20,7 +20,6 @@ class DatabaseServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->app->bindShared('oxygen.autoMigrator', function() {
            return new AutomaticMigrator(base_path() . '/vendor');
@@ -32,7 +31,6 @@ class DatabaseServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [];
     }

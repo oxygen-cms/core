@@ -20,7 +20,6 @@ class ConfigServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->app['config'] = $this->app->share(function($app) {
             $loader = $app->getConfigLoader();
@@ -45,7 +44,6 @@ class ConfigServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [
             'config'

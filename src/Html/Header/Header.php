@@ -105,7 +105,6 @@ class Header implements RenderableInterface {
      * @param array   $arguments
      * @param integer $type
      */
-
     public function __construct($title, array $arguments = [], $type = self::TYPE_MAIN) {
         $this->title         = $title;
         $this->subtitle      = null;
@@ -121,7 +120,6 @@ class Header implements RenderableInterface {
      *
      * @return string
      */
-
     public function getTitle() {
         return $this->title;
     }
@@ -131,7 +129,6 @@ class Header implements RenderableInterface {
      *
      * @return boolean
      */
-
     public function hasSubtitle() {
         return $this->subtitle !== null;
     }
@@ -141,7 +138,6 @@ class Header implements RenderableInterface {
      *
      * @return string
      */
-
     public function getSubtitle() {
         return $this->subtitle;
     }
@@ -152,7 +148,6 @@ class Header implements RenderableInterface {
      * @param string $subtitle
      * @return void
      */
-
     public function setSubtitle($subtitle) {
         $this->subtitle = $subtitle;
     }
@@ -162,7 +157,6 @@ class Header implements RenderableInterface {
      *
      * @return boolean
      */
-
     public function hasIcon() {
         return $this->icon !== null;
     }
@@ -172,7 +166,6 @@ class Header implements RenderableInterface {
      *
      * @return string
      */
-
     public function getIcon() {
         return $this->icon;
     }
@@ -183,7 +176,6 @@ class Header implements RenderableInterface {
      * @param string $icon
      * @return void
      */
-
     public function setIcon($icon) {
         $this->icon = $icon;
     }
@@ -193,7 +185,6 @@ class Header implements RenderableInterface {
      *
      * @return Toolbar
      */
-
     public function getToolbar() {
         return $this->toolbar;
     }
@@ -203,7 +194,6 @@ class Header implements RenderableInterface {
      *
      * @return array
      */
-
     public function getArguments() {
         return $this->arguments;
     }
@@ -213,7 +203,6 @@ class Header implements RenderableInterface {
      *
      * @return integer
      */
-
     public function getType() {
         return $this->type;
     }
@@ -223,7 +212,6 @@ class Header implements RenderableInterface {
      *
      * @param string $url
      */
-
     public function setBackLink($url) {
         $this->backLink = $url;
     }
@@ -233,7 +221,6 @@ class Header implements RenderableInterface {
      *
      * @return string
      */
-
     public function getBackLink() {
         return $this->backLink;
     }
@@ -243,7 +230,6 @@ class Header implements RenderableInterface {
      *
      * @param string $content
      */
-
     public function setContent($content) {
         $this->content = $content;
     }
@@ -253,7 +239,6 @@ class Header implements RenderableInterface {
      *
      * @return string
      */
-
     public function getContent() {
         return $this->content;
     }
@@ -263,7 +248,6 @@ class Header implements RenderableInterface {
      *
      * @return boolean
      */
-
     public function hasContent() {
         return $this->content !== null;
     }
@@ -273,7 +257,6 @@ class Header implements RenderableInterface {
      *
      * @param string $class
      */
-
     public function addClass($class) {
         $this->classes[] = $class;
     }
@@ -283,7 +266,6 @@ class Header implements RenderableInterface {
      *
      * @return array
      */
-
     public function getClasses() {
         return $this->classes;
     }
@@ -294,7 +276,6 @@ class Header implements RenderableInterface {
      * @param string|int $index
      * @return void
      */
-
     public function setIndex($index) {
         $this->index = $index;
     }
@@ -304,7 +285,6 @@ class Header implements RenderableInterface {
      *
      * @return string|int
      */
-
     public function getIndex() {
         return $this->index;
     }
@@ -319,7 +299,6 @@ class Header implements RenderableInterface {
      * @param string $fillFromToolbar
      * @return Header
      */
-
     public static function fromBlueprint(Blueprint $blueprint, $title = null, array $arguments = [], $type = self::TYPE_MAIN, $fillFromToolbar = 'section') {
         if($title === null) {
             $title = $arguments['model']->getAttribute($blueprint->getTitleField());

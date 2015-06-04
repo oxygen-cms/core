@@ -19,7 +19,6 @@ trait RenderableTrait {
      *
      * @return RendererInterface|callable The default renderer
      */
-
     public static function getRenderer() {
         return static::$defaultRenderer;
     }
@@ -29,7 +28,6 @@ trait RenderableTrait {
      *
      * @param RendererInterface|callable $renderer The default renderer
      */
-
     public static function setRenderer($renderer) {
         static::$defaultRenderer = $renderer;
     }
@@ -42,7 +40,6 @@ trait RenderableTrait {
      * @throws Exception if no renderer has been set
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null) {
         if($renderer === null) {
             if(static::$defaultRenderer === null) {

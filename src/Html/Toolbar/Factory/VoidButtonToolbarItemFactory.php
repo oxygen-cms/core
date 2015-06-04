@@ -13,7 +13,6 @@ class VoidButtonToolbarItemFactory implements FactoryInterface {
      * @param array $parameters Passed parameters
      * @return VoidButtonToolbarItem
      */
-
     public function create(array $parameters) {
         $toolbarItem = new VoidButtonToolbarItem($parameters['label'], $parameters['action']);
         unset($parameters['label'], $parameters['action']);

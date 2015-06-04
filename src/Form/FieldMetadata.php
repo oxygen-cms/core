@@ -16,7 +16,6 @@ class FieldMetadata {
      *
      * @var string
      */
-
     public $name;
 
     /**
@@ -24,7 +23,6 @@ class FieldMetadata {
      *
      * @var string
      */
-
     public $label;
 
     /**
@@ -32,7 +30,6 @@ class FieldMetadata {
      *
      * @var string
      */
-
     public $placeholder;
 
     /**
@@ -40,7 +37,6 @@ class FieldMetadata {
      *
      * @var string
      */
-
     public $description;
 
     /**
@@ -48,7 +44,6 @@ class FieldMetadata {
      *
      * @var string
      */
-
     public $type;
 
     /**
@@ -56,7 +51,6 @@ class FieldMetadata {
      *
      * @var FieldType
      */
-
     public $typeInstance;
 
     /**
@@ -64,7 +58,6 @@ class FieldMetadata {
      *
      * @var boolean
      */
-
     public $editable;
 
     /**
@@ -72,7 +65,6 @@ class FieldMetadata {
      *
      * @var boolean
      */
-
     public $fillable;
 
     /**
@@ -80,7 +72,6 @@ class FieldMetadata {
      *
      * @var array
      */
-
     public $attributes;
 
     /**
@@ -90,7 +81,6 @@ class FieldMetadata {
      *
      * @var array
      */
-
     public $options;
 
     /**
@@ -98,7 +88,6 @@ class FieldMetadata {
      *
      * @var array
      */
-
     public $datalist;
 
     /**
@@ -124,7 +113,6 @@ class FieldMetadata {
      * @param string $type
      * @param bool   $editable
      */
-
     public function __construct($name, $type = 'text', $editable = false) {
         $this->name              = $name;
         $this->label             = Str::title(Str::camelToWords($name));
@@ -143,7 +131,6 @@ class FieldMetadata {
      *
      * @return boolean
      */
-
     public function hasDescription() {
         return $this->description !== null;
     }
@@ -155,7 +142,6 @@ class FieldMetadata {
      * @param mixed $value value of the variable
      * @throws Exception
      */
-
     public function __set($variable, $value) {
         throw new Exception('Resource\Form\Field: Unknown key "' . $variable . '"');
     }
@@ -166,7 +152,6 @@ class FieldMetadata {
      * @return FieldType
      * @throws Exception if the type doesn't exist
      */
-
     public function getType() {
         if($this->typeInstance !== null) {
             return $this->typeInstance;
@@ -189,7 +174,6 @@ class FieldMetadata {
      * @param string                      $name
      * @param \Oxygen\Core\Form\FieldType $type
      */
-
     public static function addType($name, FieldType $type) {
         static::$types[$name] = $type;
     }
@@ -199,7 +183,6 @@ class FieldMetadata {
      *
      * @param \Oxygen\Core\Form\FieldType $type
      */
-
     public static function setDefaultType(FieldType $type) {
         static::$defaultType = $type;
     }

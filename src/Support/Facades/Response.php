@@ -15,7 +15,6 @@ class Response extends BaseResponse {
      * @param array     $parameters     Extra parameters.
      * @return mixed
      */
-
     public static function notification($notification, array $parameters = []) {
         return Facade::getFacadeApplication()['oxygen.notificationResponseCreator']
             ->createResponse($notification, $parameters);

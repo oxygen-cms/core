@@ -13,7 +13,6 @@ class DisabledToolbarItem implements ToolbarItem {
      *
      * @var array
      */
-
     public $label;
 
     /**
@@ -21,7 +20,6 @@ class DisabledToolbarItem implements ToolbarItem {
      *
      * @var string
      */
-
     public $identifier;
 
     /**
@@ -29,7 +27,6 @@ class DisabledToolbarItem implements ToolbarItem {
      *
      * @param string $label
      */
-
     public function __construct($label) {
         $this->label = $label;
         $this->identifier = camel_case($this->label);
@@ -40,7 +37,6 @@ class DisabledToolbarItem implements ToolbarItem {
      *
      * @return string
      */
-
     public function getIdentifier() {
         return $this->identifier;
     }
@@ -51,7 +47,6 @@ class DisabledToolbarItem implements ToolbarItem {
      * @param array $options
      * @return boolean
      */
-
     public function shouldRender(array $options = []) {
         return true;
     }

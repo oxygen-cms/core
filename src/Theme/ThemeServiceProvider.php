@@ -19,7 +19,6 @@ class ThemeServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function boot() {
         $this->app->before(function() {
             $currentTheme = $this->app['oxygen.themeManager']->current();
@@ -34,7 +33,6 @@ class ThemeServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->app->bindShared(['oxygen.themeManager' => 'Oxygen\Core\Theme\ThemeManager'], function($app) {
             return new ThemeManager($app['config']);
@@ -46,7 +44,6 @@ class ThemeServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [
             'Oxygen\Core\Theme\ThemeManager',

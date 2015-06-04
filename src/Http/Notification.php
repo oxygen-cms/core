@@ -62,7 +62,6 @@ class Notification {
      * @param string $content
      * @param string $color
      */
-
     public function __construct($content, $status = self::SUCCESS) {
         $this->content  = $content;
         $this->status   = $status;
@@ -73,7 +72,6 @@ class Notification {
      *
      * @return array
      */
-
     public function toArray() {
         return array(
             'content'   => $this->content,

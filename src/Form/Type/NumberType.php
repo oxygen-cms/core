@@ -13,7 +13,6 @@ class NumberType extends BaseType {
      * @param string $value
      * @return mixed
      */
-
     public function transformInput(FieldMetadata $metadata, $value) {
         return (int) $value;
     }

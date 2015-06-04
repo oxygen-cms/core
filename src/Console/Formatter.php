@@ -9,7 +9,6 @@ class Formatter {
      *
      * @param array $array
      */
-
     public static function boolean($boolean) {
         return ($boolean) ? 'Yes' : 'No';
     }
@@ -19,7 +18,6 @@ class Formatter {
      *
      * @param array $array
      */
-
     public static function count($array) {
         return count($array) . ' items';
     }
@@ -29,7 +27,6 @@ class Formatter {
      *
      * @param array $array
      */
-
     public static function shortArray($array) {
         if(!is_array($array)) {
             return $array;
@@ -43,7 +40,6 @@ class Formatter {
      *
      * @param array $array
      */
-
     public static function associativeArray(array $array) {
         $string = '[ ';
         foreach($array as $key => $item) {
@@ -61,7 +57,6 @@ class Formatter {
      *
      * @param array $array
      */
-
     public static function keyedArray($array) {
         if(is_array($array)) {
             $string = '[ ';
@@ -90,7 +85,6 @@ class Formatter {
      *
      * @param object $object
      */
-
     public static function object($object) {
         if($object !== null) {
             return static::keyedArray((array) $object);

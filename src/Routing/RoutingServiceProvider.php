@@ -19,7 +19,6 @@ class RoutingServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->app['router'] = $this->app->share(function($app) {
             $router = new Router($app['events'], $app);
@@ -41,7 +40,6 @@ class RoutingServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [
             'router'

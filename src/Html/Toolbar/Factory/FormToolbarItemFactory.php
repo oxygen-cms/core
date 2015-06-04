@@ -13,7 +13,6 @@ class FormToolbarItemFactory implements FactoryInterface {
      * @param array $parameters Passed parameters
      * @return FormToolbarItem
      */
-
     public function create(array $parameters) {
         $toolbarItem = new FormToolbarItem($parameters['action']);
         unset($parameters['action']);

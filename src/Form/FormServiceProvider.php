@@ -28,7 +28,6 @@ class FormServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         FieldMetadata::setDefaultType(new BaseType());
         FieldMetadata::addType('checkbox', new BooleanType());
@@ -45,7 +44,6 @@ class FormServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [
         ];

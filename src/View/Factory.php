@@ -34,7 +34,6 @@ class Factory extends BaseFactory {
      * @param  array   $mergeData
      * @return Illuminate\View\View
      */
-
     public function model($model, $field, $data = [], $mergeData = []) {
         $contents = $model->getAttribute($field);
         $path = $this->pathFromModel($model, $field);

@@ -19,7 +19,6 @@ class FormToolbarItem extends ActionToolbarItem {
      *
      * @var array
      */
-
     public $fields;
 
     /**
@@ -27,7 +26,6 @@ class FormToolbarItem extends ActionToolbarItem {
      *
      * @param \Oxygen\Core\Action\Action $action
      */
-
     public function __construct(Action $action) {
         parent::__construct($action);
         $this->fields = [];
@@ -39,7 +37,6 @@ class FormToolbarItem extends ActionToolbarItem {
      * @param array $arguments
      * @return boolean
      */
-
     public function linksToCurrentPage(array $arguments) {
         return false;
     }
@@ -53,7 +50,6 @@ class FormToolbarItem extends ActionToolbarItem {
      * @throws Exception
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null) {
         $this->runDynamicCallbacks($arguments);
 

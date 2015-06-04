@@ -11,7 +11,6 @@ interface FieldType {
      * @param string        $value
      * @return mixed
      */
-
     public function transformInput(FieldMetadata $metadata, $value);
 
     /**
@@ -21,7 +20,6 @@ interface FieldType {
      * @param mixed $value
      * @return string
      */
-
     public function transformOutput(FieldMetadata $metadata, $value);
 
 }

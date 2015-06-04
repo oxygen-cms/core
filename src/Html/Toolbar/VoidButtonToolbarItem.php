@@ -18,7 +18,6 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      *
      * @var string
      */
-
     public $label;
 
     /**
@@ -26,7 +25,6 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      *
      * @var string
      */
-
     public $color;
 
     /**
@@ -34,13 +32,11 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      *
      * @var string
      */
-
     public $icon;
 
     /**
      * Dialog object to be displayed.
      */
-
     public $dialog;
 
     /**
@@ -49,7 +45,6 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      * @param string $label
      * @param Action $action
      */
-
     public function __construct($label, Action $action) {
         parent::__construct($action);
         $this->label          = $label;
@@ -63,7 +58,6 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      *
      * @return boolean
      */
-
     public function hasDialog() {
         return $this->dialog !== null;
     }
@@ -73,7 +67,6 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      *
      * @return boolean
      */
-
     public function shouldRenderBasic(array $arguments) {
         $arguments = array_merge($arguments, [
             'evenOnSamePage' => true
@@ -90,7 +83,6 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      * @throws Exception
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null) {
         $this->runDynamicCallbacks($arguments);
 

@@ -12,7 +12,6 @@ abstract class ServiceProvider extends BaseServiceProvider {
      * @param  string  $dir
      * @return void
      */
-
     public function entities($dir) {
         $metadata = $this->app['config']['doctrine::doctrine.metadata'];
         $metadata[] = $dir;

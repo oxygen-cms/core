@@ -10,7 +10,6 @@ interface FactoryInterface {
      * @param array $parameters Passed parameters
      * @return mixed
      */
-
     public function create(array $parameters);
 
 }

@@ -11,7 +11,6 @@ class ViewServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->registerDbBladeEngine($this->app['view.engine.resolver']);
 
@@ -24,7 +23,6 @@ class ViewServiceProvider extends ServiceProvider {
      * @param  \Illuminate\View\Engines\EngineResolver  $resolver
      * @return void
      */
-
     public function registerDbBladeEngine($resolver) {
         $app = $this->app;
 

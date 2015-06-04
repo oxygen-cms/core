@@ -17,7 +17,6 @@ class AutomaticMigrator {
      *
      * @param $vendorDir
      */
-
     public function __construct($vendorDir) {
         $this->vendorDir = $vendorDir;
         $this->paths = [];
@@ -29,7 +28,6 @@ class AutomaticMigrator {
      * @param string      $package
      * @param string|null $path
      */
-
     public function add($package, $path = null) {
         if($path === null) {
             $path = $this->vendorDir . '/' . $package . '/src/migrations';
@@ -43,7 +41,6 @@ class AutomaticMigrator {
      *
      * @return array
      */
-
     public function getPaths() {
         return $this->paths;
     }

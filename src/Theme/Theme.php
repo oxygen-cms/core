@@ -49,7 +49,6 @@ class Theme {
      *
      * @param $key
      */
-
     public function __construct($key) {
         $this->key = $key;
         $this->provides = [];
@@ -61,7 +60,6 @@ class Theme {
      *
      * @return string
      */
-
     public function getKey() {
         return $this->key;
     }
@@ -72,7 +70,6 @@ class Theme {
      * @param string $name
      * @return void
      */
-
     public function setName($name) {
         $this->name = $name;
     }
@@ -82,7 +79,6 @@ class Theme {
      *
      * @return string
      */
-
     public function getName() {
         return $this->name;
     }
@@ -94,7 +90,6 @@ class Theme {
      * @param mixed $value
      * @return void
      */
-
     public function provides($name, $value) {
         $this->provides[$name] = $value;
     }
@@ -104,7 +99,6 @@ class Theme {
      *
      * @return array
      */
-
     public function getProvides() {
         return $this->provides;
     }
@@ -115,7 +109,6 @@ class Theme {
      * @param string $image
      * @return void
      */
-
     public function setImage($image) {
         $this->image = $image;
     }
@@ -125,7 +118,6 @@ class Theme {
      *
      * @return boolean
      */
-
     public function hasImage() {
         return $this->image !== null;
     }
@@ -135,7 +127,6 @@ class Theme {
      *
      * @return string
      */
-
     public function getImage() {
         return $this->image;
     }
@@ -145,7 +136,6 @@ class Theme {
      *
      * @param $callback
      */
-
     public function setBootCallback($callback) {
         $this->bootCallback = $callback;
     }
@@ -155,7 +145,6 @@ class Theme {
      *
      * @return void
      */
-
     public function boot() {
         $callback = $this->bootCallback;
         $callback();
@@ -167,7 +156,6 @@ class Theme {
      * @param array $arguments
      * @return void
      */
-
     public function fillFromArray(array $arguments) {
         if(isset($arguments['name'])) {
             $this->name = $arguments['name'];

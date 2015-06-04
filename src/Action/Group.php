@@ -31,7 +31,6 @@ class Group {
      * @param string $name
      * @param string $pattern
      */
-
     public function __construct($name = null, $pattern = null) {
         $this->name = $name;
         $this->pattern = $pattern;
@@ -42,7 +41,6 @@ class Group {
      *
      * @return string
      */
-
     public function getPattern() {
         return $this->pattern;
     }
@@ -52,7 +50,6 @@ class Group {
      *
      * @return boolean
      */
-
     public function hasPattern() {
         return $this->pattern !== null;
     }
@@ -62,7 +59,6 @@ class Group {
      *
      * @return string
      */
-
     public function getName() {
         return $this->name;
     }
@@ -72,7 +68,6 @@ class Group {
      *
      * @return boolean
      */
-
     public function hasName() {
         return $this->name !== null;
     }

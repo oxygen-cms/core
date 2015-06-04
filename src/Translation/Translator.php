@@ -21,7 +21,6 @@ class Translator extends BaseTranslator {
      * @param  LoaderInterface $loader
      * @param  string          $locale
      */
-
     public function __construct(LoaderInterface $loader, $locale) {
         parent::__construct($loader, $locale);
         $this->bulkReplacements = [];
@@ -34,7 +33,6 @@ class Translator extends BaseTranslator {
      * @param array $replace
      * @return void
      */
-
     public function when($key, array $replace) {
         $this->bulkReplacements[$key] = $replace;
     }
@@ -47,7 +45,6 @@ class Translator extends BaseTranslator {
      * @param  string  $locale
      * @return string
      */
-
     public function get($key, array $replace = [], $locale = null) {
         foreach($this->bulkReplacements as $match => $extraReplace) {
             if(starts_with($key, $match)) {

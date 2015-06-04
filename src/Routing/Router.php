@@ -15,7 +15,6 @@ class Router extends BaseRouter {
      * @param Action $action
      * @return void
      */
-
     public function blueprint(Blueprint $blueprint) {
         foreach($blueprint->getActions() as $action) {
             $this->action($action);
@@ -28,7 +27,6 @@ class Router extends BaseRouter {
      * @param Action $actions
      * @return void
      */
-
     public function action(Action $action) {
         if($action->isValid()) {
             $closure = function() use($action) {

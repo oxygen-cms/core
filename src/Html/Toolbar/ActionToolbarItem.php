@@ -18,7 +18,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @var \Oxygen\Core\Action\Action
      */
-
     public $action;
 
     /**
@@ -26,7 +25,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @var string
      */
-
     public $identifier;
 
     /**
@@ -34,7 +32,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @var Closure
      */
-
     public $shouldRenderCallback;
 
     /**
@@ -42,7 +39,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @var array
      */
-
     public $dynamicCallbacks;
 
     /**
@@ -50,7 +46,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @param \Oxygen\Core\Action\Action $action
      */
-
     public function __construct(Action $action) {
         $this->action = $action;
         $this->identifier = null;
@@ -65,7 +60,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @return string
      */
-
     public function getIdentifier() {
         return $this->identifier === null ? $this->action->getName() : $this->identifier;
     }
@@ -76,7 +70,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @param array $arguments
      * @return boolean
      */
-
     public function shouldRender(array $arguments = []) {
         $callback = $this->shouldRenderCallback;
         $result = $callback($this, $arguments);
@@ -89,7 +82,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @param Closure $callback
      * @return void
      */
-
     public function addDynamicCallback(Closure $callback) {
         $this->dynamicCallbacks[] = $callback;
         return $this;
@@ -101,7 +93,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @param array $arguments
      * @return void
      */
-
     public function runDynamicCallbacks(array $arguments) {
         foreach($this->dynamicCallbacks as $callback) {
             $callback($this, $arguments);
@@ -113,7 +104,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @return boolean
      */
-
     public function shouldRenderBasic(array $arguments) {
         if(isset($arguments['evenOnSamePage']) && $arguments['evenOnSamePage'] === true) {
             return $this->hasPermissions();
@@ -127,7 +117,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      *
      * @return boolean
      */
-
     public function hasPermissions() {
         return $this->action->usesPermissions()
             ? Auth::user()->hasPermissions($this->action->getPermissions())
@@ -140,7 +129,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @param array $arguments
      * @return boolean
      */
-
     public function linksToCurrentPage(array $arguments) {
         return
             URL::current() == $this->action->getURL($arguments) &&
@@ -154,7 +142,6 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @param mixed $value value of the variable
      * @throws Exception
      */
-
     public function __set($variable, $value) {
         throw new Exception('Unknown key "' . $variable . '"');
     }

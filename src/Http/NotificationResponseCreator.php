@@ -29,7 +29,6 @@ class NotificationResponseCreator {
      * @param URL $url
      * @param Repository $preferences
      */
-
     public function __construct(Session $session, Request $request, Response $response, Redirect $redirect, URL $url, Repository $preferences = null) {
         $this->session = $session;
         $this->request = $request;
@@ -49,7 +48,6 @@ class NotificationResponseCreator {
      * @param array     $parameters     Extra parameters
      * @return mixed
      */
-
     public function createResponse($notification, array $parameters = []) {
         $notification = $this->arrayFromNotification($notification);
 
@@ -123,7 +121,6 @@ class NotificationResponseCreator {
      * @param array     $parameters
      * @return
      */
-
     public function createBasicResponse($notification, $parameters) {
         if($this->wantsRedirect($parameters)) {
             $url = $this->urlFromRoute($parameters['redirect']);

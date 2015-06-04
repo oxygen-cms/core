@@ -33,7 +33,6 @@ class Navigation implements RenderableInterface {
      *
      * @var SpacerToolbarItem
      */
-
     public $spacer;
 
     /**
@@ -55,7 +54,6 @@ class Navigation implements RenderableInterface {
     /**
      * Construct the Navigation.
      */
-
     public function __construct() {
         $this->toolbars = [
             'primary'   => new Toolbar(),
@@ -78,7 +76,6 @@ class Navigation implements RenderableInterface {
      * @param integer $toolbar Which toolbar to use
      * @return array
      */
-
     public function all($toolbar = self::PRIMARY) {
         $this->loadLazyOrders($toolbar);
 
@@ -91,7 +88,6 @@ class Navigation implements RenderableInterface {
      * @param ToolbarItem $item
      * @return void
      */
-
     public function add(ToolbarItem $item) {
         $this->toolbars['primary']->addItem($item);
     }
@@ -103,7 +99,6 @@ class Navigation implements RenderableInterface {
      * @param array|callable $keys
      * @return void
      */
-
     public function order($toolbar, $keys) {
         if(is_callable($keys)) {
             $this->addLazyOrder($toolbar, $keys);
@@ -118,7 +113,6 @@ class Navigation implements RenderableInterface {
      * @param integer $toolbar Which toolbar to use
      * @return Toolbar
      */
-
     public function getToolbar($toolbar) {
         return $this->toolbars[$toolbar];
     }

@@ -24,7 +24,6 @@ class BlueprintController extends Controller {
      * @param BlueprintManager  $manager        BlueprintManager instance
      * @param string            $blueprintName  Name of the corresponding Blueprint
      */
-
     public function __construct(BlueprintManager $manager, $blueprintName = null) {
         if($blueprintName === null) {
             $reflect = new ReflectionClass($this);

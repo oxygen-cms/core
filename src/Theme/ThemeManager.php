@@ -17,7 +17,6 @@ class ThemeManager {
     /**
      * Constructs the ThemeManager.
      */
-
     public function __construct(Repository $config) {
         $this->themes = [];
         $this->config = $config;
@@ -28,7 +27,6 @@ class ThemeManager {
      *
      * @param Theme $theme
      */
-
     public function register(Theme $theme) {
         $this->themes[$theme->getKey()] = $theme;
     }
@@ -38,7 +36,6 @@ class ThemeManager {
      *
      * @param array $arguments
      */
-
     public function make(array $arguments) {
         $theme = new Theme($arguments['key']);
         unset($arguments['key']);
@@ -52,7 +49,6 @@ class ThemeManager {
      * @param string $name
      * @return Theme
      */
-
     public function get($name) {
         if($name === null) {
             return null;
@@ -66,7 +62,6 @@ class ThemeManager {
      *
      * @return array
      */
-
     public function all() {
         return $this->themes;
     }
@@ -76,7 +71,6 @@ class ThemeManager {
      *
      * @return string
      */
-
     public function getCurrentKey() {
         return $this->config->get('oxygen/core::theme');
     }
@@ -87,7 +81,6 @@ class ThemeManager {
      * @param string $key
      * @return void
      */
-
     public function setCurrentKey($key) {
         $this->config->write('oxygen/core::theme', $key);
     }
@@ -97,7 +90,6 @@ class ThemeManager {
      *
      * @return Theme
      */
-
     public function current() {
         return $this->get($this->getCurrentKey());
     }

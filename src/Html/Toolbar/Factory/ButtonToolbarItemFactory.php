@@ -13,7 +13,6 @@ class ButtonToolbarItemFactory implements FactoryInterface {
      * @param array $parameters Passed parameters
      * @return ButtonToolbarItem
      */
-
     public function create(array $parameters) {
         $toolbarItem = new ButtonToolbarItem($parameters['label'], $parameters['action']);
         unset($parameters['label'], $parameters['action']);

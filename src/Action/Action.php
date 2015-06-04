@@ -24,7 +24,6 @@ class Action {
      *
      * @var string
      */
-
     public $pattern;
 
     /**
@@ -32,7 +31,6 @@ class Action {
      *
      * @var string
      */
-
     public $name;
 
     /**
@@ -41,7 +39,6 @@ class Action {
      *
      * @var string
      */
-
     public $method;
 
     /**
@@ -49,7 +46,6 @@ class Action {
      *
      * @var Group
      */
-
     public $group;
 
     /**
@@ -57,7 +53,6 @@ class Action {
      *
      * @var array
      */
-
     public $beforeFilters;
 
     /**
@@ -65,7 +60,6 @@ class Action {
      *
      * @var array
      */
-
     public $afterFilters;
 
     /**
@@ -73,7 +67,6 @@ class Action {
      *
      * @var string
      */
-
     public $permissions;
 
     /**
@@ -83,7 +76,6 @@ class Action {
      *
      * @var mixed
      */
-
     public $uses;
 
     /**
@@ -91,7 +83,6 @@ class Action {
      *
      * @var Closure
      */
-
     public $routeParametersCallback;
 
     /**
@@ -99,7 +90,6 @@ class Action {
      *
      * @var Closure
      */
-
     public $customRouteCallback;
 
     /**
@@ -109,7 +99,6 @@ class Action {
      *
      * @var boolean
      */
-
     public $register;
 
     /**
@@ -117,7 +106,6 @@ class Action {
      *
      * @var boolean
      */
-
     public $useSmoothState;
 
     /**
@@ -128,7 +116,6 @@ class Action {
      * @param mixed $uses
      * @param Group $group
      */
-
     public function __construct($name, $pattern, $uses, Group $group = null) {
         $this->pattern       = $pattern;
         $this->name          = $name;
@@ -150,7 +137,6 @@ class Action {
      *
      * @return string
      */
-
     public function getName() {
         return ($this->group->hasName() ? $this->group->getName() . '.' : '') . $this->name;
     }
@@ -160,7 +146,6 @@ class Action {
      *
      * @return string
      */
-
     public function getPattern() {
         return ($this->group->hasPattern() ? $this->group->getPattern() . ($this->pattern === '/' ? '' : '/') : '') . $this->pattern;
     }
@@ -170,7 +155,6 @@ class Action {
      *
      * @return string
      */
-
     public function getMethod() {
         return strtoupper($this->method);
     }
@@ -180,7 +164,6 @@ class Action {
      *
      * @return array
      */
-
     public function getUses() {
         return $this->uses;
     }
@@ -190,7 +173,6 @@ class Action {
      *
      * @return array
      */
-
     public function getBeforeFilters() {
         $filters = $this->beforeFilters;
         if($this->usesPermissions()) {
@@ -204,7 +186,6 @@ class Action {
      *
      * @return array
      */
-
     public function getAfterFilters() {
         return $this->afterFilters;
     }
@@ -214,7 +195,6 @@ class Action {
      *
      * @return boolean
      */
-
     public function usesPermissions() {
         return $this->permissions !== null;
     }
@@ -224,7 +204,6 @@ class Action {
      *
      * @return string
      */
-
     public function getPermissions() {
         return $this->permissions;
     }
@@ -235,7 +214,6 @@ class Action {
      * @param array $options the options array
      * @return array route parameters
      */
-
     public function getRouteParameters(array $options = []) {
         $callback = $this->routeParametersCallback;
         return $callback($this, $options);
@@ -247,7 +225,6 @@ class Action {
      * @param array $options the options array
      * @return string the URL
      */
-
     public function getURL(array $options = []) {
         return URL::route($this->getName(), $this->getRouteParameters($options));
     }
@@ -257,7 +234,6 @@ class Action {
      *
      * @return boolean
      */
-
     public function isValid() {
         return ($this->uses !== null);
     }
@@ -269,7 +245,6 @@ class Action {
      * @param dynamic $value value of the variable
      * @throws Exception
      */
-
     public function __set($variable, $value) {
         throw new Exception('Resource\Action\Action: Unknown key "' . $variable . '"');
     }

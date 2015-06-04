@@ -30,7 +30,6 @@ class StaticField extends Field {
      * @param FieldMetadata $meta
      * @param string    $value
      */
-
     public function __construct(FieldMetadata $meta, $value = '') {
         parent::__construct($meta, $value);
     }
@@ -42,7 +41,6 @@ class StaticField extends Field {
      * @param object $entity
      * @return Field
      */
-
     public static function fromEntity(FieldMetadata $meta, $entity) {
         $instance = new static($meta, $entity->getAttribute($meta->name));
         $instance->setEntity($entity);
@@ -55,7 +53,6 @@ class StaticField extends Field {
      * @param string $type
      * @return RendererInterface|callable The renderer
      */
-
     public static function getRenderer($type) {
         return static::$renderers[$type];
     }
@@ -70,7 +67,6 @@ class StaticField extends Field {
      * @param string $type
      * @param RendererInterface|callable $renderer The default renderer
      */
-
     public static function setRenderer($type, $renderer) {
         static::$renderers[$type] = $renderer;
     }
@@ -87,7 +83,6 @@ class StaticField extends Field {
      * @throws Exception if no renderer has been set
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null) {
         $type = $this->getMeta()->type;
         if($renderer === null) {

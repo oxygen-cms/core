@@ -12,7 +12,6 @@ class CustomType extends BaseType {
      * @param callable $input
      * @param callable $output
      */
-
     public function __construct(callable $input, callable $output) {
         $this->input = $input;
         $this->output = $output;

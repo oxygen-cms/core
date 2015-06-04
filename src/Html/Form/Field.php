@@ -43,7 +43,6 @@ abstract class Field implements RenderableInterface {
      * @param FieldMetadata $meta
      * @param string    $value
      */
-
     public function __construct(FieldMetadata $meta, $value = '') {
         $this->meta = $meta;
         $this->value = $value;
@@ -54,7 +53,6 @@ abstract class Field implements RenderableInterface {
      *
      * @return FieldMetadata
      */
-
     public function getMeta() {
         return $this->meta;
     }
@@ -64,7 +62,6 @@ abstract class Field implements RenderableInterface {
      *
      * @return mixed
      */
-
     public function getValue() {
         return $this->value;
     }
@@ -74,7 +71,6 @@ abstract class Field implements RenderableInterface {
      *
      * @param object $entity
      */
-
     public function setEntity($entity) {
         $this->entity = $entity;
     }
@@ -84,7 +80,6 @@ abstract class Field implements RenderableInterface {
      *
      * @return object
      */
-
     public function getEntity() {
         return $this->entity;
     }
@@ -97,7 +92,6 @@ abstract class Field implements RenderableInterface {
      * @throws Exception if no renderer has been set
      * @return string the rendered object
      */
-
     public abstract function render(array $arguments = [], $renderer = null);
 
     /**
@@ -107,7 +101,6 @@ abstract class Field implements RenderableInterface {
      * @param object $entity
      * @return FieldMetadata
      */
-
     public static function fromEntity(FieldMetadata $meta, $entity) {
         $instance = new static($meta, $entity->getAttribute($meta->name));
         $instance->setEntity($entity);

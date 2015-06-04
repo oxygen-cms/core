@@ -36,7 +36,6 @@ class StringView extends View {
      * @param  string          $lastModified
      * @param  array           $data
      */
-
     public function __construct(
         Factory $factory,
         EngineInterface $engine,
@@ -61,7 +60,6 @@ class StringView extends View {
      * @param  \Closure  $callback
      * @return string
      */
-
     public function render(Closure $callback = null) {
         $contents = $this->renderContents();
 

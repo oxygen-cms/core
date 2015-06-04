@@ -12,7 +12,6 @@ interface RenderableInterface {
      * @throws Exception if no renderer has been set
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null);
 
 }

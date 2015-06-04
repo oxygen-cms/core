@@ -14,7 +14,6 @@ class RewriteException extends Exception {
      * @param string $value
      * @param string $regex
      */
-
     public function __construct($message, $key, $value, $regex) {
         parent::__construct($message . '. Key: "' . $key . '". Value: "' . print_r($value, true) . '"');
         $this->regex = $regex;

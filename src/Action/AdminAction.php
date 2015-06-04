@@ -19,7 +19,6 @@ class AdminAction extends Action {
      * @param mixed $uses
      * @param Group $group
      */
-
     public function __construct($name, $pattern, $uses, Group $group = null) {
         parent::__construct($name, $pattern, $uses, $group);
         $this->permissions = ($this->group->hasName() ? $this->group->getName() . '.' : '') . $this->name;
@@ -40,7 +39,6 @@ class AdminAction extends Action {
      *
      * @return array
      */
-
     public function getBeforeFilters() {
         $filters = [self::AUTH_FILTER_NAME];
         if($this->method !== Action::METHOD_GET) {

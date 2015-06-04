@@ -50,7 +50,6 @@ class Manager {
      *
      * @param Navigation $navigation
      */
-
     public function __construct(Navigation $navigation, Config $config, Router $router) {
         $this->navigation = $navigation;
         $this->config = $config;
@@ -63,7 +62,6 @@ class Manager {
      * @param string $directory
      * @return void
      */
-
     public function loadDirectory($directory) {
         $iterator = new DirectoryIterator($directory);
         foreach($iterator as $file) {
@@ -78,7 +76,6 @@ class Manager {
      *
      * @return void
      */
-
     public function registerRoutes() {
         $this->router->pattern('id', '[0-9]+');
 
@@ -94,7 +91,6 @@ class Manager {
      * @param callable $callback
      * @return void
      */
-
     public function make($name, callable $callback) {
         $blueprint = new Blueprint($name, $this->config->get('oxygen/core::config.baseURI'));
         $callback($blueprint);
@@ -112,7 +108,6 @@ class Manager {
      * @return Blueprint
      * @throws \Exception if the Blueprint can't be found
      */
-
     public function get($name) {
         if(isset($this->blueprints[$name])) {
             return $this->blueprints[$name];
@@ -128,7 +123,6 @@ class Manager {
      * @param callable $callback
      * @return void
      */
-
     public function edit($name, callable $callback) {
         $callback($this->get($name));
     }
@@ -139,7 +133,6 @@ class Manager {
      * @param string $name name of the blueprint
      * @return void
      */
-
     public function remove($name) {
         unset($this->blueprints[$name]);
     }
@@ -150,7 +143,6 @@ class Manager {
      * @param string $name name of the blueprint
      * @return boolean
      */
-
     public function exists($name) {
         return isset($this->blueprints[$name]);
     }
@@ -160,7 +152,6 @@ class Manager {
      *
      * @return array
      */
-
     public function all() {
         return $this->blueprints;
     }

@@ -19,7 +19,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var array
      */
-
     public $items;
 
     /**
@@ -27,7 +26,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var array
      */
-
     public $itemsToDisplay;
 
     /**
@@ -35,7 +33,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var string
      */
-
     public $color;
 
     /**
@@ -43,7 +40,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var string|ToolbarItem
      */
-
     public $label;
 
     /**
@@ -51,7 +47,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var ToolbarItem
      */
-
     public $button;
 
     /**
@@ -59,7 +54,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var string
      */
-
     public $icon;
 
     /**
@@ -67,7 +61,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var string
      */
-
     public $identifier;
 
     /**
@@ -75,7 +68,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @var boolean
      */
-
     public $shouldRenderButton;
 
     /**
@@ -84,7 +76,6 @@ class DropdownToolbarItem implements ToolbarItem {
      * @param string $label
      * @param array $items
      */
-
     public function __construct($label, array $items = []) {
         $this->items          = $items;
         $this->itemsToDisplay = [];
@@ -99,7 +90,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @param ToolbarItem $item
      */
-
     public function addItem(ToolbarItem $item) {
         $this->items[] = $item;
     }
@@ -109,7 +99,6 @@ class DropdownToolbarItem implements ToolbarItem {
      *
      * @return string
      */
-
     public function getIdentifier() {
         return $this->identifier;
     }
@@ -120,7 +109,6 @@ class DropdownToolbarItem implements ToolbarItem {
      * @param array $arguments
      * @return boolean
      */
-
     public function shouldRender(array $arguments = []) {
         foreach($this->items as $item) {
             if($item->shouldRender($arguments)) {
@@ -143,7 +131,6 @@ class DropdownToolbarItem implements ToolbarItem {
      * @throws \Exception
      * @return string the rendered object
      */
-
     public function render(array $arguments = [], $renderer = null) {
         if(empty($this->itemsToDisplay)) {
             return $this->button->render($arguments);

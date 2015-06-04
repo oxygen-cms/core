@@ -17,7 +17,6 @@ class ActionFactory implements FactoryInterface {
      * @param string $controller Default controller to use if none is provided
      * @return mixed
      */
-
     public function create(array $parameters, $controller = null) {
         $parameters = $this->parseParameters($parameters, $controller);
 

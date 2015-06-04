@@ -60,7 +60,6 @@ class FileWriter implements WriterInterface {
      * @param  string           $defaultPath
      * @return void
      */
-
     public function __construct(Filesystem $filesystem, LoaderInterface $loader, Rewriter $rewriter, ConfigPublisher $publisher, $defaultPath) {
         $this->files            = $filesystem;
         $this->loader           = $loader;
@@ -81,7 +80,6 @@ class FileWriter implements WriterInterface {
      * @param  boolean $writeToPackageSource whether to write the config to /vendor, or to /app/config/packages
      * @return void|boolean
      */
-
     public function write($key, $value, $environment, $group, $namespace = null, $writeToPackageSource = false) {
         $path = $this->getPath($key, $environment, $group, $namespace, $writeToPackageSource);
 
@@ -230,7 +228,6 @@ class FileWriter implements WriterInterface {
      * @param string $package usually {vendor}/{package}
      * @param string $namespace usually just {package}
      */
-
     public function addPackage($package, $namespace) {
         $this->packages[$namespace] = $package;
     }

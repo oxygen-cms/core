@@ -47,7 +47,6 @@ class Toolbar {
     /**
      * Constructs the Toolbar.
      */
-
     public function __construct() {
         $this->itemsPool    = [];
         $this->itemsOrdered = null;
@@ -60,7 +59,6 @@ class Toolbar {
      *
      * @param string $prefix
      */
-
     public function setPrefix($prefix) {
         $this->prefix = $prefix;
     }
@@ -70,7 +68,6 @@ class Toolbar {
      *
      * @return string
      */
-
     public function getPrefix() {
         return $this->prefix;
     }
@@ -81,7 +78,6 @@ class Toolbar {
      * @param $items
      * @return void
      */
-
     public function setSharedItemsPool(&$items) {
         $this->itemsPool = &$items;
     }
@@ -92,7 +88,6 @@ class Toolbar {
      * @param ToolbarItem $item
      * @return void
      */
-
     public function addItem(ToolbarItem $item) {
         $this->itemsPool[$item->getIdentifier()] = clone $item;
     }
@@ -103,7 +98,6 @@ class Toolbar {
      * @param string $identifier
      * @return ToolbarItem
      */
-
     public function getItem($identifier) {
         if(!isset($this->itemsPool[$identifier]) && $this->prefix !== null) {
             return $this->itemsPool[$this->prefix . '.' . $identifier];
@@ -118,7 +112,6 @@ class Toolbar {
      * @param string $identifier
      * @return boolean
      */
-
     public function hasItem($identifier) {
         return isset($this->itemsPool[$this->prefix . '.' . $identifier]) || isset($this->itemsPool[$identifier]);
     }
@@ -129,7 +122,6 @@ class Toolbar {
      * @param array $keys
      * @return void
      */
-
     public function setOrder(array $keys) {
         $this->itemsOrdered = [];
 
@@ -161,7 +153,6 @@ class Toolbar {
      * @param Blueprint $blueprint
      * @return void
      */
-
     public function addItemsFromBlueprint(Blueprint $blueprint) {
         foreach($blueprint->getToolbarItems() as $item) {
             $this->addItem($item);
@@ -175,7 +166,6 @@ class Toolbar {
      * @param string $set Set of items to use
      * @return void
      */
-
     public function fillFromBlueprint(Blueprint $blueprint, $set) {
         $this->addItemsFromBlueprint($blueprint);
         $this->setOrder($blueprint->getToolbarOrder($set));
@@ -186,7 +176,6 @@ class Toolbar {
      *
      * @return array
      */
-
     public function getItems() {
         return $this->itemsOrdered === null ? $this->itemsPool : $this->itemsOrdered;
     }

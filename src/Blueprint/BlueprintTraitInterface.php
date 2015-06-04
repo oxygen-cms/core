@@ -9,7 +9,6 @@ interface BlueprintTraitInterface {
      *
      * @param Blueprint $blueprint
      */
-
     public function applyTrait(Blueprint $blueprint);
 
 }

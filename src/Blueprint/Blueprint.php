@@ -138,7 +138,6 @@ class Blueprint {
      * @param string $name the name of the Blueprint
      * @param string $baseURI
      */
-
     public function __construct($name, $baseURI = '/') {
         $this->baseURI = $baseURI;
 
@@ -168,7 +167,6 @@ class Blueprint {
      *
      * @return string
      */
-
     public function getName() {
         return $this->name;
     }
@@ -178,7 +176,6 @@ class Blueprint {
      *
      * @param string $name new name of the Blueprint
      */
-
     public function setName($name) {
         $this->name = $name;
     }
@@ -188,7 +185,6 @@ class Blueprint {
      *
      * @param array $names
      */
-
     public function setDisplayNames(array $names) {
         $this->displayNames = $names;
     }
@@ -200,7 +196,6 @@ class Blueprint {
      * @param boolean  $type
      * @return void
      */
-
     public function setDisplayName($name, $type = self::SINGULAR) {
         if($type === self::SINGULAR) {
             $this->displayNames['singular'] = $name;
@@ -216,7 +211,6 @@ class Blueprint {
      * @throws InvalidArgumentException If $type is not valid
      * @return string
      */
-
     public function getDisplayName($type = self::SINGULAR) {
         if($type === self::SINGULAR) {
             return $this->displayNames['singular'];
@@ -236,7 +230,6 @@ class Blueprint {
      * @param string $actionName
      * @return string
      */
-
     public function getRouteName($actionName = null) {
         $name = Str::camel($this->getDisplayName(self::PLURAL));
         return $actionName == null ? $name : $name . '.' . $actionName;
@@ -248,7 +241,6 @@ class Blueprint {
      *
      * @return string
      */
-
     public function getRoutePattern() {
         $slug = Str::slug($this->getDisplayName(self::PLURAL));
         return $this->baseURI !== '/' ? $this->baseURI . '/' . $slug : $slug;
@@ -259,7 +251,6 @@ class Blueprint {
      *
      * @return boolean
      */
-
     public function hasController() {
         return ($this->controller !== null);
     }
@@ -269,7 +260,6 @@ class Blueprint {
      *
      * @return string
      */
-
     public function getController() {
         return $this->controller;
     }
@@ -279,7 +269,6 @@ class Blueprint {
      *
      * @param string $controller
      */
-
     public function setController($controller) {
         $this->controller = $controller;
     }
@@ -289,7 +278,6 @@ class Blueprint {
      *
      * @return boolean
      */
-
     public function hasPrimaryToolbarItem() {
         return ($this->primaryToolbarItem !== null);
     }
@@ -299,7 +287,6 @@ class Blueprint {
      *
      * @return ToolbarItem
      */
-
     public function getPrimaryToolbarItem() {
         if($this->hasPrimaryToolbarItem()) {
             return $this->getToolbarItem($this->primaryToolbarItem);
@@ -314,7 +301,6 @@ class Blueprint {
      * @param string $name
      * @return void
      */
-
     public function setPrimaryToolbarItem($name) {
         $this->primaryToolbarItem = $name;
     }
@@ -324,7 +310,6 @@ class Blueprint {
      *
      * @return boolean
      */
-
     public function hasTitleField() {
         return ($this->titleField !== null);
     }
@@ -334,7 +319,6 @@ class Blueprint {
      *
      * @return string
      */
-
     public function getTitleField() {
         if($this->titleField !== null) {
             return $this->titleField;
@@ -349,7 +333,6 @@ class Blueprint {
      * @param string $name
      * @return void
      */
-
     public function setTitleField($name) {
         if(!isset($this->formFields[$name])) {
             throw new InvalidArgumentException('Cannot set title field to "' . $name . '". Field does not exist.');
@@ -363,7 +346,6 @@ class Blueprint {
      * @param string $icon the icon
      * @return void
      */
-
     public function setIcon($icon) {
         $this->icon = $icon;
     }
@@ -373,7 +355,6 @@ class Blueprint {
      *
      * @return string
      */
-
     public function getIcon() {
         return $this->icon;
     }
@@ -384,7 +365,6 @@ class Blueprint {
      * @param string $name
      * @return FieldMetadata
      */
-
     public function getField($name) {
         if(isset($this->formFields[$name])) {
             return $this->formFields[$name];
@@ -399,7 +379,6 @@ class Blueprint {
      * @param array $only only retrieve the specified fields
      * @return array
      */
-
     public function getFields(array $only = []) {
         if(empty($only)) {
             return $this->formFields;
@@ -419,7 +398,6 @@ class Blueprint {
      * @param FieldMetadata $field
      * @return void
      */
-
     public function addField(FieldMetadata $field) {
         $this->formFields[$field->name] = $field;
     }
@@ -430,7 +408,6 @@ class Blueprint {
      * @param array $parameters
      * @return void
      */
-
     public function makeField(array $parameters) {
         $field = new FieldMetadata($parameters['name']);
         unset($parameters['name']);
@@ -446,7 +423,6 @@ class Blueprint {
      * @param array $fields
      * @return void
      */
-
     public function makeFields(array $fields) {
         foreach($fields as $parameters) {
             $this->makeField($parameters);
@@ -459,7 +435,6 @@ class Blueprint {
      * @param string $name
      * @return void
      */
-
     public function removeField($name) {
         unset($this->formFields[$name]);
     }
@@ -470,7 +445,6 @@ class Blueprint {
      * @param string $name
      * @return boolean
      */
-
     public function hasField($name) {
         return isset($this->formFields[$name]);
     }
@@ -481,7 +455,6 @@ class Blueprint {
      * @param string $name
      * @return Action
      */
-
     public function getAction($name) {
         if(isset($this->actions[$name])) {
             return $this->actions[$name];
@@ -495,7 +468,6 @@ class Blueprint {
      *
      * @return array
      */
-
     public function getActions() {
         return $this->actions;
     }
@@ -506,7 +478,6 @@ class Blueprint {
      * @param Action $action
      * @return void
      */
-
     public function addAction(Action $action) {
         $this->actions[$action->name] = $action;
     }
@@ -518,7 +489,6 @@ class Blueprint {
      * @param FactoryInterface $factory Optional FactoryInterface
      * @return Action
      */
-
     public function makeAction(array $parameters, FactoryInterface $factory = null) {
         if($factory === null) {
             $factory = $this->getDefaultActionFactory();
@@ -541,7 +511,6 @@ class Blueprint {
      * @param string $name
      * @return void
      */
-
     public function removeAction($name) {
         unset($this->actions[$name]);
     }
@@ -553,7 +522,6 @@ class Blueprint {
      * @param FactoryInterface $factory
      * @return void
      */
-
     public function setDefaultActionFactory(FactoryInterface $factory) {
         $this->defaultActionFactory = $factory;
     }
@@ -564,7 +532,6 @@ class Blueprint {
      *
      * @return FactoryInterface
      */
-
     public function getDefaultActionFactory() {
         return $this->defaultActionFactory;
     }
@@ -575,7 +542,6 @@ class Blueprint {
      *
      * @param array
      */
-
     public function getToolbarOrder($group) {
         return $this->toolbarOrders[$group];
     }
@@ -588,7 +554,6 @@ class Blueprint {
      * @param array $items
      * @return void
      */
-
     public function setToolbarOrder($group, $items) {
         $this->toolbarOrders[$group] = $items;
     }
@@ -599,7 +564,6 @@ class Blueprint {
      * @param array $items
      * @return void
      */
-
     public function setToolbarOrders(array $items) {
         $this->toolbarOrders = $items;
     }
@@ -609,7 +573,6 @@ class Blueprint {
      *
      * @return array
      */
-
     public function getToolbarOrders() {
         return $this->toolbarOrders;
     }
@@ -620,7 +583,6 @@ class Blueprint {
      * @param string $name
      * @return ToolbarItem
      */
-
     public function getToolbarItem($name) {
         if(!isset($this->toolbarItems[$name])) {
             return $this->toolbarItems[$this->getRouteName() . '.' . $name];
@@ -634,7 +596,6 @@ class Blueprint {
      *
      * @return array
      */
-
     public function getToolbarItems() {
         return $this->toolbarItems;
     }
@@ -645,7 +606,6 @@ class Blueprint {
      * @param ToolbarItem $item
      * @return void
      */
-
     public function addToolbarItem(ToolbarItem $item) {
         $this->toolbarItems[$item->getIdentifier()] = $item;
     }
@@ -657,7 +617,6 @@ class Blueprint {
      * @param FactoryInterface $factory Optional FactoryInterface
      * @return Action
      */
-
     public function makeToolbarItem(array $parameters, FactoryInterface $factory = null) {
         if($factory === null) {
             $factory = $this->getDefaultToolbarItemFactory();
@@ -680,7 +639,6 @@ class Blueprint {
      * @param string $name
      * @return void
      */
-
     public function removeToolbarItem($name) {
         if(!isset($this->toolbarItems[$name])) {
             unset($this->toolbarItems[$this->getRouteName() . '.' . $name]);
@@ -696,7 +654,6 @@ class Blueprint {
      * @param FactoryInterface $factory
      * @return void
      */
-
     public function setDefaultToolbarItemFactory(FactoryInterface $factory) {
         $this->defaultToolbarItemFactory = $factory;
     }
@@ -707,7 +664,6 @@ class Blueprint {
      *
      * @return FactoryInterface
      */
-
     public function getDefaultToolbarItemFactory() {
         return $this->defaultToolbarItemFactory;
     }
@@ -718,7 +674,6 @@ class Blueprint {
      * @param BlueprintTraitInterface $trait the trait instance
      * @return void
      */
-
     public function useTrait(BlueprintTraitInterface $trait) {
         $trait->applyTrait($this);
     }
@@ -728,7 +683,6 @@ class Blueprint {
      *
      * @return array
      */
-
     public function getValidationRules() {
         $rules = [];
 
