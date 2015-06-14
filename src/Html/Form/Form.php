@@ -2,13 +2,9 @@
 
 namespace Oxygen\Core\Form;
 
-class Form {
+use Oxygen\Core\Http\Method;
 
-    const GET = 'GET';
-    const POST = 'POST';
-    const PUT = 'POST';
-    const PATCH = 'POST';
-    const DELETE = 'POST';
+class Form {
 
     /**
      * An array of form rows
@@ -24,7 +20,7 @@ class Form {
      */
     protected $method;
 
-    public function __construct($method = self::POST) {
+    public function __construct($method = Method::POST) {
         $this->method = $method;
     }
 

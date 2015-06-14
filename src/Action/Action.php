@@ -3,6 +3,7 @@
 namespace Oxygen\Core\Action;
 
 use Exception;
+use Oxygen\Core\Http\Method;
 use URL;
 
 use Oxygen\Core\Html\Toolbar\ButtonToolbarItem;
@@ -119,7 +120,7 @@ class Action {
     public function __construct($name, $pattern, $uses, Group $group = null) {
         $this->pattern       = $pattern;
         $this->name          = $name;
-        $this->method        = self::METHOD_GET;
+        $this->method        = Method::GET;
         $this->group         = $group ?: new Group();
         $this->beforeFilters = [];
         $this->afterFilters  = [];

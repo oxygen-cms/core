@@ -5,6 +5,7 @@ namespace Oxygen\Core\Action;
 use InvalidArgumentException;
 
 use Oxygen\Core\Blueprint\Blueprint;
+use Oxygen\Core\Http\Method;
 
 class AdminAction extends Action {
 
@@ -41,7 +42,7 @@ class AdminAction extends Action {
      */
     public function getBeforeFilters() {
         $filters = [self::AUTH_FILTER_NAME];
-        if($this->method !== Action::METHOD_GET) {
+        if($this->method !== Method::GET) {
             $filters[] = self::CSRF_FILTER_NAME;
         }
         return array_merge($filters, parent::getBeforeFilters());
