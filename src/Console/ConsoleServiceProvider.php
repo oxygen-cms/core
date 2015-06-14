@@ -40,8 +40,8 @@ class ConsoleServiceProvider extends ServiceProvider {
      */
     public function provides() {
         return [
-            'Oxygen\Core\Console\BlueprintListCommand',
-            'Oxygen\Core\Console\BlueprintDetailCommand'
+            BlueprintListCommand::class,
+            BlueprintDetailCommand::class
         ];
     }
 

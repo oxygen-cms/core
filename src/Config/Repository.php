@@ -54,7 +54,7 @@ class Repository extends BaseRepository implements WritableRepository {
      */
     public function package($package, $hint, $namespace = null) {
         parent::package($package, $hint, $namespace);
-
+        
         $namespace = $this->getPackageNamespace($package, $namespace);
 
         // lets the writer know that config for {namespace} should be written to /app/config/packages/{package}
