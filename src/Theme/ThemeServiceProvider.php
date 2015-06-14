@@ -2,6 +2,7 @@
 
 namespace Oxygen\Core\Theme;
 
+use Illuminate\Contracts\Http\Kernel;
 use Oxygen\Core\Support\ServiceProvider;
 
 class ThemeServiceProvider extends ServiceProvider {
@@ -20,12 +21,7 @@ class ThemeServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app->before(function() {
-            $currentTheme = $this->app['oxygen.themeManager']->current();
-            if($currentTheme) {
-                $currentTheme->boot();
-            }
-        });
+        $this->app[Kernel::class]->pushMiddleware($this->app[BootThemeMiddleware::class]);
     }
 
     /**
@@ -34,7 +30,7 @@ class ThemeServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->bindShared(['oxygen.themeManager' => 'Oxygen\Core\Theme\ThemeManager'], function($app) {
+        $this->app->singleton(ThemeManager::class, function($app) {
             return new ThemeManager($app['config']);
         });
     }
@@ -46,8 +42,7 @@ class ThemeServiceProvider extends ServiceProvider {
      */
     public function provides() {
         return [
-            'Oxygen\Core\Theme\ThemeManager',
-            'oxygen.themeManager'
+            ThemeManager::class
         ];
     }
 
