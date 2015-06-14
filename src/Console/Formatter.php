@@ -8,6 +8,7 @@ class Formatter {
      * Formats a boolean value for console output.
      *
      * @param array $array
+     * @return string
      */
     public static function boolean($boolean) {
         return ($boolean) ? 'Yes' : 'No';
@@ -17,6 +18,7 @@ class Formatter {
      * Displays the number of items in an array.
      *
      * @param array $array
+     * @return string
      */
     public static function count($array) {
         return count($array) . ' items';
@@ -26,6 +28,7 @@ class Formatter {
      * Formats an array for console output.
      *
      * @param array $array
+     * @return string
      */
     public static function shortArray($array) {
         if(!is_array($array)) {
@@ -39,6 +42,7 @@ class Formatter {
      * Formats an array for console output.
      *
      * @param array $array
+     * @return string
      */
     public static function associativeArray(array $array) {
         $string = '[ ';
@@ -56,6 +60,7 @@ class Formatter {
      * Formats an array for console output.
      *
      * @param array $array
+     * @return string
      */
     public static function keyedArray($array) {
         if(is_array($array)) {
@@ -84,6 +89,7 @@ class Formatter {
      * Formats an object for console output.
      *
      * @param object $object
+     * @return string
      */
     public static function object($object) {
         if($object !== null) {

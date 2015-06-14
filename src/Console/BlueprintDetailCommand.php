@@ -58,27 +58,18 @@ class BlueprintDetailCommand extends Command {
 	 * @var array
 	 */
 	protected $fieldHeaders = [
-		'Name', 'Label', 'Type', 'Editable', 'Fillable', 'Validation Rules', 'Attributes', 'Options'
+		'Name', 'Label', 'Type', 'Editable', 'Fillable', 'Attributes', 'Options'
 	];
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
      * @param \Oxygen\Core\Blueprint\Manager $blueprints
+     * @return mixed
+     * @throws \Exception
      */
-	public function __construct(Manager $blueprints) {
-		parent::__construct();
-
-		$this->blueprintManager = $blueprints;
-	}
-
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function fire() {
-		$blueprint = $this->blueprintManager->get($this->argument('name'));
+	public function handle(Manager $blueprints) {
+		$blueprint = $blueprints->get($this->argument('name'));
 
 		$this->heading('General Information');
 
@@ -162,7 +153,6 @@ class BlueprintDetailCommand extends Command {
 			$field->type,
 			Formatter::boolean($field->editable),
 			Formatter::boolean($field->fillable),
-			Formatter::shortArray($field->validationRules),
 			Formatter::keyedArray($field->attributes),
 			Formatter::keyedArray($field->options)
 		];

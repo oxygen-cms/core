@@ -4,6 +4,7 @@ namespace Oxygen\Core\Console;
 
 use App;
 
+use Oxygen\Core\Blueprint\Manager;
 use Oxygen\Core\Console\Formatter;
 use Oxygen\Core\Console\Command;
 use Oxygen\Core\Blueprint\Blueprint;
@@ -36,50 +37,41 @@ class BlueprintListCommand extends Command {
 	 * @var array
 	 */
 
-	protected $headers = array(
+	protected $headers = [
 		'Name', 'Display Names', 'Controller', 'Primary Toolbar Item', 'Title Field', 'Icon'
-	);
+	];
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
+    /**
+     * Execute the console command.
+     *
+     * @param \Oxygen\Core\Blueprint\Manager $manager
+     */
+	public function handle(Manager $manager) {
+        $blueprints = $manager->all();
 
-	public function __construct() {
-		parent::__construct();
-
-		$this->blueprints = App::make('oxygen.blueprintManager')->all();
-	}
-
-	/**
-	 * Execute the console command.
-	 *
-	 * @return void
-	 */
-
-	public function fire() {
-		if (count($this->blueprints) == 0) {
-			return $this->error("Your application doesn't have any blueprints.");
+		if (count($blueprints) == 0) {
+			$this->info("Your application doesn't have any blueprints.");
+            return;
 		}
 
 
 		$generalTable = new Table($this->output);
 		$generalTable->setHeaders($this->headers);
-		$generalTable->setRows($this->getTable());
+		$generalTable->setRows($this->getTable($blueprints));
 		$generalTable->render();
 	}
 
-	/**
-	 * Compile the blueprints into a displayable format.
-	 *
-	 * @return array
-	 */
+    /**
+     * Compile the blueprints into a displayable format.
+     *
+     * @param array $blueprints
+     * @return array
+     */
 
-	protected function getTable() {
-		$results = array();
+	protected function getTable(array $blueprints) {
+		$results = [];
 
-		foreach ($this->blueprints as $key => $blueprint)
+		foreach ($blueprints as $key => $blueprint)
 		{
 			$results[] = $this->getGeneralInformation($key, $blueprint);
 		}
