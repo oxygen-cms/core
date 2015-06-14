@@ -89,7 +89,7 @@ class ViewServiceProvider extends ServiceProvider {
         // this case will be the Blade compiler, so we'll first create the compiler
         // instance to pass into the engine so it can compile the views properly.
 
-        $app->bindShared('blade.string.compiler', function($app) {
+        $app->singleton('blade.string.compiler', function($app) {
             $cache = $app['path.storage'] . '/views';
 
             return new BladeStringCompiler($app['files'], $app['blade.compiler'], $cache);

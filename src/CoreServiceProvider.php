@@ -34,11 +34,6 @@ class CoreServiceProvider extends ServiceProvider {
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'oxygen/core');
 
         $this->app['router']->middleware('oxygen.csrf', 'Oxygen\Core\Http\Filter\CsrfFilter');
-
-        $this->app['view']->composer($this->app['paginator']->getViewName(), function($view) {
-            $queryString = array_except($this->app['request']->query(), $this->app['paginator']->getPageName());
-            $view->paginator->appends($queryString);
-        });
 	}
 
 	/**

@@ -1,52 +1,46 @@
 <?php
 
-if (!function_exists('array_diff_recursive')) {
+if (!function_exists('html_attributes')) {
 
     /**
-     * Recursive version of array_diff()
+     * Build an HTML attribute string from an array.
      *
-     * @param array $array1
-     * @param array $array2
-     * @return array
+     * @param  array  $attributes
+     * @return string
      */
-
-    function array_diff_recursive(array $array1, array $array2) {
-        $return = array();
-
-        foreach ($array2 as $key => $value) {
-            if(array_key_exists($key, $array1)) {
-                if(is_array($value) && is_array($array1[$key])) {
-                    $recursiveDiff = array_diff_recursive($value, $array1[$key]);
-                    if(count($recursiveDiff)) {
-                        $return[$key] = $recursiveDiff;
-                    }
-                } else {
-                    if ($value !== $array1[$key]) {
-                        $return[$key] = $value;
-                    }
-                }
-            } else {
-              $return[$key] = $value;
+    function html_attributes($attributes) {
+        $html = [];
+        foreach((array) $attributes as $key => $value) {
+            $element = html_attribute_element($key, $value);
+            if(!is_null($element)) {
+                $html[] = $element;
             }
         }
-        return $return;
+
+        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
     }
+
 }
 
-if (!function_exists('is_assoc')) {
+if (!function_exists('html_attribute_element')) {
 
     /**
-     * Determine if the array is associative.
+     * Build a single attribute element.
      *
-     * @param array $array
-     * @return boolean
+     * @param  string  $key
+     * @param  string  $value
+     * @return string
      */
-
-    function is_assoc($array) {
-        return (bool) count(array_filter(array_keys($array), 'is_string'));
+    function html_attribute_element($key, $value) {
+        // For numeric keys we will assume that the key and the value are the same
+        // as this will convert HTML attributes such as "required" to a correct
+        // form like required="required" instead of using incorrect numerics.
+        if(is_numeric($key)) {
+            $key = $value;
+        }
+        if(!is_null($value)) {
+            return $key . '="' . e($value) . '"';
+        }
     }
 
 }
-
-
-

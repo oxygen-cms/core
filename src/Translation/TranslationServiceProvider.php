@@ -23,7 +23,7 @@ class TranslationServiceProvider extends ServiceProvider {
     public function register() {
         $this->registerLoader();
 
-        $this->app->bindShared('translator', function($app) {
+        $this->app->singleton('translator', function($app) {
             $loader = $app['translation.loader'];
 
             // When registering the translator component, we'll need to set the default
@@ -46,7 +46,7 @@ class TranslationServiceProvider extends ServiceProvider {
      */
 
     protected function registerLoader() {
-        $this->app->bindShared('translation.loader', function($app) {
+        $this->app->singleton('translation.loader', function($app) {
             return new FileLoader($app['files'], $app['path'].'/lang');
         });
     }
