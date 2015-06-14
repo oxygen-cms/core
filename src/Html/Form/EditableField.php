@@ -3,7 +3,7 @@
 namespace Oxygen\Core\Html\Form;
 
 use Exception;
-use Input;
+use Illuminate\Http\Request;
 
 use Oxygen\Core\Form\FieldMetadata;
 use Oxygen\Core\Html\RendererInterface;
@@ -15,7 +15,6 @@ class EditableField extends Field {
      *
      * @var array the renderers for different field types
      */
-
     protected static $renderers;
 
     /**
@@ -23,8 +22,14 @@ class EditableField extends Field {
      *
      * @var RendererInterface
      */
-
     protected static $fallbackRenderer;
+
+    /**
+     * The input object
+     *
+     * @var Request
+     */
+    protected $input;
 
     /**
      * Constructs the object.
@@ -32,8 +37,9 @@ class EditableField extends Field {
      * @param FieldMetadata $meta
      * @param string    $value
      */
-    public function __construct(FieldMetadata $meta, $value = '') {
+    public function __construct(FieldMetadata $meta, Request $input, $value = '') {
         parent::__construct($meta, $value);
+        $this->input = $input;
     }
 
     /**
@@ -42,8 +48,8 @@ class EditableField extends Field {
      * @return mixed
      */
     public function getValue() {
-        if(Input::old($this->getMeta()->name)) {
-            return $this->getMeta()->getType()->transformInput($this->getMeta(), Input::old($this->getMeta()->name));
+        if($this->input->old($this->getMeta()->name)) {
+            return $this->getMeta()->getType()->transformInput($this->getMeta(), $this->input->old($this->getMeta()->name));
         } else if($this->value !== null) {
             return parent::getValue();
         } else {

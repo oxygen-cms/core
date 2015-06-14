@@ -7,7 +7,7 @@ class Notification {
     /**
      * The operation was successful.
      *
-     * @var const
+     * @var string
      */
 
     const SUCCESS = 'success';
@@ -17,7 +17,7 @@ class Notification {
      * The operation may have been partially
      * completed, or perhaps user input was invalid.
      *
-     * @var const
+     * @var string
      */
 
     const WARNING = 'warning';
@@ -25,7 +25,7 @@ class Notification {
     /**
      * The operation failed completely.
      *
-     * @var const
+     * @var string
      */
 
     const FAILED = 'failed';
@@ -34,7 +34,7 @@ class Notification {
      * No particular status, but the
      * given information should be displayed.
      *
-     * @var const
+     * @var string
      */
 
     const INFO = 'info';
@@ -60,7 +60,7 @@ class Notification {
      * Constructs a new Notification.
      *
      * @param string $content
-     * @param string $color
+     * @param string $status
      */
     public function __construct($content, $status = self::SUCCESS) {
         $this->content  = $content;
@@ -73,10 +73,10 @@ class Notification {
      * @return array
      */
     public function toArray() {
-        return array(
+        return [
             'content'   => $this->content,
             'status'    => $this->status
-        );
+        ];
     }
 
 }

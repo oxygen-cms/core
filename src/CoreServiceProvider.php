@@ -25,9 +25,15 @@ class CoreServiceProvider extends ServiceProvider {
 	 */
 
 	public function boot() {
-        $this->package('oxygen/core', 'oxygen/core', __DIR__ . '/../resources');
+        $this->publishes([
+            __DIR__ . '/../resources/config/config.php' => config_path('oxygen/core.php'),
+            __DIR__ . '/../resources/lang' => base_path('resources/views/vendor/oxygen/core')
+        ]);
 
-        $this->app['router']->filter('oxygen.csrf', 'Oxygen\Core\Http\Filter\CsrfFilter');
+        $this->mergeConfigFrom(__DIR__ . '/../resources/config/config.php', 'oxygen.core');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'oxygen/core');
+
+        $this->app['router']->middleware('oxygen.csrf', 'Oxygen\Core\Http\Filter\CsrfFilter');
 
         $this->app['view']->composer($this->app['paginator']->getViewName(), function($view) {
             $queryString = array_except($this->app['request']->query(), $this->app['paginator']->getPageName());
@@ -43,9 +49,7 @@ class CoreServiceProvider extends ServiceProvider {
 
 	public function register() {
 		// bind response creator
-        $this->app->bindShared([
-            'oxygen.notificationResponseCreator' => 'Oxygen\Core\Http\NotificationResponseCreator'
-        ], function($app) {
+        $this->app->singleton(['Oxygen\Core\Http\NotificationResponseCreator'], function($app) {
             return new NotificationResponseCreator(
                 $app['Illuminate\Session\Store'],
                 $app['Illuminate\Http\Request'],
@@ -57,16 +61,16 @@ class CoreServiceProvider extends ServiceProvider {
         });
 
         // bind blueprint manager
-        $this->app->bindShared(['oxygen.navigation' => 'Oxygen\Core\Html\Navigation\Navigation'], function() {
+        $this->app->singleton(['Oxygen\Core\Html\Navigation\Navigation'], function() {
             return new Navigation();
         });
 
         // bind blueprint manager
-        $this->app->bindShared(['oxygen.blueprintManager' => 'Oxygen\Core\Blueprint\Manager'], function($app) {
+        $this->app->singleton(['Oxygen\Core\Blueprint\Manager'], function() {
             return new BlueprintManager(
-                $app->make('Oxygen\Core\Html\Navigation\Navigation'),
-                $app->make('Illuminate\Config\Repository'),
-                $app->make('Illuminate\Routing\Router')
+                $this->app->make('Oxygen\Core\Html\Navigation\Navigation'),
+                $this->app->make('Illuminate\Contracts\Config\Repository'),
+                $this->app->make('Illuminate\Contracts\Routing\Registrar')
             );
         });
 	}
@@ -79,9 +83,9 @@ class CoreServiceProvider extends ServiceProvider {
 
 	public function provides() {
 		return [
-            'oxygen.notificationResponseCreator',
-            'oxygen.navigation',
-            'oxygen.blueprintManager'
+            'Oxygen\Core\Blueprint\Manager',
+            'Oxygen\Core\Html\Navigation\Navigation',
+            'Oxygen\Core\Http\NotificationResponseCreator'
         ];
 	}
 

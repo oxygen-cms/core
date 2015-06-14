@@ -5,7 +5,7 @@ namespace Oxygen\Core\Http;
 use Illuminate\Session\Store as Session;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector as Redirect;
 use Illuminate\Routing\UrlGenerator as URL;
 
@@ -117,9 +117,9 @@ class NotificationResponseCreator {
     /**
      * Returns a basic response.
      *
-     * @param mixed     $notification   Flash message to display.
-     * @param array     $parameters
-     * @return
+     * @param mixed $notification Flash message to display.
+     * @param array $parameters
+     * @return \Illuminate\Support\Facades\Response
      */
     public function createBasicResponse($notification, $parameters) {
         if($this->wantsRedirect($parameters)) {
@@ -196,7 +196,7 @@ class NotificationResponseCreator {
      * @return Response
      */
 
-    protected function makeCustomResponse($response, $parameters) {
+    protected function makeCustomResponse(Response $response, $parameters) {
         if(isset($parameters['input']) && $parameters['input'] === true && !($response instanceof JsonResponse)) {
             return $response->withInput();
         } else if(isset($parameters['customResponse'])) {

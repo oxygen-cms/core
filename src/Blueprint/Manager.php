@@ -6,10 +6,9 @@ use Exception;
 use DirectoryIterator;
 
 use Oxygen\Core\Html\Navigation\Navigation;
-use Oxygen\Core\Action\Factory\ActionFactory;
 
-use Illuminate\Config\Repository as Config;
-use Illuminate\Routing\Router;
+use Illuminate\Contracts\Config\Repository as Config;
+use Oxygen\Core\Contracts\Routing\Registrar as Router;
 
 class Manager {
 
@@ -32,7 +31,7 @@ class Manager {
     /**
      * Laravel Config.
      *
-     * @var Config
+     * @var \Illuminate\Contracts\Config\Repository
      */
 
     protected $config;
@@ -40,7 +39,7 @@ class Manager {
     /**
      * Laravel Router.
      *
-     * @var Router
+     * @var \Illuminate\Contracts\Routing\Registrar
      */
 
     protected $router;
@@ -48,7 +47,9 @@ class Manager {
     /**
      * Constructs the BlueprintManager.
      *
-     * @param Navigation $navigation
+     * @param \Oxygen\Core\Html\Navigation\Navigation $navigation
+     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param \Oxygen\Core\Contracts\Routing\Registrar $router
      */
     public function __construct(Navigation $navigation, Config $config, Router $router) {
         $this->navigation = $navigation;

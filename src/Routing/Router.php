@@ -6,14 +6,14 @@ use Illuminate\Routing\Router as BaseRouter;
 
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Action\Action;
+use Oxygen\Core\Contracts\Routing\Registrar;
 
-class Router extends BaseRouter {
+class Router extends BaseRouter implements Registrar {
 
     /**
      * Generates a Route from a \Oxygen\Core\Blueprint\Blueprint
      *
-     * @param Action $action
-     * @return void
+     * @param \Oxygen\Core\Blueprint\Blueprint $blueprint
      */
     public function blueprint(Blueprint $blueprint) {
         foreach($blueprint->getActions() as $action) {
@@ -24,8 +24,7 @@ class Router extends BaseRouter {
     /**
      * Generates a Route from a Oxygen\Core\Action\Action
      *
-     * @param Action $actions
-     * @return void
+     * @param \Oxygen\Core\Action\Action $action
      */
     public function action(Action $action) {
         if($action->isValid()) {
