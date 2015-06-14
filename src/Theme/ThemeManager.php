@@ -2,7 +2,7 @@
 
 namespace Oxygen\Core\Theme;
 
-use Illuminate\Config\Repository;
+use Oxygen\Core\Contracts\Config\WritableRepository;
 
 class ThemeManager {
 
@@ -17,7 +17,7 @@ class ThemeManager {
     /**
      * Constructs the ThemeManager.
      */
-    public function __construct(Repository $config) {
+    public function __construct(WritableRepository $config) {
         $this->themes = [];
         $this->config = $config;
     }

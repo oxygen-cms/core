@@ -4,6 +4,7 @@ namespace Oxygen\Core\Console;
 
 use App;
 
+use Oxygen\Core\Blueprint\Manager;
 use Oxygen\Core\Console\Command;
 use Oxygen\Core\Console\Formatter;
 
@@ -60,16 +61,15 @@ class BlueprintDetailCommand extends Command {
 		'Name', 'Label', 'Type', 'Editable', 'Fillable', 'Validation Rules', 'Attributes', 'Options'
 	];
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-
-	public function __construct() {
+    /**
+     * Create a new command instance.
+     *
+     * @param \Oxygen\Core\Blueprint\Manager $blueprints
+     */
+	public function __construct(Manager $blueprints) {
 		parent::__construct();
 
-		$this->blueprintManager = App::make('oxygen.blueprintManager');
+		$this->blueprintManager = $blueprints;
 	}
 
 	/**
@@ -139,11 +139,11 @@ class BlueprintDetailCommand extends Command {
 			$action->getPattern(),
 			$action->getName(),
 			$action->getMethod(),
-			$action->group->name . ', ' . $action->group->pattern,
+			$action->group->getName() . ', ' . $action->group->getPattern(),
 			Formatter::shortArray($action->getBeforeFilters()),
 			Formatter::shortArray($action->getAfterFilters()),
 			$action->getUses(),
-			Formatter::boolean($action->registerAtEnd),
+			Formatter::boolean($action->register),
 			Formatter::boolean($action->useSmoothState)
 		];
 	}

@@ -4,8 +4,9 @@ namespace Oxygen\Core\Config;
 
 use Illuminate\Config\Repository as BaseRepository;
 use Illuminate\Config\LoaderInterface;
+use Oxygen\Core\Contracts\Config\WritableRepository;
 
-class Repository extends BaseRepository {
+class Repository extends BaseRepository implements WritableRepository {
 
     /**
      * The writer implementation.
@@ -18,10 +19,9 @@ class Repository extends BaseRepository {
     /**
      * Create a new configuration repository.
      *
-     * @param   LoaderInterface     $loader
-     * @param   WriterInterface     $writer
-     * @param   string              $environment
-     * @return  void
+     * @param   LoaderInterface $loader
+     * @param   WriterInterface $writer
+     * @param   string          $environment
      */
     public function __construct(LoaderInterface $loader, WriterInterface $writer, $environment) {
         parent::__construct($loader, $environment);

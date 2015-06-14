@@ -2,11 +2,16 @@
 
 namespace spec\Oxygen\Core\Theme;
 
+use Oxygen\Core\Contracts\Config\WritableRepository;
 use Oxygen\Core\Theme\Theme;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class ThemeManagerSpec extends ObjectBehavior {
+
+    function let(WritableRepository $repository) {
+        $this->beConstructedWith($repository);
+    }
 
     function it_is_initializable() {
         $this->shouldHaveType('Oxygen\Core\Theme\ThemeManager');
