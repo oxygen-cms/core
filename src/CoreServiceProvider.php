@@ -43,18 +43,6 @@ class CoreServiceProvider extends ServiceProvider {
 	 */
 
 	public function register() {
-		// bind response creator
-        $this->app->singleton(['Oxygen\Core\Http\NotificationResponseCreator'], function($app) {
-            return new NotificationResponseCreator(
-                $app['Illuminate\Session\Store'],
-                $app['Illuminate\Http\Request'],
-                $app['Illuminate\Support\Facades\Response'],
-                $app['Illuminate\Routing\Redirector'],
-                $app['Illuminate\Routing\UrlGenerator'],
-                $app['auth']->check() ? $app['auth']->user()->getPreferences() : null
-            );
-        });
-
         // bind blueprint manager
         $this->app->singleton(['Oxygen\Core\Html\Navigation\Navigation'], function() {
             return new Navigation();
