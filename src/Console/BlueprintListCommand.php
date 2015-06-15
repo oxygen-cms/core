@@ -49,8 +49,8 @@ class BlueprintListCommand extends Command {
 	public function handle(Manager $manager) {
         $blueprints = $manager->all();
 
-		if (count($blueprints) == 0) {
-			$this->info("Your application doesn't have any blueprints.");
+		if(empty($blueprints)) {
+			$this->error("Your application doesn't have any blueprints.");
             return;
 		}
 
