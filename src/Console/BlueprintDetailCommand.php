@@ -4,7 +4,7 @@ namespace Oxygen\Core\Console;
 
 use App;
 
-use Oxygen\Core\Blueprint\Manager;
+use Oxygen\Core\Blueprint\BlueprintManager;
 use Oxygen\Core\Console\Command;
 use Oxygen\Core\Console\Formatter;
 
@@ -64,11 +64,11 @@ class BlueprintDetailCommand extends Command {
     /**
      * Execute the console command.
      *
-     * @param \Oxygen\Core\Blueprint\Manager $blueprints
+     * @param \Oxygen\Core\Blueprint\BlueprintManager $blueprints
      * @return mixed
      * @throws \Exception
      */
-	public function handle(Manager $blueprints) {
+	public function handle(BlueprintManager $blueprints) {
 		$blueprint = $blueprints->get($this->argument('name'));
 
 		$this->heading('General Information');

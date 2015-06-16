@@ -4,7 +4,7 @@ namespace Oxygen\Core;
 
 use Illuminate\Support\ServiceProvider;
 
-use Oxygen\Core\Blueprint\Manager as BlueprintManager;
+use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 use Oxygen\Core\Http\NotificationResponseCreator;
 use Oxygen\Core\Html\Navigation\Navigation;
 

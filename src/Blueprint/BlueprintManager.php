@@ -10,7 +10,7 @@ use Oxygen\Core\Html\Navigation\Navigation;
 use Illuminate\Contracts\Config\Repository as Config;
 use Oxygen\Core\Contracts\Routing\Registrar as Router;
 
-class Manager {
+class BlueprintManager {
 
     /**
      * The array of Oxygen\Core\Blueprint\Blueprint objects.

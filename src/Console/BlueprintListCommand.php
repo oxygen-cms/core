@@ -4,7 +4,7 @@ namespace Oxygen\Core\Console;
 
 use App;
 
-use Oxygen\Core\Blueprint\Manager;
+use Oxygen\Core\Blueprint\BlueprintManager;
 use Oxygen\Core\Console\Formatter;
 use Oxygen\Core\Console\Command;
 use Oxygen\Core\Blueprint\Blueprint;
@@ -44,9 +44,9 @@ class BlueprintListCommand extends Command {
     /**
      * Execute the console command.
      *
-     * @param \Oxygen\Core\Blueprint\Manager $manager
+     * @param \Oxygen\Core\Blueprint\BlueprintManager $manager
      */
-	public function handle(Manager $manager) {
+	public function handle(BlueprintManager $manager) {
         $blueprints = $manager->all();
 
 		if(empty($blueprints)) {

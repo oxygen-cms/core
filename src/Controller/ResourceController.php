@@ -3,7 +3,7 @@
 namespace Oxygen\Core\Controller;
 
 use Oxygen\Data\Repository\RepositoryInterface;
-use Oxygen\Core\Blueprint\Manager as BlueprintManager;
+use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 
 class ResourceController extends BlueprintController {
 

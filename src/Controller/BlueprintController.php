@@ -6,7 +6,7 @@ use View;
 
 use ReflectionClass;
 
-use Oxygen\Core\Blueprint\Manager as BlueprintManager;
+use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 
 class BlueprintController extends Controller {
 
