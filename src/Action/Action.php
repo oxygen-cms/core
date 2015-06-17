@@ -2,6 +2,7 @@
 
 namespace Oxygen\Core\Action;
 
+use Closure;
 use Exception;
 use Oxygen\Core\Http\Method;
 use URL;

@@ -119,4 +119,17 @@ class EditableField extends Field {
         return $renderer->render($this, $arguments);
     }
 
+    /**
+     * Create a field from meta and a model
+     *
+     * @param FieldMetadata            $meta
+     * @param \Illuminate\Http\Request $input
+     * @param object                   $entity
+     * @return \Oxygen\Core\Form\FieldMetadata
+     */
+    public static function fromEntity(FieldMetadata $meta, Request $input, $entity) {
+        $instance = new static($meta, $input, $entity->getAttribute($meta->name));
+        return $instance;
+    }
+
 }

@@ -67,24 +67,6 @@ abstract class Field implements RenderableInterface {
     }
 
     /**
-     * Sets the entity associated with the field.
-     *
-     * @param object $entity
-     */
-    public function setEntity($entity) {
-        $this->entity = $entity;
-    }
-
-    /**
-     * Get the entity.
-     *
-     * @return object
-     */
-    public function getEntity() {
-        return $this->entity;
-    }
-
-    /**
      * Renders the object.
      *
      * @param array             $arguments
@@ -103,7 +85,6 @@ abstract class Field implements RenderableInterface {
      */
     public static function fromEntity(FieldMetadata $meta, $entity) {
         $instance = new static($meta, $entity->getAttribute($meta->name));
-        $instance->setEntity($entity);
         return $instance;
     }
 
