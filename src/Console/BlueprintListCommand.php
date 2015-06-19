@@ -2,11 +2,7 @@
 
 namespace Oxygen\Core\Console;
 
-use App;
-
 use Oxygen\Core\Blueprint\BlueprintManager;
-use Oxygen\Core\Console\Formatter;
-use Oxygen\Core\Console\Command;
 use Oxygen\Core\Blueprint\Blueprint;
 
 use Symfony\Component\Console\Input\InputOption;
@@ -53,7 +49,6 @@ class BlueprintListCommand extends Command {
 			$this->error("Your application doesn't have any blueprints.");
             return;
 		}
-
 
 		$generalTable = new Table($this->output);
 		$generalTable->setHeaders($this->headers);
