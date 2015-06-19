@@ -1,6 +1,6 @@
 <?php
 
-namespace Oxygen\Core\Form;
+namespace Oxygen\Core\Html\Form;
 
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Html\RenderableInterface;
