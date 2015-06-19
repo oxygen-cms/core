@@ -52,8 +52,8 @@ class CoreServiceProvider extends ServiceProvider {
         $this->app->singleton(['Oxygen\Core\Blueprint\Manager'], function() {
             return new BlueprintManager(
                 $this->app->make('Oxygen\Core\Html\Navigation\Navigation'),
-                $this->app->make('Illuminate\Contracts\Config\Repository'),
-                $this->app->make('Illuminate\Contracts\Routing\Registrar')
+                $this->app->make('Illuminate\Contracts\Routing\Registrar'),
+                $this->app['config']['oxygen.core.baseURI']
             );
         });
 	}
@@ -67,8 +67,7 @@ class CoreServiceProvider extends ServiceProvider {
 	public function provides() {
 		return [
             'Oxygen\Core\Blueprint\Manager',
-            'Oxygen\Core\Html\Navigation\Navigation',
-            'Oxygen\Core\Http\NotificationResponseCreator'
+            'Oxygen\Core\Html\Navigation\Navigation'
         ];
 	}
 

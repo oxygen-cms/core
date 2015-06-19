@@ -45,16 +45,23 @@ class BlueprintManager {
     protected $router;
 
     /**
+     * The default base URI for blueprints.
+     *
+     * @var string
+     */
+    protected $baseURI;
+
+    /**
      * Constructs the BlueprintManager.
      *
-     * @param \Oxygen\Core\Html\Navigation\Navigation $navigation
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param \Oxygen\Core\Html\Navigation\Navigation  $navigation
      * @param \Oxygen\Core\Contracts\Routing\Registrar $router
+     * @param string                                   $baseURI
      */
-    public function __construct(Navigation $navigation, Config $config, Router $router) {
+    public function __construct(Navigation $navigation, Router $router, $baseURI) {
         $this->navigation = $navigation;
-        $this->config = $config;
         $this->router = $router;
+        $this->baseURI = $baseURI;
     }
 
     /**
@@ -93,7 +100,7 @@ class BlueprintManager {
      * @return void
      */
     public function make($name, callable $callback) {
-        $blueprint = new Blueprint($name, $this->config->get('oxygen/core::config.baseURI'));
+        $blueprint = new Blueprint($name, $this->baseURI);
         $callback($blueprint);
         $this->blueprints[$blueprint->getName()] = $blueprint;
 
