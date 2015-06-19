@@ -49,7 +49,7 @@ class CoreServiceProvider extends ServiceProvider {
         });
 
         // bind blueprint manager
-        $this->app->singleton(['Oxygen\Core\Blueprint\Manager'], function() {
+        $this->app->singleton(['Oxygen\Core\Blueprint\BlueprintManager'], function() {
             return new BlueprintManager(
                 $this->app->make('Oxygen\Core\Html\Navigation\Navigation'),
                 $this->app->make('Illuminate\Contracts\Routing\Registrar'),
