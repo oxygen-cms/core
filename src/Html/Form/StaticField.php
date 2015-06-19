@@ -105,4 +105,16 @@ class StaticField extends Field {
         return $renderer->render($this, $arguments);
     }
 
+    /**
+     * Create a field from meta and a model
+     *
+     * @param FieldMetadata $meta
+     * @param object $entity
+     * @return FieldMetadata
+     */
+    public static function fromEntity(FieldMetadata $meta, $entity) {
+        $instance = new static($meta, $entity->getAttribute($meta->name));
+        return $instance;
+    }
+
 }
