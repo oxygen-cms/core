@@ -2,9 +2,6 @@
 
 namespace Oxygen\Core\Action;
 
-use InvalidArgumentException;
-
-use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Http\Method;
 
 class AdminAction extends Action {
