@@ -6,7 +6,7 @@ use Closure;
 use DateTime;
 use Exception;
 
-use Str;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class FieldMetadata {
