@@ -4,6 +4,7 @@ namespace Oxygen\Core\Support\Facades;
 
 use Illuminate\Support\Facades\Response as BaseResponse;
 use Illuminate\Support\Facades\Facade;
+use Oxygen\Core\Contracts\Http\NotificationPresenter;
 
 class Response extends BaseResponse {
 
@@ -16,8 +17,8 @@ class Response extends BaseResponse {
      * @return mixed
      */
     public static function notification($notification, array $parameters = []) {
-        return Facade::getFacadeApplication()['oxygen.notificationResponseCreator']
-            ->createResponse($notification, $parameters);
+        return Facade::getFacadeApplication()[NotificationPresenter::class]
+            ->present($notification, $parameters);
     }
 
 }

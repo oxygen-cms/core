@@ -3,6 +3,7 @@
 namespace Oxygen\Core\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Oxygen\Core\Blueprint\BlueprintManager;
 
 class Blueprint extends Facade {
 
@@ -19,7 +20,7 @@ class Blueprint extends Facade {
     const PLURAL = true;
 
     protected static function getFacadeAccessor() {
-        return 'oxygen.blueprintManager';
+        return BlueprintManager::class;
     }
 
 }
