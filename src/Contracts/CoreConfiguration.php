@@ -1,6 +1,6 @@
 <?php
 
-namespace Oxygen\Core;
+namespace Oxygen\Core\Contracts;
 
 interface CoreConfiguration {
 

@@ -5,7 +5,7 @@ namespace Oxygen\Core\Blueprint;
 use Exception;
 use DirectoryIterator;
 
-use Oxygen\Core\CoreConfiguration;
+use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Html\Navigation\Navigation;
 
 use Illuminate\Contracts\Config\Repository as Config;
