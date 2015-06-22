@@ -44,12 +44,12 @@ class CoreServiceProvider extends ServiceProvider {
 
 	public function register() {
         // bind blueprint manager
-        $this->app->singleton('Oxygen\Core\Html\Navigation\Navigation', function() {
+        $this->app->singleton(Navigation::class, function() {
             return new Navigation();
         });
 
         // bind blueprint manager
-        $this->app->singleton('Oxygen\Core\Blueprint\BlueprintManager', function() {
+        $this->app->singleton(BlueprintManager::class, function() {
             return new BlueprintManager(
                 $this->app->make('Oxygen\Core\Html\Navigation\Navigation'),
                 $this->app->make('Illuminate\Contracts\Routing\Registrar'),
@@ -57,15 +57,6 @@ class CoreServiceProvider extends ServiceProvider {
             );
         });
 
-        // bind blueprint manager
-        $this->app->singleton('Oxygen\Core\Blueprint\BlueprintManager', function() {
-            return new BlueprintManager(
-                $this->app->make('Oxygen\Core\Html\Navigation\Navigation'),
-                $this->app->make('Illuminate\Contracts\Routing\Registrar'),
-                $this->app['config']['oxygen.core.baseURI']
-            );
-        });
-        
         // register response factory
         $this->app->singleton(ResponseFactoryContract::class, ResponseFactory::class);
         $this->app->singleton(ExtendedResponseFactoryContract::class, ResponseFactory::class);
@@ -79,8 +70,10 @@ class CoreServiceProvider extends ServiceProvider {
 
 	public function provides() {
 		return [
-            'Oxygen\Core\Blueprint\Manager',
-            'Oxygen\Core\Html\Navigation\Navigation'
+            BlueprintManager::class,
+            Navigation::class,
+            ResponseFactoryContract::class,
+            ExtendedResponseFactoryContract::class
         ];
 	}
 
