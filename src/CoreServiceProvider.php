@@ -52,7 +52,6 @@ class CoreServiceProvider extends ServiceProvider {
         $this->app->singleton(BlueprintManager::class, function() {
             return new BlueprintManager(
                 $this->app->make(Navigation::class),
-                $this->app->make(Registrar::class),
                 $this->app->make(CoreConfiguration::class)
             );
         });
