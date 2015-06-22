@@ -5,6 +5,7 @@ namespace Oxygen\Core\Blueprint;
 use Exception;
 use DirectoryIterator;
 
+use Oxygen\Core\CoreConfiguration;
 use Oxygen\Core\Html\Navigation\Navigation;
 
 use Illuminate\Contracts\Config\Repository as Config;
@@ -29,14 +30,6 @@ class BlueprintManager {
     protected $navigation;
 
     /**
-     * Laravel Config.
-     *
-     * @var \Illuminate\Contracts\Config\Repository
-     */
-
-    protected $config;
-
-    /**
      * Laravel Router.
      *
      * @var \Illuminate\Contracts\Routing\Registrar
@@ -45,23 +38,23 @@ class BlueprintManager {
     protected $router;
 
     /**
-     * The default base URI for blueprints.
+     * The configuration instance.
      *
-     * @var string
+     * @var CoreConfiguration
      */
-    protected $baseURI;
+    protected $config;
 
     /**
      * Constructs the BlueprintManager.
      *
      * @param \Oxygen\Core\Html\Navigation\Navigation  $navigation
      * @param \Oxygen\Core\Contracts\Routing\Registrar $router
-     * @param string                                   $baseURI
+     * @param CoreConfiguration                        $config
      */
-    public function __construct(Navigation $navigation, Router $router, $baseURI) {
+    public function __construct(Navigation $navigation, Router $router, CoreConfiguration $config) {
         $this->navigation = $navigation;
         $this->router = $router;
-        $this->baseURI = $baseURI;
+        $this->config = $config;
     }
 
     /**
@@ -100,7 +93,7 @@ class BlueprintManager {
      * @return void
      */
     public function make($name, callable $callback) {
-        $blueprint = new Blueprint($name, $this->baseURI);
+        $blueprint = new Blueprint($name, $this->config->getAdminURIPrefix());
         $callback($blueprint);
         $this->blueprints[$blueprint->getName()] = $blueprint;
 

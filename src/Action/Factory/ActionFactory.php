@@ -35,10 +35,10 @@ class ActionFactory implements FactoryInterface {
     /**
      * Sets properties on the action from an input array.
      *
-     * @param Action $action Action to set the properties on
-     * @param array $properties Properties to set
+     * @param array $parameters
+     * @param       $controller
+     * @return array
      */
-
     protected function parseParameters(array $parameters, $controller) {
         if(!isset($parameters['uses']) || $parameters['uses'] === null) {
             if($controller === null) {
@@ -57,7 +57,6 @@ class ActionFactory implements FactoryInterface {
      * @param Action $action Action to set the properties on
      * @param array $properties Properties to set
      */
-
     protected function setProperties($action, $properties) {
         unset($properties['name'], $properties['pattern'], $properties['uses'], $properties['group']);
 

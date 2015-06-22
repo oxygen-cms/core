@@ -678,22 +678,4 @@ class Blueprint {
         $trait->applyTrait($this);
     }
 
-    /**
-     * Returns the combined validation rules for all the fields.
-     *
-     * @return array
-     */
-    public function getValidationRules() {
-        $rules = [];
-
-        foreach($this->formFields as $name => $field) {
-            $rules[$name] = $field->validationRules;
-            if(is_string($rules[$name])) {
-                $rules[$name] = implode('|', $rules);
-            }
-        }
-
-        return $rules;
-    }
-
 }

@@ -2,12 +2,9 @@
 
 namespace Oxygen\Core\Action;
 
-use Oxygen\Core\Http\Method;
-
 class AdminAction extends Action {
 
-    const AUTH_FILTER_NAME = 'oxygen.auth';
-    const CSRF_FILTER_NAME = 'oxygen.csrf';
+    const AUTH_MIDDLEWARE_NAME = 'oxygen.auth';
 
     /**
      * Constructs an Action.
@@ -38,10 +35,7 @@ class AdminAction extends Action {
      * @return array
      */
     public function getBeforeFilters() {
-        $filters = [self::AUTH_FILTER_NAME];
-        if($this->method !== Method::GET) {
-            $filters[] = self::CSRF_FILTER_NAME;
-        }
+        $filters = [self::AUTH_MIDDLEWARE_NAME];
         return array_merge($filters, parent::getBeforeFilters());
     }
 
