@@ -107,13 +107,13 @@ class BlueprintManager {
      *
      * @param string $name blueprint
      * @return Blueprint
-     * @throws \Exception if the Blueprint can't be found
+     * @throws BlueprintNotFoundException if the Blueprint can't be found
      */
     public function get($name) {
         if(isset($this->blueprints[$name])) {
             return $this->blueprints[$name];
         } else {
-            throw new Exception('Blueprint not found: "' . $name . '"');
+            throw new BlueprintNotFoundException('Blueprint not found: "' . $name . '"');
         }
     }
 
