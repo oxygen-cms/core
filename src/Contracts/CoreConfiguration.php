@@ -16,6 +16,6 @@ interface CoreConfiguration {
      *
      * @return mixed
      */
-    public function getLayout();
+    public function getAdminLayout();
 
 }

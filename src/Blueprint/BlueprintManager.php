@@ -30,14 +30,6 @@ class BlueprintManager {
     protected $navigation;
 
     /**
-     * Laravel Router.
-     *
-     * @var \Illuminate\Contracts\Routing\Registrar
-     */
-
-    protected $router;
-
-    /**
      * The configuration instance.
      *
      * @var CoreConfiguration
@@ -48,12 +40,10 @@ class BlueprintManager {
      * Constructs the BlueprintManager.
      *
      * @param \Oxygen\Core\Html\Navigation\Navigation  $navigation
-     * @param \Oxygen\Core\Contracts\Routing\Registrar $router
      * @param CoreConfiguration                        $config
      */
-    public function __construct(Navigation $navigation, Router $router, CoreConfiguration $config) {
+    public function __construct(Navigation $navigation, CoreConfiguration $config) {
         $this->navigation = $navigation;
-        $this->router = $router;
         $this->config = $config;
     }
 
@@ -75,13 +65,13 @@ class BlueprintManager {
     /**
      * Constructs the BlueprintManager.
      *
-     * @return void
+     * @param \Oxygen\Core\Contracts\Routing\Registrar $router
      */
-    public function registerRoutes() {
-        $this->router->pattern('id', '[0-9]+');
+    public function registerRoutes(Router $router) {
+        $router->pattern('id', '[0-9]+');
 
         foreach($this->all() as $blueprint) {
-            $this->router->blueprint($blueprint);
+            $router->blueprint($blueprint);
         }
     }
 

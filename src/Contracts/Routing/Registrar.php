@@ -4,8 +4,9 @@ namespace Oxygen\Core\Contracts\Routing;
 
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Blueprint\Blueprint;
+use Illuminate\Contracts\Routing\Registrar as BaseRegistrar;
 
-interface Registrar {
+interface Registrar extends BaseRegistrar {
 
     /**
      * Generates a Route from a \Oxygen\Core\Blueprint\Blueprint

@@ -60,6 +60,10 @@ class CoreServiceProvider extends ServiceProvider {
         // register response factory
         $this->app->singleton(ResponseFactoryContract::class, ResponseFactory::class);
         $this->app->singleton(ExtendedResponseFactoryContract::class, ResponseFactory::class);
+
+        $this->app->singleton('oxygen.layout', function() {
+            return $this->app[CoreConfiguration::class]->getAdminLayout();
+        });
 	}
 
 	/**
