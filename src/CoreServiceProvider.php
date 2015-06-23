@@ -6,10 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 use Oxygen\Core\Contracts\CoreConfiguration;
-use Oxygen\Core\Contracts\Routing\BlueprintRegistrar;
+use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as BlueprintRegistrarContract;
 use Oxygen\Core\Contracts\Routing\ResponseFactory as ExtendedResponseFactoryContract;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 use Oxygen\Core\Html\Navigation\Navigation;
+use Oxygen\Core\Routing\BlueprintRegistrar;
 use Oxygen\Core\Routing\ResponseFactory;
 
 class CoreServiceProvider extends ServiceProvider {
@@ -55,6 +56,8 @@ class CoreServiceProvider extends ServiceProvider {
                 $this->app->make(CoreConfiguration::class)
             );
         });
+
+        $this->app->bind(BlueprintRegistrarContract::class, BlueprintRegistrar::class);
 
         // register response factory
         $this->app->singleton(ResponseFactoryContract::class, ResponseFactory::class);
