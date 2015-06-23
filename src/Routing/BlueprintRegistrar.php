@@ -59,7 +59,8 @@ class BlueprintRegistrar implements BlueprintRegistrarContract {
     }
 
     protected function registerAction(Action $action) {
-        $route = $this->{$action->getMethod()}($action->getPattern(), [
+        $method = strtolower($action->getMethod());
+        $route = $this->{$method}($action->getPattern(), [
             'as'        => $action->getName(),
             'before'    => $action->getBeforeFilters(),
             'after'     => $action->getAfterFilters(),
