@@ -12,6 +12,8 @@ class SubmitToolbarItem implements ToolbarItem {
 
     public $color;
 
+    public $stretch;
+
     public function __construct($label, $color = 'green') {
         $this->label = $label;
         $this->color = $color;

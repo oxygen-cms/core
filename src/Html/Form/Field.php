@@ -67,6 +67,18 @@ abstract class Field implements RenderableInterface {
     }
 
     /**
+     * Returns the output value transformed through the field type's output transformer.
+     *
+     * @return string
+     */
+    public function getTransformedOutputValue() {
+        return $this->getMeta()->getType()->transformOutput(
+            $this->getMeta(),
+            $this->getValue()
+        );
+    }
+
+    /**
      * Renders the object.
      *
      * @param array             $arguments
