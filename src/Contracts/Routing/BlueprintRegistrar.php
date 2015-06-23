@@ -2,11 +2,11 @@
 
 namespace Oxygen\Core\Contracts\Routing;
 
+use Illuminate\Routing\Router;
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Blueprint\Blueprint;
-use Illuminate\Contracts\Routing\Registrar as BaseRegistrar;
 
-interface Registrar extends BaseRegistrar {
+interface BlueprintRegistrar  {
 
     /**
      * Generates a Route from a \Oxygen\Core\Blueprint\Blueprint
@@ -23,12 +23,15 @@ interface Registrar extends BaseRegistrar {
     public function action(Action $action);
 
     /**
-     * Set a global where pattern on all routes.
-     *
-     * @param  string  $key
-     * @param  string  $pattern
-     * @return void
+     * Registers all the 'final' routes
      */
-    public function pattern($key, $pattern);
+    public function registerFinal();
+
+    /**
+     * Returns the underlying router
+     *
+     * @return Router
+     */
+    public function getRouter();
 
 }

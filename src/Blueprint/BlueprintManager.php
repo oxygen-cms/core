@@ -6,10 +6,11 @@ use Exception;
 use DirectoryIterator;
 
 use Oxygen\Core\Contracts\CoreConfiguration;
+use Oxygen\Core\Contracts\Routing\BlueprintRegistrar;
 use Oxygen\Core\Html\Navigation\Navigation;
 
 use Illuminate\Contracts\Config\Repository as Config;
-use Oxygen\Core\Contracts\Routing\Registrar as Router;
+use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as Router;
 
 class BlueprintManager {
 
@@ -65,14 +66,16 @@ class BlueprintManager {
     /**
      * Constructs the BlueprintManager.
      *
-     * @param \Oxygen\Core\Contracts\Routing\Registrar $router
+     * @param \Oxygen\Core\Contracts\Routing\BlueprintRegistrar $registrar
      */
-    public function registerRoutes(Router $router) {
-        $router->pattern('id', '[0-9]+');
+    public function registerRoutes(BlueprintRegistrar $registrar) {
+        $registrar->getRouter()->pattern('id', '[0-9]+');
 
         foreach($this->all() as $blueprint) {
-            $router->blueprint($blueprint);
+            $registrar->blueprint($blueprint);
         }
+
+        $registrar->registerFinal();
     }
 
     /**

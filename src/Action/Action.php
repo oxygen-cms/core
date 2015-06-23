@@ -21,6 +21,8 @@ class Action {
     const METHOD_DELETE = 'DELETE';
     const METHOD_ANY    = 'ANY';
 
+    const REGISTER_AT_END    = 'atEnd';
+
     /**
      * Pattern to match. (usually a URI)
      *
@@ -229,15 +231,6 @@ class Action {
      */
     public function getURL(array $options = []) {
         return URL::route($this->getName(), $this->getRouteParameters($options));
-    }
-
-    /**
-     * Is the action valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-        return ($this->uses !== null);
     }
 
     /**

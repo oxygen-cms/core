@@ -61,13 +61,6 @@ class FieldMetadata {
     public $editable;
 
     /**
-     * Fillable means that the field can be edited.
-     *
-     * @var boolean
-     */
-    public $fillable;
-
-    /**
      * HTML attributes for the field.
      *
      * @var array
@@ -121,7 +114,6 @@ class FieldMetadata {
         $this->type              = $type;
         $this->typeInstance      = null;
         $this->editable          = $editable;
-        $this->fillable          = false;
         $this->attributes        = [];
         $this->options           = [];
     }

@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 use Oxygen\Core\Contracts\CoreConfiguration;
-use Oxygen\Core\Contracts\Routing\Registrar;
+use Oxygen\Core\Contracts\Routing\BlueprintRegistrar;
 use Oxygen\Core\Contracts\Routing\ResponseFactory as ExtendedResponseFactoryContract;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 use Oxygen\Core\Html\Navigation\Navigation;

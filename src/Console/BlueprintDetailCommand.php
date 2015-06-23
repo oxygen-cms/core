@@ -58,7 +58,7 @@ class BlueprintDetailCommand extends Command {
 	 * @var array
 	 */
 	protected $fieldHeaders = [
-		'Name', 'Label', 'Type', 'Editable', 'Fillable', 'Attributes', 'Options'
+		'Name', 'Label', 'Type', 'Editable', 'Attributes', 'Options'
 	];
 
     /**
@@ -152,7 +152,6 @@ class BlueprintDetailCommand extends Command {
 			$field->label,
 			$field->type,
 			Formatter::boolean($field->editable),
-			Formatter::boolean($field->fillable),
 			Formatter::keyedArray($field->attributes),
 			Formatter::keyedArray($field->options)
 		];
