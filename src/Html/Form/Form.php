@@ -105,6 +105,15 @@ class Form implements RenderableInterface {
     }
 
     /**
+     * Returns all the rows in the form.
+     *
+     * @return array
+     */
+    public function getRows() {
+        return $this->content;
+    }
+
+    /**
      * Returns the action of the form.
      *
      * @return Action
