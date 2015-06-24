@@ -74,6 +74,7 @@ class Form implements RenderableInterface {
      */
     public function __construct(Action $action) {
         $this->action = $action;
+        $this->routeParameters = [];
     }
 
     /**
