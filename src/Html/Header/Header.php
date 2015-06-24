@@ -2,6 +2,7 @@
 
 namespace Oxygen\Core\Html\Header;
 
+use Oxygen\Core\Form\FieldSet;
 use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Model\Model;
 use Oxygen\Core\Blueprint\Blueprint;
@@ -293,15 +294,17 @@ class Header implements RenderableInterface {
      * Constructs a Header from a Blueprint.
      *
      * @param Blueprint $blueprint
-     * @param string $title
+     * @param FieldSet|string $title
      * @param array $arguments
      * @param integer $type
      * @param string $fillFromToolbar
      * @return Header
      */
-    public static function fromBlueprint(Blueprint $blueprint, $title = null, array $arguments = [], $type = self::TYPE_MAIN, $fillFromToolbar = 'section') {
-        if($title === null) {
-            $title = $arguments['model']->getAttribute($blueprint->getTitleField());
+    public static function fromBlueprint(Blueprint $blueprint, $title, array $arguments = [], $type = self::TYPE_MAIN, $fillFromToolbar = 'section') {
+        if($title instanceof FieldSet) {
+            $title = $arguments['model']->getAttribute($title->getTitleField());
+        } else if(!is_string($title)) {
+            throw new \InvalidArgumentException('$title must be either a string or an instance of \Oxygen\Core\Form\FieldSet');
         }
 
         $object = new static(
@@ -310,8 +313,10 @@ class Header implements RenderableInterface {
             $type
         );
 
+        // sets a prefix to all the routes in the toolbar
         $object->getToolbar()->setPrefix($blueprint->getRouteName());
 
+        // fills the toolbar with buttons from the blueprint
         $object->getToolbar()->fillFromBlueprint($blueprint, $fillFromToolbar);
 
         return $object;

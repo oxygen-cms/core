@@ -39,7 +39,6 @@ class Blueprint {
      *
      * @var string
      */
-
     protected $name;
 
     /**
@@ -47,7 +46,6 @@ class Blueprint {
      *
      * @var array
      */
-
     protected $displayNames;
 
     /**
@@ -55,7 +53,6 @@ class Blueprint {
      *
      * @var string
      */
-
     protected $controller;
 
     /**
@@ -63,39 +60,20 @@ class Blueprint {
      *
      * @var string
      */
-
     protected $primaryToolbarItem;
-
-    /**
-     * The title field, used in lists
-     *
-     * @var string
-     */
-
-    protected $titleField;
 
     /**
      * The icon of the resource.
      *
      * @var string
      */
-
     protected $icon;
-
-    /**
-     * Form fields of the model.
-     *
-     * @var array
-     */
-
-    protected $formFields;
 
     /**
      * Actions of the model.
      *
      * @var array
      */
-
     protected $actions;
 
     /**
@@ -103,7 +81,6 @@ class Blueprint {
      *
      * @var array
      */
-
     protected $toolbarOrders;
 
     /**
@@ -111,7 +88,6 @@ class Blueprint {
      *
      * @var array
      */
-
     protected $toolbarItems;
 
     /**
@@ -120,7 +96,6 @@ class Blueprint {
      *
      * @var FactoryInterface
      */
-
     protected $defaultActionFactory;
 
     /**
@@ -129,7 +104,6 @@ class Blueprint {
      *
      * @var FactoryInterface
      */
-
     protected $defaultToolbarItemFactory;
 
     /**
@@ -148,9 +122,7 @@ class Blueprint {
         ];
         $this->controller    = null;
         $this->primaryToolbarItem = null;
-        $this->titleField    = null;
         $this->icon          = null;
-        $this->formFields    = [];
         $this->actions       = [];
         $this->toolbarOrders = [
             'section' => [],
@@ -306,41 +278,6 @@ class Blueprint {
     }
 
     /**
-     * Determine if the title field has been set.
-     *
-     * @return boolean
-     */
-    public function hasTitleField() {
-        return ($this->titleField !== null);
-    }
-
-    /**
-     * Get the title field
-     *
-     * @return string
-     */
-    public function getTitleField() {
-        if($this->titleField !== null) {
-            return $this->titleField;
-        } else {
-            throw new InvalidArgumentException('No title field has been set for the resource: "' . $this->getDisplayName() . '"');
-        }
-    }
-
-    /**
-     * Set the title field.
-     *
-     * @param string $name
-     * @return void
-     */
-    public function setTitleField($name) {
-        if(!isset($this->formFields[$name])) {
-            throw new InvalidArgumentException('Cannot set title field to "' . $name . '". Field does not exist.');
-        }
-        $this->titleField = $name;
-    }
-
-    /**
      * Sets the icon of the blueprint.
      *
      * @param string $icon the icon
@@ -357,96 +294,6 @@ class Blueprint {
      */
     public function getIcon() {
         return $this->icon;
-    }
-
-    /**
-     * Get a form field by its name.
-     *
-     * @param string $name
-     * @return FieldMetadata
-     */
-    public function getField($name) {
-        if(isset($this->formFields[$name])) {
-            return $this->formFields[$name];
-        } else {
-            throw new InvalidArgumentException('Field does not exist: ' . $name);
-        }
-    }
-
-    /**
-     * Get all form fields.
-     *
-     * @param array $only only retrieve the specified fields
-     * @return array
-     */
-    public function getFields(array $only = []) {
-        if(empty($only)) {
-            return $this->formFields;
-        } else {
-            $return = [];
-            foreach($only as $item) {
-                $return[] = $this->getField($item);
-            }
-            return $return;
-        }
-
-    }
-
-    /**
-     * Add a form field.
-     *
-     * @param FieldMetadata $field
-     * @return void
-     */
-    public function addField(FieldMetadata $field) {
-        $this->formFields[$field->name] = $field;
-    }
-
-    /**
-     * Add a form field.
-     *
-     * @param array $parameters
-     * @return void
-     */
-    public function makeField(array $parameters) {
-        $field = new FieldMetadata($parameters['name']);
-        unset($parameters['name']);
-        foreach($parameters as $key => $value) {
-            $field->$key = $value;
-        }
-        $this->addField($field);
-    }
-
-    /**
-     * Adds multiple form fields.
-     *
-     * @param array $fields
-     * @return void
-     */
-    public function makeFields(array $fields) {
-        foreach($fields as $parameters) {
-            $this->makeField($parameters);
-        }
-    }
-
-    /**
-     * Remove a form field.
-     *
-     * @param string $name
-     * @return void
-     */
-    public function removeField($name) {
-        unset($this->formFields[$name]);
-    }
-
-    /**
-     * Determines if the form field exists.
-     *
-     * @param string $name
-     * @return boolean
-     */
-    public function hasField($name) {
-        return isset($this->formFields[$name]);
     }
 
     /**
