@@ -62,8 +62,7 @@ class BlueprintRegistrar implements BlueprintRegistrarContract {
         $method = strtolower($action->getMethod());
         $route = $this->router->{$method}($action->getPattern(), [
             'as'        => $action->getName(),
-            'before'    => $action->getBeforeFilters(),
-            'after'     => $action->getAfterFilters(),
+            'middleware'=> $action->getMiddleware(),
             'uses'      => $action->getUses()
         ]);
         $callback = $action->customRouteCallback;

@@ -30,13 +30,13 @@ class AdminAction extends Action {
     }
 
     /**
-     * Get the $beforeFilters array.
+     * Get the middleware array.
      *
      * @return array
      */
-    public function getBeforeFilters() {
-        $filters = [self::AUTH_MIDDLEWARE_NAME];
-        return array_merge($filters, parent::getBeforeFilters());
+    public function getMiddleware() {
+        $middleware = [self::AUTH_MIDDLEWARE_NAME];
+        return array_merge($middleware, parent::getMiddleware());
     }
 
 }

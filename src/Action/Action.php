@@ -53,18 +53,11 @@ class Action {
     public $group;
 
     /**
-     * Before filters for the action.
+     * Route middleware for the action.
      *
      * @var array
      */
-    public $beforeFilters;
-
-    /**
-     * After filters for the action.
-     *
-     * @var array
-     */
-    public $afterFilters;
+    public $middleware;
 
     /**
      * Permissions required to excecute the action.
@@ -125,8 +118,7 @@ class Action {
         $this->name          = $name;
         $this->method        = Method::GET;
         $this->group         = $group ?: new Group();
-        $this->beforeFilters = [];
-        $this->afterFilters  = [];
+        $this->middleware    = [];
         $this->permissions   = null;
         $this->uses          = $uses;
         $this->register      = true;
@@ -173,25 +165,16 @@ class Action {
     }
 
     /**
-     * Returns the before filters array.
+     * Returns the middleware array.
      *
      * @return array
      */
-    public function getBeforeFilters() {
-        $filters = $this->beforeFilters;
+    public function getMiddleware() {
+        $middleware = $this->middleware;
         if($this->usesPermissions()) {
-            $filters[] = self::PERMISSIONS_FILTER_NAME . ':' . $this->getPermissions();
+            $middleware[] = self::PERMISSIONS_FILTER_NAME . ':' . $this->getPermissions();
         }
-        return $filters;
-    }
-
-    /**
-     * Returns the after filters array.
-     *
-     * @return array
-     */
-    public function getAfterFilters() {
-        return $this->afterFilters;
+        return $middleware;
     }
 
     /**
@@ -224,20 +207,10 @@ class Action {
     }
 
     /**
-     * Returns a full URL to the action.
-     *
-     * @param array $options the options array
-     * @return string the URL
-     */
-    public function getURL(array $options = []) {
-        return URL::route($this->getName(), $this->getRouteParameters($options));
-    }
-
-    /**
      * Throws an exception when trying to set a non-existent property.
      *
      * @param string $variable name of the variable
-     * @param dynamic $value value of the variable
+     * @param mixed $value value of the variable
      * @throws Exception
      */
     public function __set($variable, $value) {
