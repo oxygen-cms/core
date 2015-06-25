@@ -38,6 +38,8 @@ class TranslationServiceProvider extends ServiceProvider {
 
             return $trans;
         });
+
+        $this->app->bind(Translator::class, 'translator');
     }
 
     /**

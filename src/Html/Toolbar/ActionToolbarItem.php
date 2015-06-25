@@ -131,7 +131,7 @@ abstract class ActionToolbarItem implements ToolbarItem {
      */
     public function linksToCurrentPage(array $arguments) {
         return
-            URL::current() == URL::route($this->getName(), $this->getRouteParameters($arguments)) &&
+            URL::current() == URL::route($this->action->getName(), $this->action->getRouteParameters($arguments)) &&
             Request::method() == $this->action->getMethod();
     }
 
