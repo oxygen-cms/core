@@ -25,6 +25,7 @@ class Row {
     public function __construct(array $items) {
         $this->items = $items;
         $this->useDefaults = true;
+        $this->extraClasses = [];
     }
 
     /**
