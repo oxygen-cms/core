@@ -91,7 +91,7 @@ class ViewServiceProvider extends ServiceProvider {
 
         $app->singleton('blade.string.compiler', function($app) {
             $cache = $app['config']['view.compiled'];
-            
+
             return new BladeStringCompiler($app['files'], $app['blade.compiler'], $cache);
         });
 
