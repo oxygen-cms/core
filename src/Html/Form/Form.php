@@ -65,7 +65,7 @@ class Form implements RenderableInterface {
      *
      * @var array
      */
-    protected $routeParameters;
+    protected $routeParameterArguments;
 
     /**
      * Constructs the Form instance
@@ -74,7 +74,7 @@ class Form implements RenderableInterface {
      */
     public function __construct(Action $action) {
         $this->action = $action;
-        $this->routeParameters = [];
+        $this->routeParameterArguments = [];
         $this->content = [];
     }
 
@@ -83,15 +83,15 @@ class Form implements RenderableInterface {
      *
      * @param $arguments
      */
-    public function setRouteParameters($arguments) {
-        $this->routeParameters = $arguments;
+    public function setRouteParameterArguments($arguments) {
+        $this->routeParameterArguments = $arguments;
     }
 
     /**
      * @return array
      */
-    public function getRouteParameters() {
-        return $this->routeParameters;
+    public function getRouteParameterArguments() {
+        return $this->routeParameterArguments;
     }
 
     /**
