@@ -302,7 +302,7 @@ class Header implements RenderableInterface {
      */
     public static function fromBlueprint(Blueprint $blueprint, $title, array $arguments = [], $type = self::TYPE_MAIN, $fillFromToolbar = 'section') {
         if($title instanceof FieldSet) {
-            $title = $arguments['model']->getAttribute($title->getTitleField());
+            $title = $arguments['model']->getAttribute($title->getTitleFieldName());
         } else if(!is_string($title)) {
             throw new \InvalidArgumentException('$title must be either a string or an instance of \Oxygen\Core\Form\FieldSet');
         }
