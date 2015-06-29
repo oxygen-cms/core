@@ -20,8 +20,9 @@ class ConsoleServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->commands('Oxygen\Core\Console\BlueprintListCommand');
-        $this->commands('Oxygen\Core\Console\BlueprintDetailCommand');
+        $this->commands(BlueprintListCommand::class);
+        $this->commands(BlueprintDetailCommand::class);
+        $this->commands(FieldSetDetailCommand::class);
     }
 
     /**

@@ -16,7 +16,7 @@ class FieldSetDetailCommand extends Command {
      * @var string
      */
 
-    protected $name = 'blueprint:fields';
+    protected $name = 'field-set:view';
 
     /**
      * The console command description.
