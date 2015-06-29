@@ -34,7 +34,7 @@ class BlueprintListCommand extends Command {
 	 */
 
 	protected $headers = [
-		'Name', 'Display Names', 'Controller', 'Primary Toolbar Item', 'Title Field', 'Icon'
+		'Name', 'Display Names', 'Controller', 'Primary Toolbar Item', 'Icon'
 	];
 
     /**
@@ -88,7 +88,6 @@ class BlueprintListCommand extends Command {
 			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getDisplayName(Blueprint::PLURAL)]),
 			$blueprint->getController(),
 			$blueprint->hasPrimaryToolbarItem() ? $blueprint->getPrimaryToolbarItem()->getIdentifier() : 'None',
-			$blueprint->hasTitleField() ? $blueprint->getTitleField() : 'None',
 			$blueprint->getIcon()
 		];
 	}

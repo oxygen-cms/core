@@ -2,15 +2,9 @@
 
 namespace Oxygen\Core\Console;
 
-use App;
-
 use Oxygen\Core\Blueprint\BlueprintManager;
-use Oxygen\Core\Console\Command;
-use Oxygen\Core\Console\Formatter;
-
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Action\Action;
-use Oxygen\Core\Form\FieldMetadata;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -40,7 +34,7 @@ class BlueprintDetailCommand extends Command {
 	 * @var array
 	 */
 	protected $generalHeaders = [
-		'Name', 'Display Names', 'Route Name', 'Route Pattern', 'Controller', 'Primary Toolbar Item', 'Title Field', 'Icon'
+		'Name', 'Display Names', 'Route Name', 'Route Pattern', 'Controller', 'Primary Toolbar Item', 'Icon'
 	];
 
 	/**
@@ -49,16 +43,7 @@ class BlueprintDetailCommand extends Command {
 	 * @var array
 	 */
 	protected $actionHeaders = [
-		'Pattern', 'Name', 'Method', 'Group', 'Before Filters', 'After Filters', 'Uses', 'Register At End', 'Use Smooth State'
-	];
-
-	/**
-	 * The table headers for the command.
-	 *
-	 * @var array
-	 */
-	protected $fieldHeaders = [
-		'Name', 'Label', 'Type', 'Editable', 'Attributes', 'Options'
+		'Pattern', 'Name', 'Method', 'Group', 'Middleware', 'Uses', 'Register At End', 'Use Smooth State'
 	];
 
     /**
@@ -88,14 +73,6 @@ class BlueprintDetailCommand extends Command {
 			$actions[] = $this->getActionInformation($action);
 		}
 		$this->table($this->actionHeaders, $actions);
-
-		$this->heading('Fields');
-
-		$fields = [];
-		foreach($blueprint->getFields() as $field) {
-			$fields[] = $this->getFieldInformation($field);
-		}
-		$this->table($this->fieldHeaders, $fields);
 	}
 
 	/**
@@ -113,7 +90,6 @@ class BlueprintDetailCommand extends Command {
 			$blueprint->getRoutePattern(),
 			$blueprint->getController(),
 			$blueprint->hasPrimaryToolbarItem() ? $blueprint->getPrimaryToolbarItem()->getIdentifier() : 'None',
-			$blueprint->hasTitleField() ? $blueprint->getTitleField() : 'None',
 			$blueprint->getIcon()
 		];
 	}
@@ -131,29 +107,10 @@ class BlueprintDetailCommand extends Command {
 			$action->getName(),
 			$action->getMethod(),
 			$action->group->getName() . ', ' . $action->group->getPattern(),
-			Formatter::shortArray($action->getBeforeFilters()),
-			Formatter::shortArray($action->getAfterFilters()),
+			Formatter::shortArray($action->getMiddleware()),
 			$action->getUses(),
 			Formatter::boolean($action->register),
 			Formatter::boolean($action->useSmoothState)
-		];
-	}
-
-	/**
-	 * Get information about a Field.
-	 *
-	 * @param FieldMetadata $field
-	 * @return array
-	 */
-
-	protected function getFieldInformation(FieldMetadata $field) {
-		return [
-			$field->name,
-			$field->label,
-			$field->type,
-			Formatter::boolean($field->editable),
-			Formatter::keyedArray($field->attributes),
-			Formatter::keyedArray($field->options)
 		];
 	}
 
