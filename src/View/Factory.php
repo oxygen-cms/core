@@ -3,6 +3,7 @@
 namespace Oxygen\Core\View;
 
 use Illuminate\View\Factory as BaseFactory;
+use Oxygen\Data\Behaviour\Timestamps;
 
 class Factory extends BaseFactory {
 
@@ -14,7 +15,7 @@ class Factory extends BaseFactory {
      * @param  int     $timestamp
      * @param  array   $data
      * @param  array   $mergeData
-     * @return Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function string($contents, $unique, $timestamp, $data = [], $mergeData = []) {
         $data = array_merge($mergeData, $this->parseData($data));
@@ -32,12 +33,12 @@ class Factory extends BaseFactory {
      * @param  string  $field
      * @param  array   $data
      * @param  array   $mergeData
-     * @return Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function model($model, $field, $data = [], $mergeData = []) {
         $contents = $model->getAttribute($field);
         $path = $this->pathFromModel($model, $field);
-        $timestamp = class_uses($model, 'Oxygen\Data\Behaviour\Timestamps') ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
+        $timestamp = class_uses($model, Timestamps::class) ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
 
         return $this->string($contents, $path, $timestamp, $data, $mergeData);
     }
@@ -45,7 +46,7 @@ class Factory extends BaseFactory {
     /**
      * Generates a unique path from a model.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param object $model
      * @param string $field
      * @return string
      */

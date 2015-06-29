@@ -90,8 +90,8 @@ class ViewServiceProvider extends ServiceProvider {
         // instance to pass into the engine so it can compile the views properly.
 
         $app->singleton('blade.string.compiler', function($app) {
-            $cache = $app['path.storage'] . '/views';
-
+            $cache = $app['config']['view.compiled'];
+            
             return new BladeStringCompiler($app['files'], $app['blade.compiler'], $cache);
         });
 
