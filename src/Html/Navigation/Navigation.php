@@ -40,7 +40,6 @@ class Navigation implements RenderableInterface {
      *
      * @var array
      */
-
     protected $toolbars;
 
     /**
@@ -48,7 +47,6 @@ class Navigation implements RenderableInterface {
      *
      * @var array
      */
-
     protected $lazyOrders;
 
     /**
@@ -123,7 +121,6 @@ class Navigation implements RenderableInterface {
      * @param string $toolbar
      * @return void
      */
-
     protected function loadLazyOrders($toolbar) {
         foreach($this->lazyOrders[$toolbar] as $callback) {
             $this->order($toolbar, $callback());
@@ -137,7 +134,6 @@ class Navigation implements RenderableInterface {
      * @param callable $callback
      * @return void
      */
-
     protected function addLazyOrder($toolbar, $callback) {
         $this->lazyOrders[$toolbar][] = $callback;
     }
