@@ -61,6 +61,13 @@ class Form implements RenderableInterface {
     protected $extraClasses;
 
     /**
+     * The id of the form.
+     *
+     * @var
+     */
+    protected $id;
+
+    /**
      * The arguments that will be passed to $action->getRouteParameters() later on
      *
      * @var array
@@ -196,6 +203,22 @@ class Form implements RenderableInterface {
      */
     public function getExtraClasses() {
         return $this->extraClasses;
+    }
+
+    /**
+     * Returns the id of the form.
+     *
+     * @return string
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id) {
+        $this->id = $id;
     }
 
 }
