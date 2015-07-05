@@ -44,24 +44,14 @@
                 "description": "Adds Console Commands"
             },
             {
-                "name": "Config",
-                "class": "Oxygen\\Core\\Config\\ConfigServiceProvider",
-                "description": "Adds Writable Config to Illuminate\\Config"
-            },
-            {
-                "name": "Routing",
-                "class": "Oxygen\\Core\\Routing\\RoutingServiceProvider",
-                "description": "Adds Blueprint Routing to Illuminate\\Routing"
+                "name": "Database",
+                "class": "Oxygen\\Core\\Database\\DatabaseServiceProvider",
+                "description": "Adds automatic migrations for the database"
             },
             {
                 "name": "Translation",
                 "class": "Oxygen\\Core\\Translation\\TranslationServiceProvider",
                 "description": "Adds Bulk Replacements to Illuminate\\Translation"
-            },
-            {
-                "name": "Themes",
-                "class": "Oxygen\\Core\\Theme\\ThemeServiceProvider",
-                "description": "Adds Support for Themes"
             },
             {
                 "name": "View",

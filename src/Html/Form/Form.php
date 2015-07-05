@@ -83,6 +83,7 @@ class Form implements RenderableInterface {
         $this->action = $action;
         $this->routeParameterArguments = [];
         $this->content = [];
+        $this->extraClasses = [];
     }
 
     /**
