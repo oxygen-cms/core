@@ -185,19 +185,6 @@ class Blueprint {
     }
 
     /**
-     * Set both the singular and plural display name of the Blueprint.
-     * This indicates that the blueprint doesn't represent many objects, but is instead
-     * more like a singleton.
-     *
-     * @param string   $name
-     * @return void
-     */
-    public function setBothDisplayNames($name) {
-        $this->displayName = $name;
-        $this->pluralDisplayName = $name;
-    }
-
-    /**
      * Set the display name of the Blueprint.
      *
      * @param string   $name
@@ -258,6 +245,16 @@ class Blueprint {
     public function getRoutePattern() {
         $slug = Str::slug(Str::camelToWords($this->pluralName));
         return $this->baseURI !== '/' ? $this->baseURI . '/' . $slug : $slug;
+    }
+
+    /**
+     * Signifies that this blueprint's name doesn't have a plural form.
+     *
+     * @return void
+     */
+    public function disablePluralForm() {
+        $this->pluralName = $this->name;
+        $this->pluralDisplayName = $this->displayName;
     }
 
     /**
