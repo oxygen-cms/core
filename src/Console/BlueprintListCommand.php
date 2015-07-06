@@ -85,7 +85,7 @@ class BlueprintListCommand extends Command {
 	protected function getGeneralInformation($key, Blueprint $blueprint) {
 		return [
 			$blueprint->getName(),
-			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getDisplayName(Blueprint::PLURAL)]),
+			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getPluralDisplayName()]),
 			$blueprint->getController(),
 			$blueprint->hasPrimaryToolbarItem() ? $blueprint->getPrimaryToolbarItem()->getIdentifier() : 'None',
 			$blueprint->getIcon()

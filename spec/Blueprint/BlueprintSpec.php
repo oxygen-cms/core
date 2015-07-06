@@ -20,8 +20,9 @@ class BlueprintSpec extends ObjectBehavior {
 
     function it_has_many_different_names() {
         $this->getName()->shouldReturn('TestBlueprint');
+        $this->getPluralName()->shouldReturn('TestBlueprints');
         $this->getDisplayName()->shouldReturn('Test Blueprint');
-        $this->getDisplayName(Blueprint::PLURAL)->shouldReturn('Test Blueprints');
+        $this->getPluralDisplayName()->shouldReturn('Test Blueprints');
         $this->getRouteName()->shouldReturn('testBlueprints');
         $this->getRoutePattern()->shouldReturn('test-blueprints');
     }

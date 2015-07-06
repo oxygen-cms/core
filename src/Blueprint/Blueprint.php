@@ -35,18 +35,33 @@ class Blueprint {
     private $baseURI;
 
     /**
-     * Names of the Blueprint.
+     * Name of blueprint, used in `Blueprint::get()` method
      *
-     * @var array
+     * @var string
      */
-    protected $names;
+    protected $name;
 
     /**
-     * Display names of the Blueprint.
+     * Name of the Blueprint, in plural form.
+     * Used when generating the route name/pattern
      *
-     * @var array
+     * @var string
      */
-    protected $displayNames;
+    protected $pluralName;
+
+    /**
+     * Display name of the Blueprint.
+     *
+     * @var string
+     */
+    protected $displayName;
+
+    /**
+     * Plural display name of the Blueprint.
+     *
+     * @var string
+     */
+    protected $pluralDisplayName;
 
     /**
      * Controller of the Blueprint.
@@ -115,14 +130,10 @@ class Blueprint {
     public function __construct($name, $baseURI = '/') {
         $this->baseURI = $baseURI;
 
-        $this->names         = [
-            'singular'  => $name, // name of blueprint, used in Blueprint::get('*****')
-            'plural'    => Str::plural($name) // plural name, used when generating routes
-        ];
-        $this->displayNames  = [ // display names, purely cosmetic
-            'singular'  => Str::camelToWords($name),
-            'plural'    => Str::plural(Str::camelToWords($name))
-        ];
+        $this->name = $name;
+        $this->pluralName = Str::plural($name);
+        $this->displayName = Str::camelToWords($name);
+        $this->pluralDisplayName = Str::plural(Str::camelToWords($name));
         $this->controller    = null;
         $this->primaryToolbarItem = null;
         $this->icon          = null;
@@ -140,17 +151,19 @@ class Blueprint {
     /**
      * Returns the name of the Blueprint.
      *
-     * @param bool $type
      * @return string
      */
-    public function getName($type = self::SINGULAR) {
-        if($type === self::SINGULAR) {
-            return $this->names['singular'];
-        } else if($type === self::PLURAL) {
-            return $this->names['plural'];
-        } else {
-            throw new InvalidArgumentException('Invalid Name Type: "' . $type . '"');
-        }
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Returns the name of the Blueprint.
+     *
+     * @return string
+     */
+    public function getPluralName() {
+        return $this->pluralName;
     }
 
     /**
@@ -158,21 +171,17 @@ class Blueprint {
      *
      * @param string $name new name of the Blueprint
      */
-    public function setName($name, $type = self::SINGULAR) {
-        if($type === self::SINGULAR) {
-            $this->names['singular'] = $name;
-        } else if($type === self::PLURAL) {
-            $this->names['plural'] = $name;
-        }
+    public function setName($name) {
+        $this->name = $name;
     }
 
     /**
-     * Sets both the singular and plural names of the Blueprint.
+     * Sets the name of the Blueprint.
      *
-     * @param array $names
+     * @param string $name new name of the Blueprint
      */
-    public function setDisplayNames(array $names) {
-        $this->displayNames = $names;
+    public function setPluralName($name) {
+        $this->pluralName = $name;
     }
 
     /**
@@ -184,40 +193,46 @@ class Blueprint {
      * @return void
      */
     public function setBothDisplayNames($name) {
-        $this->displayNames['singular'] = $name;
-        $this->displayNames['plural'] = $name;
+        $this->displayName = $name;
+        $this->pluralDisplayName = $name;
     }
 
     /**
      * Set the display name of the Blueprint.
      *
      * @param string   $name
-     * @param boolean  $type
      * @return void
      */
-    public function setDisplayName($name, $type = self::SINGULAR) {
-        if($type === self::SINGULAR) {
-            $this->displayNames['singular'] = $name;
-        } else if($type === self::PLURAL) {
-            $this->displayNames['plural'] = $name;
-        }
+    public function setDisplayName($name) {
+        $this->displayName = $name;
+    }
+
+    /**
+     * Set the plural display name of the Blueprint.
+     *
+     * @param string   $name
+     * @return void
+     */
+    public function setPluralDisplayName($name) {
+        $this->pluralDisplayName = $name;
     }
 
     /**
      * Get the display name of the model.
      *
-     * @param boolean $type
-     * @throws InvalidArgumentException If $type is not valid
      * @return string
      */
-    public function getDisplayName($type = self::SINGULAR) {
-        if($type === self::SINGULAR) {
-            return $this->displayNames['singular'];
-        } else if($type === self::PLURAL) {
-            return $this->displayNames['plural'];
-        } else {
-            throw new InvalidArgumentException('Invalid Display Name Type: "' . $type . '"');
-        }
+    public function getDisplayName() {
+        return $this->displayName;
+    }
+
+    /**
+     * Get the display name of the model, in plural form
+     *
+     * @return string
+     */
+    public function getPluralDisplayName() {
+        return $this->pluralDisplayName;
     }
 
     /**
@@ -230,7 +245,7 @@ class Blueprint {
      * @return string
      */
     public function getRouteName($actionName = null) {
-        $name = Str::camel($this->getName(self::PLURAL));
+        $name = Str::camel($this->pluralName);
         return $actionName == null ? $name : $name . '.' . $actionName;
     }
 
@@ -241,7 +256,7 @@ class Blueprint {
      * @return string
      */
     public function getRoutePattern() {
-        $slug = Str::slug($this->getName(self::PLURAL));
+        $slug = Str::slug(Str::camelToWords($this->pluralName));
         return $this->baseURI !== '/' ? $this->baseURI . '/' . $slug : $slug;
     }
 

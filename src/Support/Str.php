@@ -13,9 +13,7 @@ class Str extends BaseStr {
      * @return string
      */
     public static function camelToWords($value) {
-        return preg_replace_callback('/(?<!\b)[A-Z][a-z]+|(?<=[a-z])[A-Z]/', function($match) {
-            return ' '. $match[0];
-        }, $value);
+        return preg_replace('/(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])|(?<=[A-Za-z])(?=[^A-Za-z])/', ' ', $value);
     }
 
 }

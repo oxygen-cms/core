@@ -16,12 +16,7 @@ class AdminActionSpec extends ObjectBehavior {
     }
 
     function it_automatically_uses_the_auth_and_permissions_filters() {
-        $this->getBeforeFilters()->shouldReturn(['oxygen.auth', 'oxygen.permissions:testAction']);
-    }
-
-    function it_uses_the_csrf_filter_on_all_methods_except_get() {
-        $this->method = 'POST';
-        $this->getBeforeFilters()->shouldReturn(['oxygen.auth', 'oxygen.csrf', 'oxygen.permissions:testAction']);
+        $this->getMiddleware()->shouldReturn(['oxygen.auth', 'oxygen.permissions:testAction']);
     }
 
 }

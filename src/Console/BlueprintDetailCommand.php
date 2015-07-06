@@ -84,8 +84,8 @@ class BlueprintDetailCommand extends Command {
 
 	protected function getGeneralInformation(Blueprint $blueprint) {
 		return [
-            Formatter::shortArray([$blueprint->getName(), $blueprint->getName(Blueprint::PLURAL)]),
-			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getDisplayName(Blueprint::PLURAL)]),
+            Formatter::shortArray([$blueprint->getName(), $blueprint->getPluralName()]),
+			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getPluralDisplayName()]),
 			$blueprint->getRouteName(),
 			$blueprint->getRoutePattern(),
 			$blueprint->getController(),

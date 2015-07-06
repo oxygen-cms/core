@@ -46,22 +46,15 @@ class ActionSpec extends ObjectBehavior {
         $this->getPattern()->shouldReturn('group-pattern/test-action');
     }
 
-    function it_has_before_an_after_filters() {
-        $this->getBeforeFilters()->shouldReturn([]);
-        $this->getAfterFilters()->shouldReturn([]);
+    function it_has_middleware() {
+        $this->getMiddleware()->shouldReturn([]);
 
         $this->permissions = 'my.permissions';
-        $this->getBeforeFilters()->shouldReturn(['oxygen.permissions:my.permissions']);
+        $this->getMiddleware()->shouldReturn(['oxygen.permissions:my.permissions']);
     }
 
     function it_has_route_parameters() {
         $this->getRouteParameters([])->shouldReturn([]);
-    }
-
-    function it_can_be_valid_or_not() {
-        $this->isValid()->shouldReturn(true);
-        $this->uses = null;
-        $this->isValid()->shouldReturn(false);
     }
 
 }
