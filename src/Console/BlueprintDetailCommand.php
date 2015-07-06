@@ -34,7 +34,7 @@ class BlueprintDetailCommand extends Command {
 	 * @var array
 	 */
 	protected $generalHeaders = [
-		'Name', 'Display Names', 'Route Name', 'Route Pattern', 'Controller', 'Primary Toolbar Item', 'Icon'
+		'Names', 'Display Names', 'Route Name', 'Route Pattern', 'Controller', 'Primary Toolbar Item', 'Icon'
 	];
 
 	/**
@@ -84,7 +84,7 @@ class BlueprintDetailCommand extends Command {
 
 	protected function getGeneralInformation(Blueprint $blueprint) {
 		return [
-			$blueprint->getName(),
+            Formatter::shortArray([$blueprint->getName(), $blueprint->getName(Blueprint::PLURAL)]),
 			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getDisplayName(Blueprint::PLURAL)]),
 			$blueprint->getRouteName(),
 			$blueprint->getRoutePattern(),
