@@ -9,8 +9,12 @@ interface NotificationPresenter {
     /**
      * Creates a response to an API call that handles AJAX requests as well.
      *
-     * The $redirect parameter will redirect the user to the given route name.
-     * The
+     * Will display a notification to the user and optionally perform another action such as redirecting or refreshing the page
+     *
+     * $parameters:
+     *    redirect (string)     - redirects the user to the given route
+     *    refresh (bool)        - refreshes the current page
+     *    hardRedirect (bool)   - whether to cause a full page refresh
      *
      * @param Notification $notification   Notification to display.
      * @param array        $parameters     Extra parameters

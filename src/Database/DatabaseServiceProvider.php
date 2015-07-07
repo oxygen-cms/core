@@ -12,8 +12,7 @@ class DatabaseServiceProvider extends ServiceProvider {
      *
      * @var bool
      */
-
-    protected $defer = false;
+    protected $defer = true;
 
     /**
      * Register the service provider.
@@ -21,7 +20,7 @@ class DatabaseServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->bindShared('oxygen.autoMigrator', function() {
+        $this->app->singleton(AutomaticMigrator::class, function() {
            return new AutomaticMigrator(base_path() . '/vendor');
         });
     }
@@ -32,7 +31,7 @@ class DatabaseServiceProvider extends ServiceProvider {
      * @return array
      */
     public function provides() {
-        return [];
+        return [AutomaticMigrator::class];
     }
 
 }

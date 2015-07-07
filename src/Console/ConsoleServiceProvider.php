@@ -23,6 +23,7 @@ class ConsoleServiceProvider extends ServiceProvider {
         $this->commands(BlueprintListCommand::class);
         $this->commands(BlueprintDetailCommand::class);
         $this->commands(FieldSetDetailCommand::class);
+        $this->commands(PackageMigrateCommand::class);
     }
 
     /**

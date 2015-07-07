@@ -28,11 +28,7 @@ class AutomaticMigrator {
      * @param string      $package
      * @param string|null $path
      */
-    public function add($package, $path = null) {
-        if($path === null) {
-            $path = $this->vendorDir . '/' . $package . '/src/migrations';
-        }
-
+    public function loadMigrationsFrom($path, $package) {
         $this->paths[$package] = $path;
     }
 
