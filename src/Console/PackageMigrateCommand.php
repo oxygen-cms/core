@@ -71,7 +71,7 @@ class PackageMigrateCommand extends BaseCommand {
 
         // migrate each path
         foreach($this->paths->getPaths() as $path) {
-            $this->migrator->run($path);
+            $this->migrator->run($path, $pretend);
 
             // Once the migrator has run we will grab the note output and send it out to
             // the console screen, since the migrator itself functions without having
@@ -107,6 +107,8 @@ class PackageMigrateCommand extends BaseCommand {
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
 
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
+
+            ['pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.']
         ];
     }
 
