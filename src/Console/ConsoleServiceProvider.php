@@ -3,6 +3,7 @@
 namespace Oxygen\Core\Console;
 
 use Illuminate\Support\ServiceProvider;
+use Oxygen\Core\Database\AutomaticMigrator;
 
 class ConsoleServiceProvider extends ServiceProvider {
 
@@ -32,7 +33,9 @@ class ConsoleServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-
+        $this->app->singleton(PackageMigrateCommand::class, function() {
+            return new PackageMigrateCommand($this->app['migrator'], $this->app[AutomaticMigrator::class]);
+        });
     }
 
     /**
@@ -43,7 +46,9 @@ class ConsoleServiceProvider extends ServiceProvider {
     public function provides() {
         return [
             BlueprintListCommand::class,
-            BlueprintDetailCommand::class
+            BlueprintDetailCommand::class,
+            FieldSetDetailCommand::class,
+            PackageMigrateCommand::class
         ];
     }
 
