@@ -32,12 +32,13 @@ if (!function_exists('html_attribute_element')) {
      * @return string
      */
     function html_attribute_element($key, $value) {
-        // For numeric keys we will assume that the key and the value are the same
-        // as this will convert HTML attributes such as "required" to a correct
-        // form like required="required" instead of using incorrect numerics.
-        if(is_numeric($key)) {
-            $key = $value;
+        // Boolean options will either print `keyNameHere` or ``
+        if($value === true) {
+            return $key;
+        } else if($value === false) {
+            return '';
         }
+
         if(!is_null($value)) {
             return $key . '="' . e($value) . '"';
         }
