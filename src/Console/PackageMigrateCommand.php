@@ -70,7 +70,9 @@ class PackageMigrateCommand extends BaseCommand {
         $pretend = $this->input->getOption('pretend');
 
         // migrate each path
-        foreach($this->paths->getPaths() as $path) {
+        foreach($this->paths->getPaths() as $package => $path) {
+            $this->info('Running migrations for ' . $package);
+
             $this->migrator->run($path, $pretend);
 
             // Once the migrator has run we will grab the note output and send it out to
