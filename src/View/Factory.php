@@ -3,6 +3,7 @@
 namespace Oxygen\Core\View;
 
 use Illuminate\View\Factory as BaseFactory;
+use Oxygen\Data\Behaviour\PrimaryKey;
 use Oxygen\Data\Behaviour\Timestamps;
 
 class Factory extends BaseFactory {
@@ -29,15 +30,15 @@ class Factory extends BaseFactory {
      * Get the evaluated view contents for the given model and field.
      * If the model doesn't use timestamps then the view will be re-compiled on every request.
      *
-     * @param  object  $model
+     * @param  PrimaryKey  $model
      * @param  string  $field
      * @param  array   $data
      * @param  array   $mergeData
      * @return \Illuminate\View\View
      */
-    public function model($model, $field, $data = [], $mergeData = []) {
+    public function model(PrimaryKey $model, $field, $data = [], $mergeData = []) {
         $contents = $model->getAttribute($field);
-        $path = $this->pathFromModel($model, $field);
+        $path = $this->pathFromModel(get_class($model), $model->getId(), $field);
         $timestamp = class_uses($model, Timestamps::class) ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
 
         return $this->string($contents, $path, $timestamp, $data, $mergeData);
@@ -46,13 +47,13 @@ class Factory extends BaseFactory {
     /**
      * Generates a unique path from a model.
      *
-     * @param object $model
+     * @param        $className
+     * @param        $id
      * @param string $field
      * @return string
      */
-
-    protected function pathFromModel($model, $field) {
-        $path = 'db_' . get_class($model) . '_' . $model->getId() . '_' . $field;
+    public function pathFromModel($className, $id, $field) {
+        $path = 'db_' . $className . '_' . $id . '_' . $field;
         return strtolower(str_replace(['-', '.'], '_', $path));
     }
 
