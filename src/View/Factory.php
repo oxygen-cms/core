@@ -36,7 +36,7 @@ class Factory extends BaseFactory {
      * @param  array   $mergeData
      * @return \Illuminate\View\View
      */
-    public function model(PrimaryKey $model, $field, $data = [], $mergeData = []) {
+    public function model($model, $field, $data = [], $mergeData = []) {
         $contents = $model->getAttribute($field);
         $path = $this->pathFromModel(get_class($model), $model->getId(), $field);
         $timestamp = class_uses($model, Timestamps::class) ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
