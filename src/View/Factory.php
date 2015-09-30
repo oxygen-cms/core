@@ -3,8 +3,6 @@
 namespace Oxygen\Core\View;
 
 use Illuminate\View\Factory as BaseFactory;
-use Oxygen\Data\Behaviour\PrimaryKey;
-use Oxygen\Data\Behaviour\Timestamps;
 
 class Factory extends BaseFactory {
 
@@ -30,7 +28,7 @@ class Factory extends BaseFactory {
      * Get the evaluated view contents for the given model and field.
      * If the model doesn't use timestamps then the view will be re-compiled on every request.
      *
-     * @param  PrimaryKey  $model
+     * @param  object  $model
      * @param  string  $field
      * @param  array   $data
      * @param  array   $mergeData
@@ -39,8 +37,8 @@ class Factory extends BaseFactory {
     public function model($model, $field, $data = [], $mergeData = []) {
         $contents = $model->getAttribute($field);
         $path = $this->pathFromModel(get_class($model), $model->getId(), $field);
-        $timestamp = class_uses($model, Timestamps::class) ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
-
+        $timestamp = class_uses($model, 'Oxygen\Data\Behaviour\Timestamps') ? $model->getAttribute('updatedAt')->getTimestamp() : 0;
+        
         return $this->string($contents, $path, $timestamp, $data, $mergeData);
     }
 
