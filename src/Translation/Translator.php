@@ -45,14 +45,14 @@ class Translator extends BaseTranslator {
      * @param  string  $locale
      * @return string
      */
-    public function get($key, array $replace = [], $locale = null) {
+    public function get($key, array $replace = [], $locale = null, $fallback = true) {
         foreach($this->bulkReplacements as $match => $extraReplace) {
             if(starts_with($key, $match)) {
                 $replace = array_merge($replace, $extraReplace);
             }
         }
-
-        return parent::get($key, $replace, $locale);
+        
+        return parent::get($key, $replace, $locale, $fallback);
     }
 
 }
