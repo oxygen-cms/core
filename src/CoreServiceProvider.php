@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 use Oxygen\Core\Contracts\CoreConfiguration;
+use Oxygen\Core\Contracts\Http\NotificationPresenter;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as BlueprintRegistrarContract;
 use Oxygen\Core\Contracts\Routing\ResponseFactory as ExtendedResponseFactoryContract;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
@@ -62,6 +63,12 @@ class CoreServiceProvider extends ServiceProvider {
         // register response factory
         $this->app->singleton(ResponseFactoryContract::class, ResponseFactory::class);
         $this->app->singleton(ExtendedResponseFactoryContract::class, ResponseFactory::class);
+        $this->app->bind(ResponseFactory::class, function() {
+            // lazy load stuff
+            return new ResponseFactory($this->app['view'], $this->app['redirect'], function() {
+                return $this->app[NotificationPresenter::class] ;
+            });
+        });
 
         $this->app->singleton('oxygen.layout', function() {
             return $this->app[CoreConfiguration::class]->getAdminLayout();

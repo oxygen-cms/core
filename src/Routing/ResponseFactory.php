@@ -15,18 +15,20 @@ class ResponseFactory extends BaseResponseFactory implements ResponseFactoryCont
      *
      * @var \Oxygen\Core\Contracts\Http\NotificationPresenter
      */
-    protected $notification;
+    protected $notificationPresenter;
+
+    private $notificationPresenterFactory;
 
     /**
      * Create a new response factory instance.
      *
-     * @param  \Illuminate\Contracts\View\Factory               $view
-     * @param  \Illuminate\Routing\Redirector                   $redirector
-     * @param \Oxygen\Core\Contracts\Http\NotificationPresenter $notification
+     * @param  \Illuminate\Contracts\View\Factory     $view
+     * @param  \Illuminate\Routing\Redirector         $redirector
+     * @param callable                                $notificationFactory
      */
-    public function __construct(ViewFactory $view, Redirector $redirector, NotificationPresenter $notification) {
+    public function __construct(ViewFactory $view, Redirector $redirector, callable $notificationFactory) {
         parent::__construct($view, $redirector);
-        $this->notification = $notification;
+        $this->notificationPresenterFactory = $notificationFactory;
     }
 
     /**
@@ -38,7 +40,15 @@ class ResponseFactory extends BaseResponseFactory implements ResponseFactoryCont
      * @return \Illuminate\Http\Response
      */
     public function notification($notification, array $parameters = []) {
-        return $this->notification->present($notification, $parameters);
+        return $this->getNotificationPresenter()->present($notification, $parameters);
+    }
+
+    private function getNotificationPresenter() {
+        if($this->notificationPresenter == null) {
+            $callable = $this->notificationPresenterFactory;
+            $this->notificationPresenter = $callable();
+        }
+        return $this->notificationPresenter;
     }
 
 }
