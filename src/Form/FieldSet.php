@@ -19,7 +19,7 @@ abstract class FieldSet {
     /**
      * Returns the name of the title field.
      *
-     * @return mixed
+     * @return string
      */
     public abstract function getTitleFieldName();
 
