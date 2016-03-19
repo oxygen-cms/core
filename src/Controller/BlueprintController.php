@@ -35,11 +35,7 @@ class BlueprintController extends Controller {
             throw new \InvalidArgumentException('$blueprint should be an instance of \Oxygen\Core\Blueprint\Blueprint or \Oxygen\Core\Blueprint\BlueprintManager');
         }
 
-        View::composer('*', function($view) {
-            if(!isset($view['blueprint'])) {
-                $view->with('blueprint', $this->blueprint);
-            }
-        });
+        view()->share('blueprint', $this->blueprint);
     }
 
 }
