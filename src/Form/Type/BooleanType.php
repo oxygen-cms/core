@@ -10,27 +10,29 @@ class BooleanType extends BaseType {
      * Takes the given input value and transforms it into a compatible value for storage.
      *
      * @param FieldMetadata $metadata
-     * @param string $value
+     * @param string        $value
      * @return mixed
      */
     public function transformInput(FieldMetadata $metadata, $value) {
-        return $value === 'true' ?  true : false;
+        return $value === 'true' ? true : false;
     }
 
     /**
      * Transforms the given value into a string representation.
      *
      * @param FieldMetadata $metadata
-     * @param mixed $value
+     * @param mixed         $value
      * @return string
      */
     public function transformOutput(FieldMetadata $metadata, $value) {
         if($value === true || $value === 1) {
             return 'true';
-        } else if($value === false || $value === 0) {
-            return 'false';
         } else {
-            return 'unknown';
+            if($value === false || $value === 0) {
+                return 'false';
+            } else {
+                return 'unknown';
+            }
         }
     }
 

@@ -58,7 +58,7 @@ class PackageMigrateCommand extends BaseCommand {
      * @return void
      */
     public function fire() {
-        if (!$this->confirmToProceed()) {
+        if(!$this->confirmToProceed()) {
             return;
         }
 
@@ -78,7 +78,7 @@ class PackageMigrateCommand extends BaseCommand {
             // Once the migrator has run we will grab the note output and send it out to
             // the console screen, since the migrator itself functions without having
             // any instances of the OutputInterface contract passed into the class.
-            foreach ($this->migrator->getNotes() as $note) {
+            foreach($this->migrator->getNotes() as $note) {
                 $this->output->writeln($note);
             }
         }
@@ -92,7 +92,7 @@ class PackageMigrateCommand extends BaseCommand {
     protected function prepareDatabase() {
         $this->migrator->setConnection($this->input->getOption('database'));
 
-        if (!$this->migrator->repositoryExists()) {
+        if(!$this->migrator->repositoryExists()) {
             $options = ['--database' => $this->input->getOption('database')];
 
             $this->call('migrate:install', $options);

@@ -2,12 +2,9 @@
 
 namespace Oxygen\Core\Form;
 
-use Closure;
-use DateTime;
-use Exception;
-
-use Oxygen\Core\Support\Str;
 use Carbon\Carbon;
+use Exception;
+use Oxygen\Core\Support\Str;
 
 class FieldMetadata {
 
@@ -107,15 +104,15 @@ class FieldMetadata {
      * @param bool   $editable
      */
     public function __construct($name, $type = 'text', $editable = false) {
-        $this->name              = $name;
-        $this->label             = Str::title(Str::camelToWords($name));
-        $this->description       = null;
-        $this->placeholder       = null;
-        $this->type              = $type;
-        $this->typeInstance      = null;
-        $this->editable          = $editable;
-        $this->attributes        = [];
-        $this->options           = [];
+        $this->name = $name;
+        $this->label = Str::title(Str::camelToWords($name));
+        $this->description = null;
+        $this->placeholder = null;
+        $this->type = $type;
+        $this->typeInstance = null;
+        $this->editable = $editable;
+        $this->attributes = [];
+        $this->options = [];
     }
 
     /**
@@ -131,7 +128,7 @@ class FieldMetadata {
      * Throws an exception when trying to set a non-existent property.
      *
      * @param string $variable name of the variable
-     * @param mixed $value value of the variable
+     * @param mixed  $value    value of the variable
      * @throws Exception
      */
     public function __set($variable, $value) {
@@ -151,12 +148,16 @@ class FieldMetadata {
 
         if(isset(static::$types[$this->type])) {
             $this->typeInstance = static::$types[$this->type];
+
             return static::$types[$this->type];
-        } else if(static::$defaultType !== null) {
-            $this->typeInstance = static::$defaultType;
-            return static::$defaultType;
-        } else  {
-            throw new Exception('No `FieldType` Object Set For Field Type "' . $this->type . '" And No Default Set');
+        } else {
+            if(static::$defaultType !== null) {
+                $this->typeInstance = static::$defaultType;
+
+                return static::$defaultType;
+            } else {
+                throw new Exception('No `FieldType` Object Set For Field Type "' . $this->type . '" And No Default Set');
+            }
         }
     }
 

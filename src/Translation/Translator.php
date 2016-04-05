@@ -2,8 +2,8 @@
 
 namespace Oxygen\Core\Translation;
 
-use Illuminate\Translation\Translator as BaseTranslator;
 use Illuminate\Translation\LoaderInterface;
+use Illuminate\Translation\Translator as BaseTranslator;
 
 class Translator extends BaseTranslator {
 
@@ -30,7 +30,7 @@ class Translator extends BaseTranslator {
      * The given replacements will be used whenever a translation beginning with $key is retrieved.
      *
      * @param string $key
-     * @param array $replace
+     * @param array  $replace
      * @return void
      */
     public function when($key, array $replace) {
@@ -40,9 +40,9 @@ class Translator extends BaseTranslator {
     /**
      * Get the translation for the given key.
      *
-     * @param  string  $key
-     * @param  array   $replace
-     * @param  string  $locale
+     * @param  string $key
+     * @param  array  $replace
+     * @param  string $locale
      * @return string
      */
     public function get($key, array $replace = [], $locale = null, $fallback = true) {
@@ -51,7 +51,7 @@ class Translator extends BaseTranslator {
                 $replace = array_merge($replace, $extraReplace);
             }
         }
-        
+
         return parent::get($key, $replace, $locale, $fallback);
     }
 

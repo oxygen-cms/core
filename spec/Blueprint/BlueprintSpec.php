@@ -3,7 +3,6 @@
 namespace spec\Oxygen\Core\Blueprint;
 
 use Oxygen\Core\Action\Action;
-use Oxygen\Core\Blueprint\Blueprint;;
 use Oxygen\Core\Html\Toolbar\ToolbarItem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

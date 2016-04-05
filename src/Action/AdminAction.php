@@ -11,14 +11,14 @@ class AdminAction extends Action {
      *
      * @param string $name
      * @param string $pattern
-     * @param mixed $uses
-     * @param Group $group
+     * @param mixed  $uses
+     * @param Group  $group
      */
     public function __construct($name, $pattern, $uses, Group $group = null) {
         parent::__construct($name, $pattern, $uses, $group);
         $this->permissions = ($this->group->hasName() ? $this->group->getName() . '.' : '') . $this->name;
         $this->useSmoothState = true;
-        $this->routeParametersCallback = function($action, array $options) {
+        $this->routeParametersCallback = function ($action, array $options) {
             if(isset($options['model'])) {
                 return [
                     $options['model']->getId()
@@ -36,6 +36,7 @@ class AdminAction extends Action {
      */
     public function getMiddleware() {
         $middleware = [self::AUTH_MIDDLEWARE_NAME];
+
         return array_merge($middleware, parent::getMiddleware());
     }
 

@@ -9,7 +9,7 @@ class Str extends BaseStr {
     /**
      * Converts a case-delimited string (eg camel case) into words
      *
-     * @param  string  $value
+     * @param  string $value
      * @return string
      */
     public static function camelToWords($value) {

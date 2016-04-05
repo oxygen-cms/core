@@ -47,10 +47,10 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      */
     public function __construct($label, Action $action) {
         parent::__construct($action);
-        $this->label          = $label;
-        $this->color          = 'white';
-        $this->icon           = null;
-        $this->dialog         = null;
+        $this->label = $label;
+        $this->color = 'white';
+        $this->icon = null;
+        $this->dialog = null;
     }
 
     /**
@@ -71,6 +71,7 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
         $arguments = array_merge($arguments, [
             'evenOnSamePage' => true
         ]);
+
         return parent::shouldRenderBasic($arguments);
     }
 
@@ -78,7 +79,7 @@ class VoidButtonToolbarItem extends ActionToolbarItem {
      * Renders the object.
      * Before rendering all 'dynamic callbacks' will be excecuted.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws Exception
      * @return string the rendered object

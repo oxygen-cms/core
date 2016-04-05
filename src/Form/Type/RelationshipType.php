@@ -10,7 +10,7 @@ class RelationshipType extends BaseType {
      * Takes the given input value and transforms it into a compatible value for storage.
      *
      * @param FieldMetadata $metadata
-     * @param string $value
+     * @param string        $value
      * @return mixed
      */
     public function transformInput(FieldMetadata $metadata, $value) {
@@ -18,7 +18,7 @@ class RelationshipType extends BaseType {
         $repo = $metadata->options['repository'];
         $repo = is_callable($repo) ? $repo() : $repo;
 
-        return $repo->getReference((int) $value);
+        return $repo->getReference((int)$value);
     }
 
 }

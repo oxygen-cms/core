@@ -3,12 +3,15 @@
 
 namespace Oxygen\Core\Html\Form;
 
-use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\RenderableTrait;
 
 class Row {
 
     use RenderableTrait;
+
+    public $useDefaults;
+
+    public $isFooter;
 
     protected $items;
 
@@ -18,9 +21,6 @@ class Row {
      * @var array
      */
     protected $extraClasses;
-
-    public $useDefaults;
-    public $isFooter;
 
     public function __construct(array $items) {
         $this->items = $items;

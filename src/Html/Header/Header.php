@@ -2,22 +2,22 @@
 
 namespace Oxygen\Core\Html\Header;
 
+use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Form\FieldSet;
 use Oxygen\Core\Html\RenderableInterface;
-use Oxygen\Core\Model\Model;
-use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\Toolbar\Toolbar;
+use Oxygen\Core\Model\Model;
 
 class Header implements RenderableInterface {
 
     use RenderableTrait;
 
-    const TYPE_TINY    = 3;
-    const TYPE_SMALL   = 0;
-    const TYPE_NORMAL  = 1;
-    const TYPE_MAIN    = 2;
-    const TYPE_BLOCK   = 4;
+    const TYPE_TINY = 3;
+    const TYPE_SMALL = 0;
+    const TYPE_NORMAL = 1;
+    const TYPE_MAIN = 2;
+    const TYPE_BLOCK = 4;
 
     /**
      * Title of the section header.
@@ -107,13 +107,13 @@ class Header implements RenderableInterface {
      * @param integer $type
      */
     public function __construct($title, array $arguments = [], $type = self::TYPE_MAIN) {
-        $this->title         = $title;
-        $this->subtitle      = null;
-        $this->toolbar       = new Toolbar();
-        $this->arguments     = $arguments;
-        $this->type          = $type;
-        $this->backLink      = null;
-        $this->classes       = [];
+        $this->title = $title;
+        $this->subtitle = null;
+        $this->toolbar = new Toolbar();
+        $this->arguments = $arguments;
+        $this->type = $type;
+        $this->backLink = null;
+        $this->classes = [];
     }
 
     /**
@@ -293,18 +293,20 @@ class Header implements RenderableInterface {
     /**
      * Constructs a Header from a Blueprint.
      *
-     * @param Blueprint $blueprint
+     * @param Blueprint       $blueprint
      * @param FieldSet|string $title
-     * @param array $arguments
-     * @param integer $type
-     * @param string $fillFromToolbar
+     * @param array           $arguments
+     * @param integer         $type
+     * @param string          $fillFromToolbar
      * @return Header
      */
     public static function fromBlueprint(Blueprint $blueprint, $title, array $arguments = [], $type = self::TYPE_MAIN, $fillFromToolbar = 'section') {
         if($title instanceof FieldSet) {
             $title = $arguments['model']->getAttribute($title->getTitleFieldName());
-        } else if(!is_string($title)) {
-            throw new \InvalidArgumentException('$title must be either a string or an instance of \Oxygen\Core\Form\FieldSet');
+        } else {
+            if(!is_string($title)) {
+                throw new \InvalidArgumentException('$title must be either a string or an instance of \Oxygen\Core\Form\FieldSet');
+            }
         }
 
         $object = new static(

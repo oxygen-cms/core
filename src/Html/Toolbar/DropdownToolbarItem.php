@@ -3,8 +3,6 @@
 namespace Oxygen\Core\Html\Toolbar;
 
 use Exception;
-use InvalidArgumentException;
-
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\RendererInterface;
 
@@ -74,15 +72,15 @@ class DropdownToolbarItem implements ToolbarItem {
      * Constructs the DropdownToolbarItem.
      *
      * @param string $label
-     * @param array $items
+     * @param array  $items
      */
     public function __construct($label, array $items = []) {
-        $this->items          = $items;
+        $this->items = $items;
         $this->itemsToDisplay = [];
-        $this->label          = $label;
-        $this->color          = 'white';
-        $this->icon           = 'angle-down';
-        $this->identifier     = camel_case($this->label);
+        $this->label = $label;
+        $this->color = 'white';
+        $this->icon = 'angle-down';
+        $this->identifier = camel_case($this->label);
     }
 
     /**
@@ -126,7 +124,7 @@ class DropdownToolbarItem implements ToolbarItem {
     /**
      * Renders the object.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws \Exception
      * @return string the rendered object

@@ -2,8 +2,8 @@
 
 namespace Oxygen\Core\Support\Facades;
 
-use Oxygen\Core\Html\Navigation\Navigation as NavigationManager;
 use Illuminate\Support\Facades\Facade;
+use Oxygen\Core\Html\Navigation\Navigation as NavigationManager;
 
 class Navigation extends Facade {
 

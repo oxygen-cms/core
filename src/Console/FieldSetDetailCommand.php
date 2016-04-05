@@ -4,9 +4,9 @@ namespace Oxygen\Core\Console;
 
 use Illuminate\Contracts\Container\Container;
 use Oxygen\Core\Form\FieldMetadata;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class FieldSetDetailCommand extends Command {
 

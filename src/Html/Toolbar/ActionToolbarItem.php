@@ -2,14 +2,12 @@
 
 namespace Oxygen\Core\Html\Toolbar;
 
+use Auth;
 use Closure;
 use Exception;
-
-use Auth;
-use URL;
-use Request;
-
 use Oxygen\Core\Action\Action;
+use Request;
+use URL;
 
 abstract class ActionToolbarItem implements ToolbarItem {
 
@@ -49,7 +47,7 @@ abstract class ActionToolbarItem implements ToolbarItem {
     public function __construct(Action $action) {
         $this->action = $action;
         $this->identifier = null;
-        $this->shouldRenderCallback = function(ActionToolbarItem $item, array $arguments) {
+        $this->shouldRenderCallback = function (ActionToolbarItem $item, array $arguments) {
             return $item->shouldRenderBasic($arguments);
         };
         $this->dynamicCallbacks = [];
@@ -73,6 +71,7 @@ abstract class ActionToolbarItem implements ToolbarItem {
     public function shouldRender(array $arguments = []) {
         $callback = $this->shouldRenderCallback;
         $result = $callback($this, $arguments);
+
         return $result;
     }
 
@@ -84,6 +83,7 @@ abstract class ActionToolbarItem implements ToolbarItem {
      */
     public function addDynamicCallback(Closure $callback) {
         $this->dynamicCallbacks[] = $callback;
+
         return $this;
     }
 
@@ -139,7 +139,7 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * Throws an exception when trying to set a non-existent property.
      *
      * @param string $variable name of the variable
-     * @param mixed $value value of the variable
+     * @param mixed  $value    value of the variable
      * @throws Exception
      */
     public function __set($variable, $value) {

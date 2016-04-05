@@ -17,7 +17,7 @@ interface FieldType {
      * Transforms the given value into a representation ready for a form field.
      *
      * @param FieldMetadata $metadata
-     * @param mixed $value
+     * @param mixed         $value
      * @return string
      */
     public function transformOutput(FieldMetadata $metadata, $value);

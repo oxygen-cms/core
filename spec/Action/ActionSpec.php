@@ -3,6 +3,7 @@
 namespace spec\Oxygen\Core\Action;
 
 use Oxygen\Core\Action\Group;
+use Oxygen\Core\Http\Method;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -26,9 +27,9 @@ class ActionSpec extends ObjectBehavior {
 
     function it_has_a_method() {
         // must return uppercase
-        $this->getMethod()->shouldReturn('GET');
-        $this->method = 'post';
-        $this->getMethod()->shouldReturn('POST');
+        $this->getMethod()->shouldReturn(Method::GET);
+        $this->method = Method::POST;
+        $this->getMethod()->shouldReturn(Method::POST);
     }
 
     function it_has_a_uses_property() {

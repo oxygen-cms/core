@@ -3,10 +3,10 @@
 namespace Oxygen\Core\Html\Navigation;
 
 use Oxygen\Core\Html\RenderableInterface;
+use Oxygen\Core\Html\RenderableTrait;
+use Oxygen\Core\Html\Toolbar\SpacerToolbarItem;
 use Oxygen\Core\Html\Toolbar\Toolbar;
 use Oxygen\Core\Html\Toolbar\ToolbarItem;
-use Oxygen\Core\Html\Toolbar\SpacerToolbarItem;
-use Oxygen\Core\Html\RenderableTrait;
 
 class Navigation implements RenderableInterface {
 
@@ -54,7 +54,7 @@ class Navigation implements RenderableInterface {
      */
     public function __construct() {
         $this->toolbars = [
-            'primary'   => new Toolbar(),
+            'primary' => new Toolbar(),
             'secondary' => new Toolbar()
         ];
         $itemsPool = [];
@@ -93,7 +93,7 @@ class Navigation implements RenderableInterface {
     /**
      * Orders the toolbar.
      *
-     * @param integer $toolbar Which toolbar to use
+     * @param integer        $toolbar Which toolbar to use
      * @param array|callable $keys
      * @return void
      */
@@ -130,7 +130,7 @@ class Navigation implements RenderableInterface {
     /**
      * Adds a lazy ordering function.
      *
-     * @param string $toolbar
+     * @param string   $toolbar
      * @param callable $callback
      * @return void
      */

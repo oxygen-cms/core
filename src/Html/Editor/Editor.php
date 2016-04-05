@@ -2,8 +2,8 @@
 
 namespace Oxygen\Core\Html\Editor;
 
-use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\RenderableInterface;
+use Oxygen\Core\Html\RenderableTrait;
 
 class Editor implements RenderableInterface {
 
@@ -102,11 +102,11 @@ class Editor implements RenderableInterface {
     /**
      * Constructs the Editor.
      *
-     * @param string     $name
-     * @param mixed      $value
-     * @param int        $type
-     * @param array      $attributes
-     * @param array      $options
+     * @param string $name
+     * @param mixed  $value
+     * @param int    $type
+     * @param array  $attributes
+     * @param array  $options
      */
     public function __construct($name, $value = '', $type = self::TYPE_MAIN, array $attributes = [], array $options = []) {
         $this->name = $name;

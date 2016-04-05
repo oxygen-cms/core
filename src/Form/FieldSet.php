@@ -10,18 +10,13 @@ abstract class FieldSet {
     private $cachedFields;
 
     /**
-     * Creates the fields in the set.
+     * Returns a field in the set.
      *
-     * @return array
+     * @return FieldMetadata
      */
-    public abstract function createFields();
-
-    /**
-     * Returns the name of the title field.
-     *
-     * @return string
-     */
-    public abstract function getTitleFieldName();
+    public function getField($name) {
+        return $this->getFields()[$name];
+    }
 
     /**
      * Returns the fields in the set.
@@ -32,17 +27,16 @@ abstract class FieldSet {
         if($this->cachedFields == null) {
             $this->cachedFields = $this->createFields();
         }
+
         return $this->cachedFields;
     }
 
     /**
-     * Returns a field in the set.
+     * Creates the fields in the set.
      *
-     * @return FieldMetadata
+     * @return array
      */
-    public function getField($name) {
-        return $this->getFields()[$name];
-    }
+    public abstract function createFields();
 
     /**
      * Returns the title field.
@@ -54,19 +48,11 @@ abstract class FieldSet {
     }
 
     /**
-     * Creates a new field
+     * Returns the name of the title field.
      *
-     * @param $name
-     * @param $arguments
-     * @return \Oxygen\Core\Form\FieldMetadata
+     * @return string
      */
-    public function makeField($name, $arguments) {
-        $field = new FieldMetadata($name);
-        foreach($arguments as $key => $value) {
-            $field->$key = $value;
-        }
-        return $field;
-    }
+    public abstract function getTitleFieldName();
 
     /**
      * Creates multiple new fields
@@ -81,7 +67,24 @@ abstract class FieldSet {
             unset($field['name']);
             $results[$name] = $this->makeField($name, $field);
         }
+
         return $results;
+    }
+
+    /**
+     * Creates a new field
+     *
+     * @param $name
+     * @param $arguments
+     * @return \Oxygen\Core\Form\FieldMetadata
+     */
+    public function makeField($name, $arguments) {
+        $field = new FieldMetadata($name);
+        foreach($arguments as $key => $value) {
+            $field->$key = $value;
+        }
+
+        return $field;
     }
 
     /**

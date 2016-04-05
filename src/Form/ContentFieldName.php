@@ -10,5 +10,5 @@ interface ContentFieldName {
      * @return string
      */
     public function getContentFieldName();
-    
+
 }

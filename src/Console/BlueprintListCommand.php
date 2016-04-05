@@ -2,59 +2,56 @@
 
 namespace Oxygen\Core\Console;
 
-use Oxygen\Core\Blueprint\BlueprintManager;
 use Oxygen\Core\Blueprint\Blueprint;
-
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Oxygen\Core\Blueprint\BlueprintManager;
 use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class BlueprintListCommand extends Command {
 
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'blueprint:list';
 
-	protected $name = 'blueprint:list';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Lists all the registered blueprints for the application.';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-
-	protected $description = 'Lists all the registered blueprints for the application.';
-
-	/**
-	 * The table headers for the command.
-	 *
-	 * @var array
-	 */
-
-	protected $headers = [
-		'Name', 'Display Names', 'Controller', 'Primary Toolbar Item', 'Icon'
-	];
+    /**
+     * The table headers for the command.
+     *
+     * @var array
+     */
+    protected $headers = [
+        'Name', 'Display Names', 'Controller', 'Primary Toolbar Item', 'Icon'
+    ];
 
     /**
      * Execute the console command.
      *
      * @param \Oxygen\Core\Blueprint\BlueprintManager $manager
      */
-	public function handle(BlueprintManager $manager) {
+    public function handle(BlueprintManager $manager) {
         $blueprints = $manager->all();
 
-		if(empty($blueprints)) {
-			$this->error("Your application doesn't have any blueprints.");
-            return;
-		}
+        if(empty($blueprints)) {
+            $this->error("Your application doesn't have any blueprints.");
 
-		$generalTable = new Table($this->output);
-		$generalTable->setHeaders($this->headers);
-		$generalTable->setRows($this->getTable($blueprints));
-		$generalTable->render();
-	}
+            return;
+        }
+
+        $generalTable = new Table($this->output);
+        $generalTable->setHeaders($this->headers);
+        $generalTable->setRows($this->getTable($blueprints));
+        $generalTable->render();
+    }
 
     /**
      * Compile the blueprints into a displayable format.
@@ -63,33 +60,32 @@ class BlueprintListCommand extends Command {
      * @return array
      */
 
-	protected function getTable(array $blueprints) {
-		$results = [];
+    protected function getTable(array $blueprints) {
+        $results = [];
 
-		foreach ($blueprints as $key => $blueprint)
-		{
-			$results[] = $this->getGeneralInformation($key, $blueprint);
-		}
+        foreach($blueprints as $key => $blueprint) {
+            $results[] = $this->getGeneralInformation($key, $blueprint);
+        }
 
-		return array_filter($results);
-	}
+        return array_filter($results);
+    }
 
-	/**
-	 * Get the blueprint information.
-	 *
-	 * @param string $key
-	 * @param Blueprint $blueprint
-	 * @return array
-	 */
+    /**
+     * Get the blueprint information.
+     *
+     * @param string    $key
+     * @param Blueprint $blueprint
+     * @return array
+     */
 
-	protected function getGeneralInformation($key, Blueprint $blueprint) {
-		return [
-			$blueprint->getName(),
-			Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getPluralDisplayName()]),
-			$blueprint->getController(),
-			$blueprint->hasPrimaryToolbarItem() ? $blueprint->getPrimaryToolbarItem()->getIdentifier() : 'None',
-			$blueprint->getIcon()
-		];
-	}
+    protected function getGeneralInformation($key, Blueprint $blueprint) {
+        return [
+            $blueprint->getName(),
+            Formatter::shortArray([$blueprint->getDisplayName(), $blueprint->getPluralDisplayName()]),
+            $blueprint->getController(),
+            $blueprint->hasPrimaryToolbarItem() ? $blueprint->getPrimaryToolbarItem()->getIdentifier() : 'None',
+            $blueprint->getIcon()
+        ];
+    }
 
 }

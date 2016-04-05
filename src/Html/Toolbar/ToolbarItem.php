@@ -19,12 +19,12 @@ interface ToolbarItem extends RenderableInterface {
      * @param array $arguments
      * @return boolean
      */
-    public function shouldRender(array $arguments = array());
+    public function shouldRender(array $arguments = []);
 
     /**
      * Renders the object.
      *
-     * @param array $arguments
+     * @param array             $arguments
      * @param RendererInterface $renderer
      * @return string the rendered object
      */

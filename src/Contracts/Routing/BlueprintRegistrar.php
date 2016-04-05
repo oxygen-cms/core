@@ -6,7 +6,7 @@ use Illuminate\Routing\Router;
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Blueprint\Blueprint;
 
-interface BlueprintRegistrar  {
+interface BlueprintRegistrar {
 
     /**
      * Generates a Route from a \Oxygen\Core\Blueprint\Blueprint

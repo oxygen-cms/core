@@ -63,8 +63,8 @@ class Notification {
      * @param string $status
      */
     public function __construct($content, $status = self::SUCCESS) {
-        $this->content  = $content;
-        $this->status   = $status;
+        $this->content = $content;
+        $this->status = $status;
     }
 
     /**
@@ -74,8 +74,8 @@ class Notification {
      */
     public function toArray() {
         return [
-            'content'   => $this->content,
-            'status'    => $this->status
+            'content' => $this->content,
+            'status' => $this->status
         ];
     }
 

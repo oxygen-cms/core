@@ -3,8 +3,8 @@
 namespace Oxygen\Core\Controller;
 
 use Oxygen\Core\Blueprint\Blueprint;
-use Oxygen\Data\Repository\RepositoryInterface;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
+use Oxygen\Data\Repository\RepositoryInterface;
 
 class ResourceController extends BlueprintController {
 
@@ -19,8 +19,8 @@ class ResourceController extends BlueprintController {
     /**
      * Constructs a ResourceController.
      *
-     * @param RepositoryInterface           $repository    The Repository implementation
-     * @param BlueprintManager|Blueprint    $blueprint
+     * @param RepositoryInterface        $repository The Repository implementation
+     * @param BlueprintManager|Blueprint $blueprint
      */
     public function __construct(RepositoryInterface $repository, $blueprint) {
         parent::__construct($blueprint);

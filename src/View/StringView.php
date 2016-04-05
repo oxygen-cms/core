@@ -3,11 +3,10 @@
 namespace Oxygen\Core\View;
 
 use Closure;
-use stdClass;
-
-use Illuminate\View\View;
-use Illuminate\View\Engines\EngineInterface;
 use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
+use Illuminate\View\Engines\EngineInterface;
+use Illuminate\View\View;
+use stdClass;
 
 class StringView extends View {
 
@@ -44,20 +43,20 @@ class StringView extends View {
         $lastModified,
         $data = []
     ) {
-        $this->contents     = $contents;
-        $this->path         = $path;
+        $this->contents = $contents;
+        $this->path = $path;
         $this->lastModified = $lastModified;
-        $this->engine       = $engine;
-        $this->factory      = $factory;
-        $this->info         = $this->gatherInfo();
+        $this->engine = $engine;
+        $this->factory = $factory;
+        $this->info = $this->gatherInfo();
 
-        $this->data = $data instanceof Arrayable ? $data->toArray() : (array) $data;
+        $this->data = $data instanceof Arrayable ? $data->toArray() : (array)$data;
     }
 
     /**
      * Get the string contents of the view.
      *
-     * @param  \Closure  $callback
+     * @param  \Closure $callback
      * @return string
      */
     public function render(Closure $callback = null) {
@@ -112,10 +111,11 @@ class StringView extends View {
      */
 
     protected function gatherInfo() {
-        $info               = new stdClass();
-        $info->contents     = $this->contents;
-        $info->path         = $this->path;
+        $info = new stdClass();
+        $info->contents = $this->contents;
+        $info->path = $this->path;
         $info->lastModified = $this->lastModified;
+
         return $info;
     }
 

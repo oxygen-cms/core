@@ -7,21 +7,11 @@ use Exception;
 use Oxygen\Core\Http\Method;
 use URL;
 
-use Oxygen\Core\Html\Toolbar\ButtonToolbarItem;
-use Oxygen\Core\Blueprint\Blueprint;
-
 class Action {
 
     const PERMISSIONS_FILTER_NAME = 'oxygen.permissions';
 
-    const METHOD_GET    = 'GET';
-    const METHOD_POST   = 'POST';
-    const METHOD_PUT    = 'PUT';
-    const METHOD_PATCH  = 'PATCH';
-    const METHOD_DELETE = 'DELETE';
-    const METHOD_ANY    = 'ANY';
-
-    const REGISTER_AT_END    = 'atEnd';
+    const REGISTER_AT_END = 'atEnd';
 
     /**
      * Pattern to match. (usually a URI)
@@ -110,22 +100,23 @@ class Action {
      *
      * @param string $name
      * @param string $pattern
-     * @param mixed $uses
-     * @param Group $group
+     * @param mixed  $uses
+     * @param Group  $group
      */
     public function __construct($name, $pattern, $uses, Group $group = null) {
-        $this->pattern       = $pattern;
-        $this->name          = $name;
-        $this->method        = Method::GET;
-        $this->group         = $group ?: new Group();
-        $this->middleware    = [];
-        $this->permissions   = null;
-        $this->uses          = $uses;
-        $this->register      = true;
-        $this->routeParametersCallback = function($action, array $options) {
+        $this->pattern = $pattern;
+        $this->name = $name;
+        $this->method = Method::GET;
+        $this->group = $group ?: new Group();
+        $this->middleware = [];
+        $this->permissions = null;
+        $this->uses = $uses;
+        $this->register = true;
+        $this->routeParametersCallback = function ($action, array $options) {
             return [];
         };
-        $this->customRouteCallback = function($action, $route) { };
+        $this->customRouteCallback = function ($action, $route) {
+        };
     }
 
     /**
@@ -174,6 +165,7 @@ class Action {
         if($this->usesPermissions()) {
             $middleware[] = self::PERMISSIONS_FILTER_NAME . ':' . $this->getPermissions();
         }
+
         return $middleware;
     }
 
@@ -203,6 +195,7 @@ class Action {
      */
     public function getRouteParameters(array $options = []) {
         $callback = $this->routeParametersCallback;
+
         return $callback($this, $options);
     }
 
@@ -210,7 +203,7 @@ class Action {
      * Throws an exception when trying to set a non-existent property.
      *
      * @param string $variable name of the variable
-     * @param mixed $value value of the variable
+     * @param mixed  $value    value of the variable
      * @throws Exception
      */
     public function __set($variable, $value) {

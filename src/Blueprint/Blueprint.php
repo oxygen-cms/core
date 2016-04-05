@@ -3,14 +3,12 @@
 namespace Oxygen\Core\Blueprint;
 
 use InvalidArgumentException;
-
 use Oxygen\Core\Action\Action;
-use Oxygen\Core\Action\Group;
 use Oxygen\Core\Action\Factory\AdminActionFactory;
-use Oxygen\Core\Html\Toolbar\ToolbarItem;
-use Oxygen\Core\Html\Toolbar\Factory\ButtonToolbarItemFactory;
-use Oxygen\Core\Form\FieldMetadata;
+use Oxygen\Core\Action\Group;
 use Oxygen\Core\Factory\FactoryInterface;
+use Oxygen\Core\Html\Toolbar\Factory\ButtonToolbarItemFactory;
+use Oxygen\Core\Html\Toolbar\ToolbarItem;
 use Oxygen\Core\Support\Str;
 
 class Blueprint {
@@ -134,13 +132,13 @@ class Blueprint {
         $this->pluralName = Str::plural($name);
         $this->displayName = Str::camelToWords($name);
         $this->pluralDisplayName = Str::plural(Str::camelToWords($name));
-        $this->controller    = null;
+        $this->controller = null;
         $this->primaryToolbarItem = null;
-        $this->icon          = null;
-        $this->actions       = [];
+        $this->icon = null;
+        $this->actions = [];
         $this->toolbarOrders = [
             'section' => [],
-            'item'    => []
+            'item' => []
         ];
         $this->toolbarItems = [];
         $this->defaultActionFactory = new AdminActionFactory();
@@ -187,7 +185,7 @@ class Blueprint {
     /**
      * Set the display name of the Blueprint.
      *
-     * @param string   $name
+     * @param string $name
      * @return void
      */
     public function setDisplayName($name) {
@@ -197,7 +195,7 @@ class Blueprint {
     /**
      * Set the plural display name of the Blueprint.
      *
-     * @param string   $name
+     * @param string $name
      * @return void
      */
     public function setPluralDisplayName($name) {
@@ -233,6 +231,7 @@ class Blueprint {
      */
     public function getRouteName($actionName = null) {
         $name = Str::camel($this->pluralName);
+
         return $actionName == null ? $name : $name . '.' . $actionName;
     }
 
@@ -244,6 +243,7 @@ class Blueprint {
      */
     public function getRoutePattern() {
         $slug = Str::slug(Str::camelToWords($this->pluralName));
+
         return $this->baseURI !== '/' ? $this->baseURI . '/' . $slug : $slug;
     }
 
@@ -371,7 +371,7 @@ class Blueprint {
     /**
      * Adds an action.
      *
-     * @param array $parameters
+     * @param array            $parameters
      * @param FactoryInterface $factory Optional FactoryInterface
      * @return Action
      */
@@ -437,7 +437,7 @@ class Blueprint {
      * particular toolbar group.
      *
      * @param string $group
-     * @param array $items
+     * @param array  $items
      * @return void
      */
     public function setToolbarOrder($group, $items) {
@@ -499,7 +499,7 @@ class Blueprint {
     /**
      * Makes a new toolbar item and adds it to the Blueprint.
      *
-     * @param array $parameters
+     * @param array            $parameters
      * @param FactoryInterface $factory Optional FactoryInterface
      * @return Action
      */

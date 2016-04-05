@@ -3,8 +3,8 @@
 namespace Oxygen\Core\Routing;
 
 use Illuminate\Routing\Router;
-use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Action\Action;
+use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as BlueprintRegistrarContract;
 
 class BlueprintRegistrar implements BlueprintRegistrarContract {
@@ -47,8 +47,10 @@ class BlueprintRegistrar implements BlueprintRegistrarContract {
     public function action(Action $action) {
         if($action->register === Action::REGISTER_AT_END) {
             $this->registerActionsLast[] = $action;
-        } else if($action->register) {
-            $this->registerAction($action);
+        } else {
+            if($action->register) {
+                $this->registerAction($action);
+            }
         }
     }
 
@@ -61,9 +63,9 @@ class BlueprintRegistrar implements BlueprintRegistrarContract {
     protected function registerAction(Action $action) {
         $method = strtolower($action->getMethod());
         $route = $this->router->{$method}($action->getPattern(), [
-            'as'        => $action->getName(),
-            'middleware'=> $action->getMiddleware(),
-            'uses'      => $action->getUses()
+            'as' => $action->getName(),
+            'middleware' => $action->getMiddleware(),
+            'uses' => $action->getUses()
         ]);
         $callback = $action->customRouteCallback;
         $callback($action, $route);

@@ -23,7 +23,7 @@ class SpacerToolbarItem implements ToolbarItem {
      * @param array $arguments
      * @return boolean
      */
-    public function shouldRender(array $arguments = array()) {
+    public function shouldRender(array $arguments = []) {
         return true;
     }
 

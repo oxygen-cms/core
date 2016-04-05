@@ -2,8 +2,8 @@
 
 namespace Oxygen\Core\Html\Toolbar\Factory;
 
-use Oxygen\Core\Html\Toolbar\ButtonToolbarItem;
 use Oxygen\Core\Factory\FactoryInterface;
+use Oxygen\Core\Html\Toolbar\ButtonToolbarItem;
 
 class ButtonToolbarItemFactory implements FactoryInterface {
 

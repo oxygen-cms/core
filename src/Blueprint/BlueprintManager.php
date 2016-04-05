@@ -3,12 +3,10 @@
 namespace Oxygen\Core\Blueprint;
 
 use DirectoryIterator;
-
+use Illuminate\Contracts\Config\Repository as Config;
 use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar;
 use Oxygen\Core\Html\Navigation\Navigation;
-
-use Illuminate\Contracts\Config\Repository as Config;
 
 class BlueprintManager {
 
@@ -38,8 +36,8 @@ class BlueprintManager {
     /**
      * Constructs the BlueprintManager.
      *
-     * @param \Oxygen\Core\Html\Navigation\Navigation  $navigation
-     * @param CoreConfiguration                        $config
+     * @param \Oxygen\Core\Html\Navigation\Navigation $navigation
+     * @param CoreConfiguration                       $config
      */
     public function __construct(Navigation $navigation, CoreConfiguration $config) {
         $this->navigation = $navigation;
@@ -79,7 +77,7 @@ class BlueprintManager {
     /**
      * Make a new Blueprint.
      *
-     * @param string $name display name of the blueprint
+     * @param string   $name display name of the blueprint
      * @param callable $callback
      * @return void
      */
@@ -111,7 +109,7 @@ class BlueprintManager {
     /**
      * Edits an existing Blueprint.
      *
-     * @param string $name display name of the blueprint
+     * @param string   $name display name of the blueprint
      * @param callable $callback
      * @return void
      */

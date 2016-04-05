@@ -33,7 +33,7 @@ class ConsoleServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton(PackageMigrateCommand::class, function() {
+        $this->app->singleton(PackageMigrateCommand::class, function () {
             return new PackageMigrateCommand($this->app['migrator'], $this->app[AutomaticMigrator::class]);
         });
     }

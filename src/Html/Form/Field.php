@@ -41,7 +41,7 @@ abstract class Field implements RenderableInterface {
      * Constructs the object.
      *
      * @param FieldMetadata $meta
-     * @param string    $value
+     * @param string        $value
      */
     public function __construct(FieldMetadata $meta, $value = '') {
         $this->meta = $meta;
@@ -81,7 +81,7 @@ abstract class Field implements RenderableInterface {
     /**
      * Renders the object.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws Exception if no renderer has been set
      * @return string the rendered object

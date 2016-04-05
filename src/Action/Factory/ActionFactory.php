@@ -3,9 +3,7 @@
 namespace Oxygen\Core\Action\Factory;
 
 use InvalidArgumentException;
-
 use Oxygen\Core\Action\Action;
-use Oxygen\Core\Action\Group;
 use Oxygen\Core\Factory\FactoryInterface;
 
 class ActionFactory implements FactoryInterface {
@@ -13,7 +11,7 @@ class ActionFactory implements FactoryInterface {
     /**
      * Creates a new Action using the passed parameters.
      *
-     * @param array $parameters Passed parameters
+     * @param array  $parameters Passed parameters
      * @param string $controller Default controller to use if none is provided
      * @return mixed
      */
@@ -54,8 +52,8 @@ class ActionFactory implements FactoryInterface {
     /**
      * Sets properties on the action from an input array.
      *
-     * @param Action $action Action to set the properties on
-     * @param array $properties Properties to set
+     * @param Action $action     Action to set the properties on
+     * @param array  $properties Properties to set
      */
     protected function setProperties($action, $properties) {
         unset($properties['name'], $properties['pattern'], $properties['uses'], $properties['group']);

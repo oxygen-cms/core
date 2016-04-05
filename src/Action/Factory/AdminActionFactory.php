@@ -3,15 +3,13 @@
 namespace Oxygen\Core\Action\Factory;
 
 use Oxygen\Core\Action\AdminAction;
-use Oxygen\Core\Action\Group;
-use Oxygen\Core\Factory\FactoryInterface;
 
 class AdminActionFactory extends ActionFactory {
 
     /**
      * Creates a new Action using the passed parameters.
      *
-     * @param array $parameters Passed parameters
+     * @param array  $parameters Passed parameters
      * @param string $controller Default controller to use if none is provided
      * @return mixed
      */

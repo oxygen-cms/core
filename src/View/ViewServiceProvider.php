@@ -35,8 +35,8 @@ class ViewServiceProvider extends ServiceProvider {
             // Next we will register the various engines with the resolver so that the
             // environment can resolve the engines it needs for various views based
             // on the extension of view files. We call a method for each engines.
-            foreach (['php', 'blade', 'bladeString'] as $engine) {
-                $this->{'register'.ucfirst($engine).'Engine'}($resolver);
+            foreach(['php', 'blade', 'bladeString'] as $engine) {
+                $this->{'register' . ucfirst($engine) . 'Engine'}($resolver);
             }
 
             return $resolver;
@@ -46,17 +46,19 @@ class ViewServiceProvider extends ServiceProvider {
     /**
      * Register the PHP engine implementation.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \Illuminate\View\Engines\EngineResolver $resolver
      * @return void
      */
     public function registerPhpEngine($resolver) {
-        $resolver->register('php', function () { return new PhpEngine; });
+        $resolver->register('php', function () {
+            return new PhpEngine;
+        });
     }
 
     /**
      * Register the Blade engine implementation.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \Illuminate\View\Engines\EngineResolver $resolver
      * @return void
      */
     public function registerBladeEngine($resolver) {
@@ -79,7 +81,7 @@ class ViewServiceProvider extends ServiceProvider {
     /**
      * Register the StringBladeCompiler implementation.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @param  \Illuminate\View\Engines\EngineResolver $resolver
      * @return void
      */
     public function registerBladeStringEngine($resolver) {
@@ -89,13 +91,13 @@ class ViewServiceProvider extends ServiceProvider {
         // this case will be the Blade compiler, so we'll first create the compiler
         // instance to pass into the engine so it can compile the views properly.
 
-        $app->singleton('blade.string.compiler', function($app) {
+        $app->singleton('blade.string.compiler', function ($app) {
             $cache = $app['config']['view.compiled'];
 
             return new BladeStringCompiler($app['files'], $app['blade.compiler'], $cache);
         });
 
-        $resolver->register('blade.string', function() use ($app) {
+        $resolver->register('blade.string', function () use ($app) {
             return new CompilerEngine($app['blade.string.compiler'], $app['files']);
         });
     }

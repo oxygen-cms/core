@@ -11,7 +11,7 @@ class BaseType implements FieldType {
      * Takes the given input value and transforms it into a compatible value for storage.
      *
      * @param FieldMetadata $metadata
-     * @param string $value
+     * @param string        $value
      * @return mixed
      */
     public function transformInput(FieldMetadata $metadata, $value) {
@@ -22,7 +22,7 @@ class BaseType implements FieldType {
      * Transforms the given value into a human readable representation suitable for output.
      *
      * @param FieldMetadata $metadata
-     * @param mixed $value
+     * @param mixed         $value
      * @return string
      */
     public function transformOutput(FieldMetadata $metadata, $value) {

@@ -2,9 +2,6 @@
 
 namespace Oxygen\Core\Html\Toolbar;
 
-use InvalidArgumentException;
-
-use Oxygen\Core\Action\Action;
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Html\RenderableTrait;
 
@@ -48,19 +45,10 @@ class Toolbar {
      * Constructs the Toolbar.
      */
     public function __construct() {
-        $this->itemsPool    = [];
+        $this->itemsPool = [];
         $this->itemsOrdered = null;
-        $this->spacer       = new SpacerToolbarItem();
-        $this->prefix       = null;
-    }
-
-    /**
-     * Sets the prefix.
-     *
-     * @param string $prefix
-     */
-    public function setPrefix($prefix) {
-        $this->prefix = $prefix;
+        $this->spacer = new SpacerToolbarItem();
+        $this->prefix = null;
     }
 
     /**
@@ -70,6 +58,15 @@ class Toolbar {
      */
     public function getPrefix() {
         return $this->prefix;
+    }
+
+    /**
+     * Sets the prefix.
+     *
+     * @param string $prefix
+     */
+    public function setPrefix($prefix) {
+        $this->prefix = $prefix;
     }
 
     /**
@@ -83,6 +80,30 @@ class Toolbar {
     }
 
     /**
+     * Adds toolbar items from a Blueprint.
+     *
+     * @param Blueprint $blueprint
+     * @param string    $set Set of items to use
+     * @return void
+     */
+    public function fillFromBlueprint(Blueprint $blueprint, $set) {
+        $this->addItemsFromBlueprint($blueprint);
+        $this->setOrder($blueprint->getToolbarOrder($set));
+    }
+
+    /**
+     * Adds toolbar items from a Blueprint.
+     *
+     * @param Blueprint $blueprint
+     * @return void
+     */
+    public function addItemsFromBlueprint(Blueprint $blueprint) {
+        foreach($blueprint->getToolbarItems() as $item) {
+            $this->addItem($item);
+        }
+    }
+
+    /**
      * Adds a ToolbarItem.
      *
      * @param ToolbarItem $item
@@ -90,30 +111,6 @@ class Toolbar {
      */
     public function addItem(ToolbarItem $item) {
         $this->itemsPool[$item->getIdentifier()] = clone $item;
-    }
-
-    /**
-     * Get a ToolbarItem.
-     *
-     * @param string $identifier
-     * @return ToolbarItem
-     */
-    public function getItem($identifier) {
-        if(!isset($this->itemsPool[$identifier]) && $this->prefix !== null) {
-            return $this->itemsPool[$this->prefix . '.' . $identifier];
-        }
-
-        return $this->itemsPool[$identifier];
-    }
-
-    /**
-     * Determines a ToolbarItem exists.
-     *
-     * @param string $identifier
-     * @return boolean
-     */
-    public function hasItem($identifier) {
-        return isset($this->itemsPool[$this->prefix . '.' . $identifier]) || isset($this->itemsPool[$identifier]);
     }
 
     /**
@@ -148,27 +145,27 @@ class Toolbar {
     }
 
     /**
-     * Adds toolbar items from a Blueprint.
+     * Determines a ToolbarItem exists.
      *
-     * @param Blueprint $blueprint
-     * @return void
+     * @param string $identifier
+     * @return boolean
      */
-    public function addItemsFromBlueprint(Blueprint $blueprint) {
-        foreach($blueprint->getToolbarItems() as $item) {
-            $this->addItem($item);
-        }
+    public function hasItem($identifier) {
+        return isset($this->itemsPool[$this->prefix . '.' . $identifier]) || isset($this->itemsPool[$identifier]);
     }
 
     /**
-     * Adds toolbar items from a Blueprint.
+     * Get a ToolbarItem.
      *
-     * @param Blueprint $blueprint
-     * @param string $set Set of items to use
-     * @return void
+     * @param string $identifier
+     * @return ToolbarItem
      */
-    public function fillFromBlueprint(Blueprint $blueprint, $set) {
-        $this->addItemsFromBlueprint($blueprint);
-        $this->setOrder($blueprint->getToolbarOrder($set));
+    public function getItem($identifier) {
+        if(!isset($this->itemsPool[$identifier]) && $this->prefix !== null) {
+            return $this->itemsPool[$this->prefix . '.' . $identifier];
+        }
+
+        return $this->itemsPool[$identifier];
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace Oxygen\Core\Html\Toolbar;
 
 use Exception;
-
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\RendererInterface;
@@ -43,15 +42,15 @@ class ButtonToolbarItem extends ActionToolbarItem {
     /**
      * Constructs the item.
      *
-     * @param string $label the label
+     * @param string $label  the label
      * @param Action $action the action that will be executed
      */
     public function __construct($label, Action $action) {
         parent::__construct($action);
-        $this->label          = $label;
-        $this->color          = 'white';
-        $this->icon           = null;
-        $this->dialog         = null;
+        $this->label = $label;
+        $this->color = 'white';
+        $this->icon = null;
+        $this->dialog = null;
     }
 
     /**
@@ -67,7 +66,7 @@ class ButtonToolbarItem extends ActionToolbarItem {
      * Renders the object.
      * Before rendering all 'dynamic callbacks' will be executed.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws \Exception
      * @return string the rendered object

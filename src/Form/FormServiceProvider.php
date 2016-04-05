@@ -3,7 +3,6 @@
 namespace Oxygen\Core\Form;
 
 use Illuminate\Support\ServiceProvider;
-
 use Oxygen\Core\Form\Type\BaseType;
 use Oxygen\Core\Form\Type\BooleanType;
 use Oxygen\Core\Form\Type\DatetimeType;

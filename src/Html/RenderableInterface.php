@@ -7,7 +7,7 @@ interface RenderableInterface {
     /**
      * Renders the object.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws Exception if no renderer has been set
      * @return string the rendered object

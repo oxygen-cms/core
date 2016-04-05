@@ -5,7 +5,6 @@ namespace Oxygen\Core\Html\Form;
 use Oxygen\Core\Action\Action;
 use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\RenderableTrait;
-use Oxygen\Core\Http\Method;
 
 class Form implements RenderableInterface {
 
@@ -77,7 +76,7 @@ class Form implements RenderableInterface {
     /**
      * Constructs the Form instance
      *
-     * @param \Oxygen\Core\Action\Action $action         the Oxygen action
+     * @param \Oxygen\Core\Action\Action $action the Oxygen action
      */
     public function __construct(Action $action) {
         $this->action = $action;
@@ -110,6 +109,7 @@ class Form implements RenderableInterface {
      */
     public function addContent($row) {
         $this->content[] = $row;
+
         return $this;
     }
 
@@ -144,6 +144,7 @@ class Form implements RenderableInterface {
      */
     public function setUseMultiPartFormData($useMultiPartFormData) {
         $this->useMultiPartFormData = $useMultiPartFormData;
+
         return $this;
     }
 
@@ -160,6 +161,7 @@ class Form implements RenderableInterface {
      */
     public function setAsynchronous($asynchronous) {
         $this->asynchronous = $asynchronous;
+
         return $this;
     }
 
@@ -176,6 +178,7 @@ class Form implements RenderableInterface {
      */
     public function setWarnBeforeExit($warnBeforeExit) {
         $this->warnBeforeExit = $warnBeforeExit;
+
         return $this;
     }
 
@@ -192,6 +195,7 @@ class Form implements RenderableInterface {
      */
     public function setSubmitOnShortcutKey($submitOnShortcutKey) {
         $this->submitOnShortcutKey = $submitOnShortcutKey;
+
         return $this;
     }
 

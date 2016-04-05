@@ -20,8 +20,8 @@ class DatabaseServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton(AutomaticMigrator::class, function() {
-           return new AutomaticMigrator(base_path() . '/vendor');
+        $this->app->singleton(AutomaticMigrator::class, function () {
+            return new AutomaticMigrator(base_path() . '/vendor');
         });
     }
 

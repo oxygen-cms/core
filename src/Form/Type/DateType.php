@@ -11,7 +11,7 @@ class DateType extends BaseType {
      * Transforms the given value ready for a form.
      *
      * @param FieldMetadata $metadata
-     * @param mixed $value
+     * @param mixed         $value
      * @return string
      */
     public function transformOutput(FieldMetadata $metadata, $value) {

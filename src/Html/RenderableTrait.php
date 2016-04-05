@@ -35,7 +35,7 @@ trait RenderableTrait {
     /**
      * Renders the object.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws Exception if no renderer has been set
      * @return string the rendered object
@@ -51,8 +51,10 @@ trait RenderableTrait {
                 }
                 $renderer = static::$defaultRenderer;
             }
-        } else if(is_callable($renderer)) {
-            $renderer = $renderer();
+        } else {
+            if(is_callable($renderer)) {
+                $renderer = $renderer();
+            }
         }
 
         return $renderer->render($this, $arguments);

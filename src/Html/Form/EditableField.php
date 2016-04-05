@@ -4,7 +4,6 @@ namespace Oxygen\Core\Html\Form;
 
 use Exception;
 use Illuminate\Http\Request;
-
 use Oxygen\Core\Form\FieldMetadata;
 use Oxygen\Core\Html\RendererInterface;
 
@@ -35,7 +34,7 @@ class EditableField extends Field {
      * Constructs the object.
      *
      * @param FieldMetadata $meta
-     * @param string    $value
+     * @param string        $value
      */
     public function __construct(FieldMetadata $meta, Request $input, $value = '') {
         parent::__construct($meta, $value);
@@ -50,10 +49,12 @@ class EditableField extends Field {
     public function getValue() {
         if($this->input->old($this->getMeta()->name)) {
             return $this->getMeta()->getType()->transformInput($this->getMeta(), $this->input->old($this->getMeta()->name));
-        } else if($this->value !== null) {
-            return parent::getValue();
         } else {
-            return null;
+            if($this->value !== null) {
+                return parent::getValue();
+            } else {
+                return null;
+            }
         }
     }
 
@@ -74,7 +75,7 @@ class EditableField extends Field {
     /**
      * Sets the default Renderer for the object.
      *
-     * @param string $type
+     * @param string                     $type
      * @param RendererInterface|callable $renderer The default renderer
      */
     public static function setRenderer($type, $renderer) {
@@ -88,7 +89,7 @@ class EditableField extends Field {
     /**
      * Renders the object.
      *
-     * @param array             $arguments
+     * @param array                      $arguments
      * @param RendererInterface|callable $renderer
      * @throws Exception if no renderer has been set or if the field is not editable
      * @return string the rendered object
@@ -112,8 +113,10 @@ class EditableField extends Field {
                 }
                 $renderer = static::$renderers[$type];
             }
-        } else if(is_callable($renderer)) {
-            $renderer = $renderer();
+        } else {
+            if(is_callable($renderer)) {
+                $renderer = $renderer();
+            }
         }
 
         return $renderer->render($this, $arguments);
@@ -129,6 +132,7 @@ class EditableField extends Field {
      */
     public static function fromEntity(FieldMetadata $meta, Request $input, $entity) {
         $instance = new static($meta, $input, $entity->getAttribute($meta->name));
+
         return $instance;
     }
 

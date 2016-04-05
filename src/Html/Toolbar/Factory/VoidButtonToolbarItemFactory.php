@@ -2,8 +2,8 @@
 
 namespace Oxygen\Core\Html\Toolbar\Factory;
 
-use Oxygen\Core\Html\Toolbar\VoidButtonToolbarItem;
 use Oxygen\Core\Factory\FactoryInterface;
+use Oxygen\Core\Html\Toolbar\VoidButtonToolbarItem;
 
 class VoidButtonToolbarItemFactory implements FactoryInterface {
 

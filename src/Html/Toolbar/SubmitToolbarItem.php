@@ -14,9 +14,16 @@ class SubmitToolbarItem implements ToolbarItem {
 
     public $stretch;
 
+    /**
+     * Dialog object to be displayed.
+     */
+    public $dialog;
+
     public function __construct($label, $color = 'green') {
         $this->label = $label;
         $this->color = $color;
+        $this->stretch = false;
+        $this->dialog = null;
     }
 
     /**
@@ -26,6 +33,15 @@ class SubmitToolbarItem implements ToolbarItem {
      */
     public function getIdentifier() {
         return 'submit';
+    }
+
+    /**
+     * Returns whether the ToolbarItem has a dialog.
+     *
+     * @return boolean
+     */
+    public function hasDialog() {
+        return $this->dialog !== null;
     }
 
     /**

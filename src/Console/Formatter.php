@@ -53,7 +53,22 @@ class Formatter {
             }
         }
         $string .= ' ]';
+
         return $string;
+    }
+
+    /**
+     * Formats an object for console output.
+     *
+     * @param object $object
+     * @return string
+     */
+    public static function object($object) {
+        if($object !== null) {
+            return static::keyedArray((array)$object);
+        } else {
+            return 'None';
+        }
     }
 
     /**
@@ -75,27 +90,18 @@ class Formatter {
                 }
             }
             $string .= ' ]';
-            return $string;
-        } else if(is_object($array)) {
-            return get_class($array);
-        } else if(is_null($array)) {
-            return 'Null';
-        } else {
-            return 'Unknown';
-        }
-    }
 
-    /**
-     * Formats an object for console output.
-     *
-     * @param object $object
-     * @return string
-     */
-    public static function object($object) {
-        if($object !== null) {
-            return static::keyedArray((array) $object);
+            return $string;
         } else {
-            return 'None';
+            if(is_object($array)) {
+                return get_class($array);
+            } else {
+                if(is_null($array)) {
+                    return 'Null';
+                } else {
+                    return 'Unknown';
+                }
+            }
         }
     }
 
