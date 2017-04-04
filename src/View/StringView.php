@@ -77,7 +77,6 @@ class StringView extends View {
      *
      * @return string
      */
-
     protected function renderContents() {
         // We will keep track of the amount of views being rendered so we can flush
         // the section after the complete rendering operation is done. This will
@@ -99,7 +98,6 @@ class StringView extends View {
      *
      * @return string
      */
-
     protected function getContents() {
         return $this->engine->get($this->gatherInfo(), $this->gatherData());
     }
@@ -109,7 +107,6 @@ class StringView extends View {
      *
      * @return \stdClass
      */
-
     protected function gatherInfo() {
         $info = new stdClass();
         $info->contents = $this->contents;
