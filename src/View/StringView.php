@@ -56,10 +56,10 @@ class StringView extends View {
     /**
      * Get the string contents of the view.
      *
-     * @param  \Closure $callback
+     * @param callable $callback
      * @return string
      */
-    public function render(Closure $callback = null) {
+    public function render(callable $callback = null) {
         $contents = $this->renderContents();
 
         $response = isset($callback) ? $callback($this, $contents) : null;
