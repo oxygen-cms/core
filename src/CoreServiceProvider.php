@@ -70,8 +70,9 @@ class CoreServiceProvider extends ServiceProvider {
         return [
             BlueprintManager::class,
             Navigation::class,
-            ResponseFactoryContract::class,
-            ExtendedResponseFactoryContract::class
+// TODO: work out what this was for
+//            ResponseFactoryContract::class,
+//            ExtendedResponseFactoryContract::class
         ];
     }
 

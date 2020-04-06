@@ -3,6 +3,7 @@
 namespace Oxygen\Core\Html\Toolbar;
 
 use Oxygen\Core\Html\RenderableTrait;
+use Illuminate\Support\Str;
 
 class DisabledToolbarItem implements ToolbarItem {
 
@@ -29,7 +30,7 @@ class DisabledToolbarItem implements ToolbarItem {
      */
     public function __construct($label) {
         $this->label = $label;
-        $this->identifier = camel_case($this->label);
+        $this->identifier = Str::camel($this->label);
     }
 
     /**

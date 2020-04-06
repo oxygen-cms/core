@@ -2,8 +2,9 @@
 
 namespace Oxygen\Core\Translation;
 
-use Illuminate\Translation\LoaderInterface;
+use Illuminate\Contracts\Translation\Loader;
 use Illuminate\Translation\Translator as BaseTranslator;
+use Illuminate\Support\Str;
 
 class Translator extends BaseTranslator {
 
@@ -18,10 +19,11 @@ class Translator extends BaseTranslator {
     /**
      * Create a new translator instance.
      *
-     * @param  LoaderInterface $loader
-     * @param  string          $locale
+     * @param  \Illuminate\Contracts\Translation\Loader  $loader
+     * @param  string  $locale
+     * @return void
      */
-    public function __construct(LoaderInterface $loader, $locale) {
+    public function __construct(Loader $loader, $locale) {
         parent::__construct($loader, $locale);
         $this->bulkReplacements = [];
     }
@@ -40,14 +42,15 @@ class Translator extends BaseTranslator {
     /**
      * Get the translation for the given key.
      *
-     * @param  string $key
+     * @param  string  $key
      * @param  array  $replace
-     * @param  string $locale
-     * @return string
+     * @param  string|null  $locale
+     * @param  bool  $fallback
+     * @return string|array
      */
     public function get($key, array $replace = [], $locale = null, $fallback = true) {
         foreach($this->bulkReplacements as $match => $extraReplace) {
-            if(starts_with($key, $match)) {
+            if(Str::startsWith($key, $match)) {
                 $replace = array_merge($replace, $extraReplace);
             }
         }

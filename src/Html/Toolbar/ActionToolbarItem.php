@@ -2,12 +2,12 @@
 
 namespace Oxygen\Core\Html\Toolbar;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 use Exception;
 use Oxygen\Core\Action\Action;
-use Request;
-use URL;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
 
 abstract class ActionToolbarItem implements ToolbarItem {
 

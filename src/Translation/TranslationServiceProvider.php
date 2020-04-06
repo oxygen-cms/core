@@ -4,7 +4,7 @@ namespace Oxygen\Core\Translation;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Translation\FileLoader;
-use Illuminate\Translation\LoaderInterface;
+use Illuminate\Contracts\Translation\Loader;
 use Illuminate\Translation\Translator as LaravelTranslator;
 
 class TranslationServiceProvider extends ServiceProvider {
@@ -64,7 +64,7 @@ class TranslationServiceProvider extends ServiceProvider {
             'translation.loader',
             Translator::class,
             LaravelTranslator::class,
-            LoaderInterface::class];
+            Loader::class];
     }
 
 }

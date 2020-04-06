@@ -2,9 +2,9 @@
 
 namespace Oxygen\Core\Html\Toolbar;
 
-use Exception;
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\RendererInterface;
+use Illuminate\Support\Str;
 
 class DropdownToolbarItem implements ToolbarItem {
 
@@ -80,7 +80,7 @@ class DropdownToolbarItem implements ToolbarItem {
         $this->label = $label;
         $this->color = 'white';
         $this->icon = 'angle-down';
-        $this->identifier = camel_case($this->label);
+        $this->identifier = Str::camel($this->label);
     }
 
     /**

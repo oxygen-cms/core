@@ -74,7 +74,7 @@ class ViewServiceProvider extends ServiceProvider {
         });
 
         $resolver->register('blade', function () use ($app) {
-            return new CompilerEngine($app['blade.compiler'], $app['files']);
+            return new CompilerEngine($app['blade.compiler']);
         });
     }
 
@@ -98,7 +98,7 @@ class ViewServiceProvider extends ServiceProvider {
         });
 
         $resolver->register('blade.string', function () use ($app) {
-            return new CompilerEngine($app['blade.string.compiler'], $app['files']);
+            return new CompilerEngine($app['blade.string.compiler']);
         });
     }
 

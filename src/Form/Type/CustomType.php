@@ -5,6 +5,14 @@ namespace Oxygen\Core\Form\Type;
 use Oxygen\Core\Form\FieldMetadata;
 
 class CustomType extends BaseType {
+    /**
+     * @var callable
+     */
+    private $input;
+    /**
+     * @var callable
+     */
+    private $output;
 
     /**
      * Constructs the CustomType

@@ -427,6 +427,7 @@ class Blueprint {
      * particular toolbar group.
      *
      * @param array
+     * @return mixed
      */
     public function getToolbarOrder($group) {
         return $this->toolbarOrders[$group];

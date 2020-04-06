@@ -30,7 +30,7 @@ class StaticField extends Field {
      * @param FieldMetadata $meta
      * @param string        $value
      */
-    public function __construct(FieldMetadata $meta, $value = '') {
+    public final function __construct(FieldMetadata $meta, $value = '') {
         parent::__construct($meta, $value);
     }
 

@@ -36,7 +36,7 @@ class EditableField extends Field {
      * @param FieldMetadata $meta
      * @param string        $value
      */
-    public function __construct(FieldMetadata $meta, Request $input, $value = '') {
+    public final function __construct(FieldMetadata $meta, Request $input, $value = '') {
         parent::__construct($meta, $value);
         $this->input = $input;
     }
@@ -128,7 +128,7 @@ class EditableField extends Field {
      * @param FieldMetadata            $meta
      * @param \Illuminate\Http\Request $input
      * @param object                   $entity
-     * @return \Oxygen\Core\Form\FieldMetadata
+     * @return \Oxygen\Core\Html\EditableField
      */
     public static function fromEntity(FieldMetadata $meta, Request $input, $entity) {
         $instance = new static($meta, $input, $entity->getAttribute($meta->name));

@@ -3,8 +3,8 @@
 namespace Oxygen\Core\View;
 
 use Closure;
-use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
-use Illuminate\View\Engines\EngineInterface;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\View\Engine;
 use Illuminate\View\View;
 use stdClass;
 
@@ -26,10 +26,15 @@ class StringView extends View {
     protected $lastModified;
 
     /**
+     * @var stdClass
+     */
+    private $info;
+
+    /**
      * Create a new view instance.
      *
      * @param  Factory         $factory
-     * @param  EngineInterface $engine
+     * @param  Engine $engine
      * @param  string          $contents
      * @param  string          $path
      * @param  string          $lastModified
@@ -37,20 +42,16 @@ class StringView extends View {
      */
     public function __construct(
         Factory $factory,
-        EngineInterface $engine,
+        Engine $engine,
         $contents,
         $path,
         $lastModified,
         $data = []
     ) {
+        parent::__construct($factory, $engine, 'unnamedStringView', $path, $data);
         $this->contents = $contents;
-        $this->path = $path;
         $this->lastModified = $lastModified;
-        $this->engine = $engine;
-        $this->factory = $factory;
         $this->info = $this->gatherInfo();
-
-        $this->data = $data instanceof Arrayable ? $data->toArray() : (array)$data;
     }
 
     /**
@@ -67,7 +68,7 @@ class StringView extends View {
         // Once we have the contents of the view, we will flush the sections if we are
         // done rendering all views so that there is nothing left hanging over when
         // another view is rendered in the future by the application developers.
-        $this->factory->flushSectionsIfDoneRendering();
+        $this->factory->flushStateIfDoneRendering();
 
         return $response ?: $contents;
     }

@@ -21,11 +21,17 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
     protected $reflect;
 
     /**
+     * @var BladeCompiler
+     */
+    private $blade;
+
+    /**
      * Create a new compiler instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem        $files
-     * @param  \Illuminate\View\Compilers\BladeCompiler $compiler
-     * @param  string                                   $cachePath
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Illuminate\View\Compilers\BladeCompiler $compiler
+     * @param string $cachePath
+     * @throws \ReflectionException
      */
     public function __construct(Filesystem $files, BladeCompiler $compiler, $cachePath) {
         parent::__construct($files, $cachePath);
@@ -36,8 +42,9 @@ class BladeStringCompiler extends Compiler implements CompilerInterface {
     /**
      * Compile the view at the given path.
      *
-     * @param  \stdClass $info
+     * @param \stdClass $info
      * @return void
+     * @throws \ReflectionException
      */
     public function compile($info) {
         // resets the footer (eg: layouts)

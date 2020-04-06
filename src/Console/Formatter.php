@@ -7,7 +7,7 @@ class Formatter {
     /**
      * Formats a boolean value for console output.
      *
-     * @param array $array
+     * @param boolean $boolean
      * @return string
      */
     public static function boolean($boolean) {
@@ -27,7 +27,7 @@ class Formatter {
     /**
      * Formats an array for console output.
      *
-     * @param array $array
+     * @param mixed $array
      * @return string
      */
     public static function shortArray($array) {

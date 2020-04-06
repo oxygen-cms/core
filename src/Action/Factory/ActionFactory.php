@@ -34,7 +34,7 @@ class ActionFactory implements FactoryInterface {
      * Sets properties on the action from an input array.
      *
      * @param array $parameters
-     * @param       $controller
+     * @param string $controller
      * @return array
      */
     protected function parseParameters(array $parameters, $controller) {

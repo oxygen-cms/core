@@ -106,7 +106,7 @@ class Header implements RenderableInterface {
      * @param array   $arguments
      * @param integer $type
      */
-    public function __construct($title, array $arguments = [], $type = self::TYPE_MAIN) {
+    public final function __construct($title, array $arguments = [], $type = self::TYPE_MAIN) {
         $this->title = $title;
         $this->subtitle = null;
         $this->toolbar = new Toolbar();

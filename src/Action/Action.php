@@ -52,7 +52,7 @@ class Action {
     /**
      * Permissions required to excecute the action.
      *
-     * @var string
+     * @var string|null
      */
     public $permissions;
 

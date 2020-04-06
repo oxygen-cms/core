@@ -5,7 +5,7 @@ namespace Oxygen\Core\Controller;
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 use ReflectionClass;
-use View;
+use Oxygen\Core\Support\Str;
 
 class BlueprintController extends Controller {
 
@@ -21,11 +21,13 @@ class BlueprintController extends Controller {
      * Constructs a BlueprintController.
      *
      * @param BlueprintManager | string $blueprint The blueprint or blueprint manager
+     * @throws \ReflectionException
+     * @throws \Oxygen\Core\Blueprint\BlueprintNotFoundException
      */
     public function __construct($blueprint) {
         if($blueprint instanceof BlueprintManager) {
             $reflect = new ReflectionClass($this);
-            $blueprintName = str_singular(str_replace('Controller', '', $reflect->getShortName()));
+            $blueprintName = Str::singular(str_replace('Controller', '', $reflect->getShortName()));
             $this->blueprint = $blueprint->get($blueprintName);
         } else {
             if($blueprint instanceof Blueprint) {

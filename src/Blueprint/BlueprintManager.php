@@ -3,7 +3,7 @@
 namespace Oxygen\Core\Blueprint;
 
 use DirectoryIterator;
-use Illuminate\Contracts\Config\Repository as Config;
+use Oxygen\Core\Support\Str;
 use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar;
 use Oxygen\Core\Html\Navigation\Navigation;
@@ -53,7 +53,7 @@ class BlueprintManager {
     public function loadDirectory($directory) {
         $iterator = new DirectoryIterator($directory);
         foreach($iterator as $file) {
-            if($file->isFile() && ends_with($file->getFilename(), '.php')) {
+            if($file->isFile() && Str::endsWith($file->getFilename(), '.php')) {
                 require $directory . '/' . $file->getFilename();
             }
         }

@@ -13,9 +13,14 @@ class AutomaticMigrator {
     protected $paths;
 
     /**
+     * @var string
+     */
+    private $vendorDir;
+
+    /**
      * Constructs the automatic migrator.
      *
-     * @param $vendorDir
+     * @param string $vendorDir
      */
     public function __construct($vendorDir) {
         $this->vendorDir = $vendorDir;
