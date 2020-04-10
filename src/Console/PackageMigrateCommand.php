@@ -74,7 +74,7 @@ class PackageMigrateCommand extends BaseCommand {
             $this->info('Running migrations for ' . $package);
 
             $this->migrator->setOutput($this->output);
-            $this->migrator->run($path, $pretend);
+            $this->migrator->run($path, ['pretend' => $pretend]);
         }
     }
 
