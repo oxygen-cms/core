@@ -8,6 +8,7 @@ use Oxygen\Core\Html\RenderableInterface;
 use Oxygen\Core\Html\RenderableTrait;
 use Oxygen\Core\Html\Toolbar\Toolbar;
 use Oxygen\Core\Model\Model;
+use Oxygen\Data\Behaviour\StatusIconInterface;
 
 class Header implements RenderableInterface {
 
@@ -320,6 +321,12 @@ class Header implements RenderableInterface {
 
         // fills the toolbar with buttons from the blueprint
         $object->getToolbar()->fillFromBlueprint($blueprint, $fillFromToolbar);
+
+        if(isset($arguments['model']) &&
+            ($arguments['model'] instanceof StatusIconInterface) &&
+            (isset($arguments['statusIcon']) ? $arguments['statusIcon'] : true)) {
+            $object->setIcon($arguments['model']->getStatusIcon());
+        }
 
         return $object;
     }

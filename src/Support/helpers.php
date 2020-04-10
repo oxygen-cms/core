@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Response;
 use Oxygen\Core\Contracts\Routing\ResponseFactory;
 use Oxygen\Core\Http\Notification;
 
@@ -64,7 +65,7 @@ if(!function_exists('notify')) {
      *
      * @param Notification $notification Notification to display.
      * @param array        $parameters   Extra parameters
-     * @return mixed
+     * @return Response
      */
     function notify(Notification $notification, array $parameters = []) {
         return app(ResponseFactory::class)->notification($notification, $parameters);

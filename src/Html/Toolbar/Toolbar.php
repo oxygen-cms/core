@@ -135,7 +135,9 @@ class Toolbar {
                 }
 
                 foreach($value as $dropdownItem) {
-                    $dropdown->addItem($this->getItem($dropdownItem));
+                    if($this->hasItem($dropdownItem)) {
+                        $dropdown->addItem($this->getItem($dropdownItem));
+                    }
                 }
                 $this->itemsOrdered[] = $dropdown;
             } else {

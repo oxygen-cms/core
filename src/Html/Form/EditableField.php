@@ -24,31 +24,24 @@ class EditableField extends Field {
     protected static $fallbackRenderer;
 
     /**
-     * The input object
-     *
-     * @var Request
-     */
-    protected $input;
-
-    /**
      * Constructs the object.
      *
      * @param FieldMetadata $meta
      * @param string        $value
      */
-    public final function __construct(FieldMetadata $meta, Request $input, $value = '') {
+    public final function __construct(FieldMetadata $meta, $value = '') {
         parent::__construct($meta, $value);
-        $this->input = $input;
     }
 
     /**
      * Get the value of the field.
      *
      * @return mixed
+     * @throws Exception
      */
     public function getValue() {
-        if($this->input->old($this->getMeta()->name)) {
-            return $this->getMeta()->getType()->transformInput($this->getMeta(), $this->input->old($this->getMeta()->name));
+        if(request()->old($this->getMeta()->name)) {
+            return $this->getMeta()->getType()->transformInput($this->getMeta(), request()->old($this->getMeta()->name));
         } else {
             if($this->value !== null) {
                 return parent::getValue();
@@ -126,12 +119,11 @@ class EditableField extends Field {
      * Create a field from meta and a model
      *
      * @param FieldMetadata            $meta
-     * @param \Illuminate\Http\Request $input
      * @param object                   $entity
-     * @return \Oxygen\Core\Html\EditableField
+     * @return EditableField
      */
-    public static function fromEntity(FieldMetadata $meta, Request $input, $entity) {
-        $instance = new static($meta, $input, $entity->getAttribute($meta->name));
+    public static function fromEntity(FieldMetadata $meta, $entity) {
+        $instance = new static($meta, $entity->getAttribute($meta->name));
 
         return $instance;
     }

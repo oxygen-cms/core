@@ -35,7 +35,7 @@ class AdminAction extends Action {
      * @return array
      */
     public function getMiddleware() {
-        $middleware = [self::AUTH_MIDDLEWARE_NAME];
+        $middleware = ['web', self::AUTH_MIDDLEWARE_NAME];
 
         return array_merge($middleware, parent::getMiddleware());
     }

@@ -42,13 +42,6 @@ class Editor implements RenderableInterface {
     public static $defaultStylesheets = [];
 
     /**
-     * Include editor scripts if it will be displayed on the page.
-     *
-     * @var boolean
-     */
-    public static $includeScripts = false;
-
-    /**
      * Name of the code editor.
      *
      * @var string
@@ -88,16 +81,7 @@ class Editor implements RenderableInterface {
      *
      * @var array
      */
-
-    protected $stylesheets;
-
-    /**
-     * Style sets for the editor
-     *
-     * @var array
-     */
-
-    protected $styleSets;
+    public $stylesheets;
 
     /**
      * Constructs the Editor.
@@ -114,7 +98,6 @@ class Editor implements RenderableInterface {
         $this->type = $type;
         $this->attributes = $attributes;
         $this->stylesheets = static::$defaultStylesheets;
-        $this->styleSets = [];
 
         if(!isset($options['language'])) {
             $options['language'] = self::$defaultOptions['language'];
@@ -150,30 +133,6 @@ class Editor implements RenderableInterface {
      */
     public function getStylesheets() {
         return $this->stylesheets;
-    }
-
-    /**
-     * Returns the JavaScript code used to
-     * initialise a Editor for the given information.
-     *
-     * @return string
-     */
-    public function getCreateScript() {
-        static::$includeScripts = true;
-
-        $text = '<script>';
-        $text .= 'editors = ( typeof editors != "undefined" && editors instanceof Array ) ? editors : [];';
-        $text .= 'editors.push({';
-        $text .= 'name: "' . $this->name . '",';
-        $text .= 'stylesheets: ' . json_encode($this->stylesheets) . ',';
-
-        foreach($this->options as $key => $value) {
-            $text .= $key . ': "' . $value . '",';
-        }
-
-        $text .= '});</script>';
-
-        return $text;
     }
 
 }

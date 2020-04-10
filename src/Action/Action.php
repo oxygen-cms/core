@@ -108,6 +108,7 @@ class Action {
         $this->name = $name;
         $this->method = Method::GET;
         $this->group = $group ?: new Group();
+        // by default all actions go through the web middleware - we have no pure API endpoints
         $this->middleware = [];
         $this->permissions = null;
         $this->uses = $uses;

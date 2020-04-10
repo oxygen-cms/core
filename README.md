@@ -18,6 +18,38 @@ For example:
 - **Open**: Oxygen makes use of hundreds of awesome PHP packages, installed through [Composer](https://getcomposer.org/)
 - **Ready for Tomorrow**: Despite being written in PHP, what could be considered as quite a 'legacy' language, Oxygen strives to make use of proven and future-facing technologies such as the Laravel Framework, Doctrine ORM, PHP 7 and above etc...
 
+## Framework Structure
+
+All parts of the framework depend on the Laravel framework to varying degrees.
+
+**Core packages**:
+
+- *oxygen/data* - wrapper around Doctrine ORM
+- *oxygen/core* - core framework, depends on *oxygen/data*
+- *oxygen/crud* - scaffolding for Create-Read-Update-Delete operations, depends on *oxygen/data* and *oxygen/core*
+- *oxygen/theme* - theming support - doesn't depend on any oxygen packages
+- *oxygen/preferences* - dynamic preferences configuration, depends on *oxygen/core*, *oxygen/data*, *oxygen/theme*
+- *oxygen/auth* - authentication, depends on *oxygen/core*, *oxygen/data*, *oxygen/preferences*
+
+**Basic modules** - each of these adds some optional part of the backend interface, they can be mixed and matched as you please.
+
+- *oxygen/mod-auth* - authentication - this one is pretty necessary to be able to access the backend interface
+- *oxygen/mod-dashboard* - admin dashboard
+- *oxygen/mod-import-export* - import/export database content
+- *oxygen/mod-preferences* - preferences UI
+
+Things which the CMS can store:
+
+- *oxygen/mod-events* - adds events
+- *oxygen/mod-media* - adds media items (images, videos, audio, PDFs)
+- *oxygen/mod-pages* - adds pages
+
+Deprecated:
+
+- *oxygen/mod-security* - a basic log of all login attempts
+- *oxygen/mod-marketplace* - a package marketplace - never took off so decided not worth the maintenance effort
+
+
 ## The Stack
 
 Oxygen uses the Laravel PHP framework, which in turn is based off [Symfony](http://symfony.com/).
