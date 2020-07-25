@@ -5,6 +5,7 @@ namespace Oxygen\Core\Action;
 class AdminAction extends Action {
 
     const AUTH_MIDDLEWARE_NAME = 'oxygen.auth';
+    const TWO_FACTOR_AUTH_MIDDLEWARE_NAME = '2fa.require';
 
     /**
      * Constructs an Action.
@@ -35,7 +36,7 @@ class AdminAction extends Action {
      * @return array
      */
     public function getMiddleware() {
-        $middleware = ['web', self::AUTH_MIDDLEWARE_NAME];
+        $middleware = ['web', self::AUTH_MIDDLEWARE_NAME, self::TWO_FACTOR_AUTH_MIDDLEWARE_NAME];
 
         return array_merge($middleware, parent::getMiddleware());
     }
