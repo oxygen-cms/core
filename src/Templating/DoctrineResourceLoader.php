@@ -41,9 +41,11 @@ class DoctrineResourceLoader implements ResourceLoader {
      */
     public function getSourceContext(string $name): Source {
         $item = $this->getByKey($name);
-        echo "compiling<br>";
-        echo $item->getResourceType() . '::' . $item->getResourceKey() . "<br>";
-        return new Source($item->getTemplateCode(), $name);
+        $code = $item->getTemplateCode();
+        if($code === null) {
+            $code = '';
+        }
+        return new Source($code, $name);
     }
 
     public function getCacheKey(string $name): string {

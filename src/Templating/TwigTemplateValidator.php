@@ -44,6 +44,9 @@ class TwigTemplateValidator {
      * @throws \Throwable
      */
     public function validate($attribute, $value, $parameters, $validator) {
+        if($value === null) {
+            return true;
+        }
         try {
             $this->compiler->renderString($value, $attribute);
             return true;

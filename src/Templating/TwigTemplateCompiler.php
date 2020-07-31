@@ -31,6 +31,11 @@ class TwigTemplateCompiler {
      */
     private $allowedFunctions;
     /**
+     * @var string[]
+     */
+    private $allowedMethods;
+    
+    /**
      * @var \Twig\Sandbox\SecurityPolicy
      */
     private $policy;
@@ -40,18 +45,17 @@ class TwigTemplateCompiler {
         $this->stringLoader = new ArrayLoader();
         $this->twig = new Environment(new ChainLoader([$this->stringLoader, $this->loader]), [
             'cache' => $cachePath,
-            'auto_reload' => true
+            'auto_reload' => true,
+            'strict_variables' => true
         ]);
         $tags = ['if', 'for', 'set'];
         $filters = ['upper', 'escape', 'raw'];
-        $methods = [
-            //'Article' => ['getTitle', 'getBody'],
-        ];
+        $this->allowedMethods = [];
         $properties = [
             //'Article' => ['title', 'body'],
         ];
         $this->allowedFunctions = ['include'];
-        $this->policy = new \Twig\Sandbox\SecurityPolicy($tags, $filters, $methods, $properties, $this->allowedFunctions);
+        $this->policy = new \Twig\Sandbox\SecurityPolicy($tags, $filters, $this->allowedMethods, $properties, $this->allowedFunctions);
         $this->twig->addExtension(new SandboxExtension($this->policy, true));
     }
     
@@ -62,6 +66,11 @@ class TwigTemplateCompiler {
     public function addAllowedFunction($function) {
         $this->allowedFunctions[] = $function;
         $this->policy->setAllowedFunctions($this->allowedFunctions);
+    }
+
+    public function setAllowedMethods($class, $methods) {
+        $this->allowedMethods[$class] = $methods;
+        $this->policy->setAllowedMethods($this->allowedMethods);
     }
     
     /**
@@ -95,7 +104,10 @@ class TwigTemplateCompiler {
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function renderString(string $template, string $key = null, array $params = []) {
+    public function renderString($template, string $key = null, array $params = []) {
+        if($template === null) {
+            $template = '';
+        }
         if($key === null) {
             $key = hash('sha256', $template);
         }
