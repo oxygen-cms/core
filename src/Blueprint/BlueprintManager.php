@@ -62,7 +62,7 @@ class BlueprintManager {
     /**
      * Constructs the BlueprintManager.
      *
-     * @param \Oxygen\Core\Contracts\Routing\BlueprintRegistrar $registrar
+     * @param BlueprintRegistrar $registrar
      */
     public function registerRoutes(BlueprintRegistrar $registrar) {
         $registrar->getRouter()->pattern('id', '[0-9]+');
@@ -70,8 +70,17 @@ class BlueprintManager {
         foreach($this->all() as $blueprint) {
             $registrar->blueprint($blueprint);
         }
+    }
 
-        $registrar->registerFinal();
+    /**
+     * Constructs the BlueprintManager.
+     *
+     * @param BlueprintRegistrar $registrar
+     */
+    public function registerFinalRoutes(BlueprintRegistrar $registrar) {
+        foreach($this->all() as $blueprint) {
+            $registrar->blueprintFinal($blueprint);
+        }
     }
 
     /**

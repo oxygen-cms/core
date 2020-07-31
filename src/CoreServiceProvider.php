@@ -69,10 +69,7 @@ class CoreServiceProvider extends ServiceProvider {
     public function provides() {
         return [
             BlueprintManager::class,
-            Navigation::class,
-// TODO: work out what this was for
-//            ResponseFactoryContract::class,
-//            ExtendedResponseFactoryContract::class
+            Navigation::class
         ];
     }
 

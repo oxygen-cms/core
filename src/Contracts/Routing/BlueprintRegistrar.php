@@ -9,23 +9,25 @@ use Oxygen\Core\Blueprint\Blueprint;
 interface BlueprintRegistrar {
 
     /**
-     * Generates a Route from a \Oxygen\Core\Blueprint\Blueprint
+     * Registers routes from a \Oxygen\Core\Blueprint\Blueprint
      *
-     * @param \Oxygen\Core\Blueprint\Blueprint $blueprint
+     * @param Blueprint $blueprint
      */
     public function blueprint(Blueprint $blueprint);
 
     /**
-     * Generates a Route from a Oxygen\Core\Action\Action
+     * Registers routes marked with 'register' => REGISTER_AT_END
      *
-     * @param \Oxygen\Core\Action\Action $action
+     * @param Blueprint $blueprint
      */
-    public function action(Action $action);
+    public function blueprintFinal(Blueprint $blueprint);
 
     /**
-     * Registers all the 'final' routes
+     * Generates a Route from a Oxygen\Core\Action\Action
+     *
+     * @param Action $action
      */
-    public function registerFinal();
+    public function action(Action $action);
 
     /**
      * Returns the underlying router

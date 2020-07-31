@@ -31,7 +31,7 @@ class BlueprintRegistrar implements BlueprintRegistrarContract {
     /**
      * Generates a Route from a \Oxygen\Core\Blueprint\Blueprint
      *
-     * @param \Oxygen\Core\Blueprint\Blueprint $blueprint
+     * @param Blueprint $blueprint
      */
     public function blueprint(Blueprint $blueprint) {
         foreach($blueprint->getActions() as $action) {
@@ -42,21 +42,25 @@ class BlueprintRegistrar implements BlueprintRegistrarContract {
     /**
      * Generates a Route from a Oxygen\Core\Action\Action
      *
-     * @param \Oxygen\Core\Action\Action $action
+     * @param Action $action
+     * @param bool $atEnd whether to register actions marked with REGISTER_AT_END
      */
-    public function action(Action $action) {
-        if($action->register === Action::REGISTER_AT_END) {
-            $this->registerActionsLast[] = $action;
-        } else {
-            if($action->register) {
-                $this->registerAction($action);
-            }
+    public function action(Action $action, $atEnd = false) {
+        if($atEnd && $action->register === Action::REGISTER_AT_END) {
+            $this->registerAction($action);
+        } else if(!$atEnd && $action->register === true) {
+            $this->registerAction($action);
         }
     }
 
-    public function registerFinal() {
-        foreach($this->registerActionsLast as $action) {
-            $this->registerAction($action);
+    /**
+     * Registers routes marked with 'register' => REGISTER_AT_END
+     *
+     * @param Blueprint $blueprint
+     */
+    public function blueprintFinal(Blueprint $blueprint) {
+        foreach($blueprint->getActions() as $action) {
+            $this->action($action, true);
         }
     }
 
