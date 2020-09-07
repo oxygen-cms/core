@@ -1,4 +1,4 @@
-name: PHP Composer
+name: phpspec and phpstan
 
 on:
   push:
