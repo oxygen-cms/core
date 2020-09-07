@@ -64,5 +64,8 @@
     "require-dev": {
         "phpstan/phpstan": "^0.12.18",
         "phpspec/phpspec": "^6.1"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpspec run && vendor/bin/phpstan analyze src --level 1"
     }
 }
