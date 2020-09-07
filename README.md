@@ -1,6 +1,6 @@
 # Oxygen - Core Framework
 
-![](https://img.shields.io/packagist/v/oxygen/core) ![](https://img.shields.io/packagist/l/oxygen/core)
+![](https://img.shields.io/packagist/v/oxygen/core) ![](https://img.shields.io/packagist/l/oxygen/core) ![phpspec and phpstan](https://github.com/oxygen-cms/core/workflows/phpspec%20and%20phpstan/badge.svg)
 
 This repository contains the core framework for Oxygen.
 
