@@ -1,9 +1,11 @@
 # Oxygen - Core Framework
 
+![](https://img.shields.io/packagist/v/oxygen/core) ![](https://img.shields.io/packagist/l/oxygen/core)
+
 This repository contains the core framework for Oxygen.
 
 Oxygen is a framework for building modern web applications.
-At it's core, its just a small addon to the excellent [Laravel Framework](http://laravel.com/),
+At its core, Oxygen is but a small addon to the excellent [Laravel Framework](http://laravel.com/),
 however with the addition of many extensions, Oxygen becomes a full-featured CMS.
 The modular nature of Oxygen means that you can pick and choose exactly how much you want, and make the framework into your own magnificent creation specifically fine-tuned to business needs.
 

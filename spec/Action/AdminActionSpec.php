@@ -16,7 +16,7 @@ class AdminActionSpec extends ObjectBehavior {
     }
 
     function it_automatically_uses_the_auth_and_permissions_filters() {
-        $this->getMiddleware()->shouldReturn(['oxygen.auth', 'oxygen.permissions:testAction']);
+        $this->getMiddleware()->shouldReturn(['web', 'oxygen.auth', '2fa.require', 'oxygen.permissions:testAction']);
     }
 
 }

@@ -371,8 +371,8 @@ class Blueprint {
     /**
      * Adds an action.
      *
-     * @param array            $parameters
-     * @param FactoryInterface $factory Optional FactoryInterface
+     * @param array $parameters
+     * @param FactoryInterface|null $factory  FactoryInterface
      * @return Action
      */
     public function makeAction(array $parameters, FactoryInterface $factory = null) {
@@ -426,7 +426,7 @@ class Blueprint {
      * Gets the toolbar items for a
      * particular toolbar group.
      *
-     * @param array
+     * @param string
      * @return mixed
      */
     public function getToolbarOrder($group) {

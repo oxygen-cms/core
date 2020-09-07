@@ -57,7 +57,7 @@ abstract class FieldSet {
     /**
      * Creates multiple new fields
      *
-     * @param $fields
+     * @param array $fields
      * @return array
      */
     public function makeFields(array $fields) {
@@ -74,8 +74,8 @@ abstract class FieldSet {
     /**
      * Creates a new field
      *
-     * @param $name
-     * @param $arguments
+     * @param string $name
+     * @param array $arguments
      * @return \Oxygen\Core\Form\FieldMetadata
      */
     public function makeField($name, $arguments) {
@@ -90,7 +90,7 @@ abstract class FieldSet {
     /**
      * Checks if the field exists.
      *
-     * @param $key the field name
+     * @param string $key the field name
      * @return bool
      */
     public function hasField($key) {
