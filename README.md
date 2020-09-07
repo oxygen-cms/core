@@ -27,7 +27,7 @@ All parts of the framework depend on the Laravel framework to varying degrees.
 **Core packages**:
 
 - [oxygen/data](https://github.com/oxygen-cms/data) - wrapper around Doctrine ORM
-- [oxygen/core]((https://github.com/oxygen-cms/core) - core framework, depends on *oxygen/data*
+- [oxygen/core](https://github.com/oxygen-cms/core) - core framework, depends on *oxygen/data*
 - [oxygen/crud](https://github.com/oxygen-cms/crud)  - scaffolding for Create-Read-Update-Delete operations, depends on *oxygen/data* and *oxygen/core*
 - [oxygen/theme](https://github.com/oxygen-cms/theme)  - theming support - doesn't depend on any oxygen packages
 - [oxygen/preferences](https://github.com/oxygen-cms/preferences)  - dynamic preferences configuration, depends on *oxygen/core*, *oxygen/data*, *oxygen/theme*
@@ -35,21 +35,21 @@ All parts of the framework depend on the Laravel framework to varying degrees.
 
 **Basic modules** - each of these adds some optional part of the backend interface, they can be mixed and matched as you please.
 
-- *oxygen/mod-auth* - authentication - this one is pretty necessary to be able to access the backend interface
-- *oxygen/mod-dashboard* - admin dashboard
-- *oxygen/mod-import-export* - import/export database content
-- *oxygen/mod-preferences* - preferences UI
+- [oxygen/mod-auth](https://github.com/oxygen-cms/mod-auth) - authentication - this one is pretty necessary to be able to access the backend interface
+- [oxygen/mod-import-export](https://github.com/oxygen-cms/mod-import-export) - import/export database content
+- [oxygen/mod-preferences](https://github.com/oxygen-cms/mod-preferences) - preferences UI
 
 Things which the CMS can store:
 
-- *oxygen/mod-events* - adds events
-- *oxygen/mod-media* - adds media items (images, videos, audio, PDFs)
-- *oxygen/mod-pages* - adds pages
+- [oxygen/mod-events](https://github.com/oxygen-cms/mod-events) - adds events
+- [oxygen/mod-media](https://github.com/oxygen-cms/mod-media) - adds media items (images, videos, audio, PDFs)
+- [oxygen/mod-pages](https://github.com/oxygen-cms/mod-pages) - adds pages
 
 Deprecated:
 
-- *oxygen/mod-security* - a basic log of all login attempts
-- *oxygen/mod-marketplace* - a package marketplace - never took off so decided not worth the maintenance effort
+- *oxygen/mod-dashboard* - admin dashboard - **will be integrated into new Vue.JS user interface**
+- *oxygen/mod-security* - a basic log of all login attempts - **now integrated into the authentication module**
+- *oxygen/mod-marketplace* - a package marketplace - **never took off so decided not worth the maintenance effort**
 
 
 ## The Stack
