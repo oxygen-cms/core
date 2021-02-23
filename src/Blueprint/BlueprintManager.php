@@ -6,7 +6,6 @@ use DirectoryIterator;
 use Oxygen\Core\Support\Str;
 use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar;
-use Oxygen\Core\Html\Navigation\Navigation;
 
 class BlueprintManager {
 
@@ -19,14 +18,6 @@ class BlueprintManager {
     protected $blueprints = [];
 
     /**
-     * Main navigation instance.
-     *
-     * @var Navigation
-     */
-
-    protected $navigation;
-
-    /**
      * The configuration instance.
      *
      * @var CoreConfiguration
@@ -36,11 +27,9 @@ class BlueprintManager {
     /**
      * Constructs the BlueprintManager.
      *
-     * @param \Oxygen\Core\Html\Navigation\Navigation $navigation
      * @param CoreConfiguration                       $config
      */
-    public function __construct(Navigation $navigation, CoreConfiguration $config) {
-        $this->navigation = $navigation;
+    public function __construct(CoreConfiguration $config) {
         $this->config = $config;
     }
 
@@ -94,10 +83,6 @@ class BlueprintManager {
         $blueprint = new Blueprint($name, $this->config->getAdminURIPrefix());
         $callback($blueprint);
         $this->blueprints[$blueprint->getName()] = $blueprint;
-
-        if($blueprint->hasPrimaryToolbarItem()) {
-            $this->navigation->add($blueprint->getPrimaryToolbarItem());
-        }
     }
 
     /**

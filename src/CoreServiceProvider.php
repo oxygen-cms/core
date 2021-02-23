@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
 use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as BlueprintRegistrarContract;
-use Oxygen\Core\Html\Navigation\Navigation;
+use Oxygen\Core\Contracts\StaticCoreConfiguration;
 use Oxygen\Core\Routing\BlueprintRegistrar;
 
 class CoreServiceProvider extends ServiceProvider {
@@ -40,15 +40,11 @@ class CoreServiceProvider extends ServiceProvider {
      */
 
     public function register() {
-        // bind blueprint manager
-        $this->app->singleton(Navigation::class, function () {
-            return new Navigation();
-        });
+        $this->app->bind(CoreConfiguration::class, StaticCoreConfiguration::class);
 
         // bind blueprint manager
         $this->app->singleton(BlueprintManager::class, function () {
             return new BlueprintManager(
-                $this->app->make(Navigation::class),
                 $this->app->make(CoreConfiguration::class)
             );
         });
