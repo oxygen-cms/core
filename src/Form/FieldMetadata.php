@@ -44,13 +44,6 @@ class FieldMetadata {
     public $type;
 
     /**
-     * A `FieldType` object instance
-     *
-     * @var FieldType
-     */
-    public $typeInstance;
-
-    /**
      * Editable means that the field should appear on forms.
      *
      * @var boolean
@@ -85,16 +78,7 @@ class FieldMetadata {
      *
      * @var array
      */
-
     protected static $types;
-
-    /**
-     * The default type.
-     *
-     * @var FieldType
-     */
-
-    protected static $defaultType;
 
     /**
      * Construct the object.
@@ -109,7 +93,6 @@ class FieldMetadata {
         $this->description = null;
         $this->placeholder = null;
         $this->type = $type;
-        $this->typeInstance = null;
         $this->editable = $editable;
         $this->attributes = [];
         $this->options = [];
@@ -142,22 +125,10 @@ class FieldMetadata {
      * @throws Exception if the type doesn't exist
      */
     public function getType() {
-        if($this->typeInstance !== null) {
-            return $this->typeInstance;
-        }
-
         if(isset(static::$types[$this->type])) {
-            $this->typeInstance = static::$types[$this->type];
-
             return static::$types[$this->type];
         } else {
-            if(static::$defaultType !== null) {
-                $this->typeInstance = static::$defaultType;
-
-                return static::$defaultType;
-            } else {
-                throw new Exception('No `FieldType` Object Set For Field Type "' . $this->type . '" And No Default Set');
-            }
+            throw new Exception('No `FieldType` Object Set For Field Type "' . $this->type . '" And No Default Set');
         }
     }
 
@@ -169,15 +140,6 @@ class FieldMetadata {
      */
     public static function addType($name, FieldType $type) {
         static::$types[$name] = $type;
-    }
-
-    /**
-     * Sets the default type.
-     *
-     * @param \Oxygen\Core\Form\FieldType $type
-     */
-    public static function setDefaultType(FieldType $type) {
-        static::$defaultType = $type;
     }
 
 }
