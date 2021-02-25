@@ -4,6 +4,7 @@ namespace Oxygen\Core\Controller;
 
 use Oxygen\Core\Blueprint\Blueprint;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
+use Oxygen\Core\Blueprint\BlueprintNotFoundException;
 use ReflectionClass;
 use Oxygen\Core\Support\Str;
 
@@ -12,17 +13,16 @@ class BlueprintController extends Controller {
     /**
      * Blueprint for the Resource.
      *
-     * @var \Oxygen\Core\Blueprint\Blueprint
+     * @var Blueprint
      */
-
     protected $blueprint;
 
     /**
      * Constructs a BlueprintController.
      *
-     * @param BlueprintManager | string $blueprint The blueprint or blueprint manager
+     * @param BlueprintManager | Blueprint $blueprint The blueprint or blueprint manager
      * @throws \ReflectionException
-     * @throws \Oxygen\Core\Blueprint\BlueprintNotFoundException
+     * @throws BlueprintNotFoundException
      */
     public function __construct($blueprint) {
         if($blueprint instanceof BlueprintManager) {
