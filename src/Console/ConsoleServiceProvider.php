@@ -25,7 +25,6 @@ class ConsoleServiceProvider extends ServiceProvider {
         $this->commands(BlueprintDetailCommand::class);
         $this->commands(FieldSetDetailCommand::class);
         $this->commands(PackageMigrateCommand::class);
-        $this->commands(UsersListCommand::class);
     }
 
     /**
@@ -49,8 +48,7 @@ class ConsoleServiceProvider extends ServiceProvider {
             BlueprintListCommand::class,
             BlueprintDetailCommand::class,
             FieldSetDetailCommand::class,
-            PackageMigrateCommand::class,
-            UsersListCommand::class
+            PackageMigrateCommand::class
         ];
     }
 
