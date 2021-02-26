@@ -33,6 +33,7 @@ class FormServiceProvider extends ServiceProvider {
         FieldMetadata::addType('search', new BaseType());
         FieldMetadata::addType('editor', new BaseType());
         FieldMetadata::addType('editor-mini', new BaseType());
+        FieldMetadata::addType('radio', new BaseType());
         FieldMetadata::addType('email', new BaseType());
         FieldMetadata::addType('textarea', new BaseType());
         FieldMetadata::addType('checkbox', new BooleanType());
