@@ -16,7 +16,6 @@ class CoreServiceProvider extends ServiceProvider {
      *
      * @var bool
      */
-
     protected $defer = false;
 
     /**
@@ -24,7 +23,6 @@ class CoreServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function boot() {
         $this->publishes([
             __DIR__ . '/../resources/lang' => base_path('resources/lang/vendor/oxygen/core')
@@ -38,7 +36,6 @@ class CoreServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-
     public function register() {
         $this->app->bind(CoreConfiguration::class, StaticCoreConfiguration::class);
 
@@ -61,7 +58,6 @@ class CoreServiceProvider extends ServiceProvider {
      *
      * @return array
      */
-
     public function provides() {
         return [
             BlueprintManager::class
