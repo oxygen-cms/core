@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=7.2.0",
-        "oxygen/data": "~0.9.7",
+        "oxygen/data": "~0.10.0",
         "laravel/framework": "~6.0",
         "twig/twig": "^3.0"
     },
