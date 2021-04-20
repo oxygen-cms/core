@@ -39,7 +39,7 @@ class ResourceController extends BlueprintController {
         if(is_object($item)) {
             return $item;
         } else {
-            return $this->repository->find($item);
+            return $this->repository->find((int) $item);
         }
     }
 
