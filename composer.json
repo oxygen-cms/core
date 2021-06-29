@@ -29,36 +29,12 @@
     },
     "minimum-stability": "stable",
     "extra": {
-        "title": "Oxygen Core",
-        "readme": "oxygen.md",
-        "changes": "changes.md",
-        "icon": "icon.png",
         "providers": [
-            {
-                "name": "Core",
-                "class": "Oxygen\\Core\\CoreServiceProvider",
-                "description": "Core Service Provider of Oxygen"
-            },
-            {
-                "name": "Console",
-                "class": "Oxygen\\Core\\Console\\ConsoleServiceProvider",
-                "description": "Adds Console Commands"
-            },
-            {
-                "name": "Database",
-                "class": "Oxygen\\Core\\Database\\DatabaseServiceProvider",
-                "description": "Adds automatic migrations for the database"
-            },
-            {
-                "name": "Translation",
-                "class": "Oxygen\\Core\\Translation\\TranslationServiceProvider",
-                "description": "Adds Bulk Replacements to Illuminate\\Translation"
-            },
-            {
-                "name": "View",
-                "class": "Oxygen\\Core\\View\\ViewServiceProvider",
-                "description": "Compiles Views from a String"
-            }
+            "Oxygen\\Core\\CoreServiceProvider",
+            "Oxygen\\Core\\Console\\ConsoleServiceProvider",
+            "Oxygen\\Core\\Console\\ConsoleServiceProvider",
+            "Oxygen\\Core\\Translation\\TranslationServiceProvider",
+            "Oxygen\\Core\\Form\\FormServiceProvider"
         ]
     },
     "require-dev": {
