@@ -60,7 +60,9 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function provides() {
         return [
-            BlueprintManager::class
+            BlueprintManager::class,
+            CoreConfiguration::class,
+            BlueprintRegistrarContract::class
         ];
     }
 

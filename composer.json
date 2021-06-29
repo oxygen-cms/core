@@ -29,13 +29,15 @@
     },
     "minimum-stability": "stable",
     "extra": {
-        "providers": [
-            "Oxygen\\Core\\CoreServiceProvider",
-            "Oxygen\\Core\\Console\\ConsoleServiceProvider",
-            "Oxygen\\Core\\Console\\ConsoleServiceProvider",
-            "Oxygen\\Core\\Translation\\TranslationServiceProvider",
-            "Oxygen\\Core\\Form\\FormServiceProvider"
-        ]
+        "laravel": {
+            "providers": [
+                "Oxygen\\Core\\CoreServiceProvider",
+                "Oxygen\\Core\\Console\\ConsoleServiceProvider",
+                "Oxygen\\Core\\Console\\ConsoleServiceProvider",
+                "Oxygen\\Core\\Translation\\TranslationServiceProvider",
+                "Oxygen\\Core\\Form\\FormServiceProvider"
+            ]
+        }
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.18",
