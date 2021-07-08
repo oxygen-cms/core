@@ -8,6 +8,7 @@ use Oxygen\Core\Form\Type\BooleanType;
 use Oxygen\Core\Form\Type\DatetimeType;
 use Oxygen\Core\Form\Type\DateType;
 use Oxygen\Core\Form\Type\EditorType;
+use Oxygen\Core\Form\Type\JsonType;
 use Oxygen\Core\Form\Type\ListType;
 use Oxygen\Core\Form\Type\NumberType;
 use Oxygen\Core\Form\Type\RelationshipType;
@@ -33,6 +34,7 @@ class FormServiceProvider extends ServiceProvider {
         FieldMetadata::addType('search', new BaseType());
         FieldMetadata::addType('editor', new BaseType());
         FieldMetadata::addType('editor-mini', new BaseType());
+        FieldMetadata::addType('editor-mini-json', new JsonType());
         FieldMetadata::addType('radio', new BaseType());
         FieldMetadata::addType('email', new BaseType());
         FieldMetadata::addType('textarea', new BaseType());

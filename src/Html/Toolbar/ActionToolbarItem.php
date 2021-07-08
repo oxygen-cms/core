@@ -5,6 +5,7 @@ namespace Oxygen\Core\Html\Toolbar;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 use Exception;
+use Oxygen\Auth\Permissions\Permissions;
 use Oxygen\Core\Action\Action;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
@@ -118,9 +119,7 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @return boolean
      */
     public function hasPermissions() {
-        return $this->action->usesPermissions()
-            ? Auth::user()->hasPermissions($this->action->getPermissions())
-            : true;
+        return !$this->action->usesPermissions() || app(Permissions::class)->has($this->action->getPermissions());
     }
 
     /**
