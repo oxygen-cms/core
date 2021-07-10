@@ -144,7 +144,7 @@ class Action {
      * @return string
      */
     public function getMethod() {
-        return strtoupper($this->method);
+        return $this->method;
     }
 
     /**

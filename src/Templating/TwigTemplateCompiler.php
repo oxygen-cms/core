@@ -11,6 +11,7 @@ use Twig\Error\SyntaxError;
 use Twig\Extension\SandboxExtension;
 use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
+use Twig\Sandbox\SecurityPolicy;
 
 class TwigTemplateCompiler {
 
@@ -34,9 +35,9 @@ class TwigTemplateCompiler {
      * @var string[]
      */
     private $allowedMethods;
-    
+
     /**
-     * @var \Twig\Sandbox\SecurityPolicy
+     * @var SecurityPolicy
      */
     private $policy;
 
@@ -55,10 +56,10 @@ class TwigTemplateCompiler {
             //'Article' => ['title', 'body'],
         ];
         $this->allowedFunctions = ['include'];
-        $this->policy = new \Twig\Sandbox\SecurityPolicy($tags, $filters, $this->allowedMethods, $properties, $this->allowedFunctions);
+        $this->policy = new SecurityPolicy($tags, $filters, $this->allowedMethods, $properties, $this->allowedFunctions);
         $this->twig->addExtension(new SandboxExtension($this->policy, true));
     }
-    
+
     public function getTwig() {
         return $this->twig;
     }
@@ -72,7 +73,7 @@ class TwigTemplateCompiler {
         $this->allowedMethods[$class] = $methods;
         $this->policy->setAllowedMethods($this->allowedMethods);
     }
-    
+
     /**
      * @return TwigLoader
      */
@@ -91,26 +92,32 @@ class TwigTemplateCompiler {
      * @throws SyntaxError
      */
     public function render(Templatable $item, array $params = []) {
-        $this->getLoader()->preloadItem($item);
-        return $this->twig->render($item->getResourceType() . '::' . $item->getResourceKey(), $params);
+        $this->getLoader()->setPublishedMode($item->isPublished());
+        $key = $this->getLoader()->preloadItem($item);
+        return $this->twig->render($key, $params);
     }
 
     /**
      * @param string $template
-     * @param string|null $key
+     * @param Templatable|null $item
      * @param array $params
      * @return string
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function renderString($template, string $key = null, array $params = []) {
+    public function renderString($template, Templatable $item = null, array $params = []) {
         if($template === null) {
             $template = '';
         }
-        if($key === null) {
-            $key = hash('sha256', $template);
+
+        if($item !== null) {
+            $this->getLoader()->setPublishedMode($item->isPublished());
+        } else {
+            $this->getLoader()->setPublishedMode(false);
         }
+
+        $key = hash('sha256', $template);
         $this->stringLoader->setTemplate($key, $template);
         return $this->twig->render($key, $params);
     }

@@ -18,7 +18,6 @@ abstract class Field implements RenderableInterface {
      *
      * @var FieldMetadata
      */
-
     protected $meta;
 
     /**
@@ -26,7 +25,6 @@ abstract class Field implements RenderableInterface {
      *
      * @var mixed
      */
-
     protected $value;
 
     /**
@@ -34,18 +32,19 @@ abstract class Field implements RenderableInterface {
      *
      * @var object
      */
-
     protected $entity;
 
     /**
      * Constructs the object.
      *
      * @param FieldMetadata $meta
-     * @param string        $value
+     * @param string $value
+     * @param null $entity
      */
-    public function __construct(FieldMetadata $meta, $value = '') {
+    public function __construct(FieldMetadata $meta, $value = '', $entity = null) {
         $this->meta = $meta;
         $this->value = $value;
+        $this->entity = $entity;
     }
 
     /**
@@ -87,5 +86,12 @@ abstract class Field implements RenderableInterface {
      * @return string the rendered object
      */
     public abstract function render(array $arguments = [], $renderer = null);
+
+    /**
+     * @return object
+     */
+    public function getEntity(): ?object {
+        return $this->entity;
+    }
 
 }

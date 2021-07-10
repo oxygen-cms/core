@@ -27,10 +27,11 @@ class EditableField extends Field {
      * Constructs the object.
      *
      * @param FieldMetadata $meta
-     * @param string        $value
+     * @param string $value
+     * @param null $entity
      */
-    public final function __construct(FieldMetadata $meta, $value = '') {
-        parent::__construct($meta, $value);
+    public final function __construct(FieldMetadata $meta, $value = '', $entity = null) {
+        parent::__construct($meta, $value, $entity);
     }
 
     /**
@@ -123,9 +124,7 @@ class EditableField extends Field {
      * @return EditableField
      */
     public static function fromEntity(FieldMetadata $meta, $entity) {
-        $instance = new static($meta, $entity->getAttribute($meta->name));
-
-        return $instance;
+        return new static($meta, $entity->getAttribute($meta->name), $entity);
     }
 
 }
