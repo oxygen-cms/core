@@ -19,8 +19,10 @@ class ResourceController extends BlueprintController {
     /**
      * Constructs a ResourceController.
      *
-     * @param RepositoryInterface        $repository The Repository implementation
+     * @param RepositoryInterface $repository The Repository implementation
      * @param BlueprintManager|Blueprint $blueprint
+     * @throws \Oxygen\Core\Blueprint\BlueprintNotFoundException
+     * @throws \ReflectionException
      */
     public function __construct(RepositoryInterface $repository, $blueprint) {
         parent::__construct($blueprint);
@@ -34,7 +36,6 @@ class ResourceController extends BlueprintController {
      * @param mixed $item
      * @return object
      */
-
     protected function getItem($item) {
         if(is_object($item)) {
             return $item;

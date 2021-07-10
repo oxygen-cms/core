@@ -118,9 +118,8 @@ abstract class ActionToolbarItem implements ToolbarItem {
      * @return boolean
      */
     public function hasPermissions() {
-        return $this->action->usesPermissions()
-            ? Auth::user()->hasPermissions($this->action->getPermissions())
-            : true;
+        // TODO: work out how to make this not an implicit dependency on `oxygen/auth`
+        return !$this->action->usesPermissions() || app('\\Oxygen\\Auth\\Permissions\\Permissions')->has($this->action->getPermissions());
     }
 
     /**

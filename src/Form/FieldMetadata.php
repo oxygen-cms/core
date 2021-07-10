@@ -133,6 +133,19 @@ class FieldMetadata {
     }
 
     /**
+     * Returns the evaluated options of this field.
+     *
+     * @return array
+     */
+    public function getOptions() {
+        if(is_callable($this->options)) {
+            return ($this->options)();
+        } else {
+            return $this->options;
+        }
+    }
+
+    /**
      * Adds a type.
      *
      * @param string                      $name

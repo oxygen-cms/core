@@ -13,9 +13,15 @@ class TwigLoader implements LoaderInterface {
      * @var ResourceLoader[]
      */
     protected $resources = [];
-    
+
+    /**
+     * @var bool
+     */
+    protected $publishedMode = false;
+
     public function preloadItem(Templatable $item) {
-        $this->resources[$item->getResourceType()]->preloadItem($item);
+        $key = $this->resources[$item->getResourceType()]->preloadItem($item);
+        return $item->getResourceType() . '::' . $key;
     }
 
     /**
@@ -38,7 +44,7 @@ class TwigLoader implements LoaderInterface {
             throw new LoaderError('resource not found: ' . $resourceName);
         }
     }
-    
+
     public function getSourceContext(string $name): Source {
         $parts = $this->splitName($name);
         $source = $this->getResourceLoader($parts['resource'])->getSourceContext($parts['key']);
@@ -63,16 +69,33 @@ class TwigLoader implements LoaderInterface {
             return false;
         }
     }
-    
+
+    /**
+     * @throws LoaderError if the template name is not valid
+     */
     private function splitName($name) {
         $nameParts = explode('::', $name);
-        if(count($nameParts) != 2) {
+
+        if(count($nameParts) < 2) {
             throw new LoaderError('Invalid template name '. $name);
         }
+
+        $resource = array_shift($nameParts);
+
+        if(!$this->publishedMode && count($nameParts) == 1) {
+            $item = $this->getResourceLoader($resource)->getLatestItemForKey($nameParts[0]);
+            $id = $item->getId();
+            $nameParts[] = strval($id);
+        }
+
         return [
-            'resource' => $nameParts[0],
-            'key' => $nameParts[1]
+            'resource' => $resource,
+            'key' => implode('::', $nameParts)
         ];
+    }
+
+    public function setPublishedMode(bool $published) {
+        $this->publishedMode = $published;
     }
 
 }

@@ -16,7 +16,7 @@ interface Templatable {
      * @return string
      */
     public function getResourceKey();
-    
+
     /**
      * @return string
      */
@@ -26,5 +26,16 @@ interface Templatable {
      * @return DateTime
      */
     public function getUpdatedAt();
+
+    /**
+     * Returns true if the record is considered 'published'.
+     * @return bool
+     */
+    public function isPublished(): bool;
+
+    /**
+     * @return int
+     */
+    public function getId();
 
 }

@@ -3,8 +3,12 @@
 
 namespace Oxygen\Core\Templating;
 
+use Exception;
+use Illuminate\Validation\Validator;
 use Oxygen\Core\View\Factory;
+use ReflectionClass;
 use ReflectionException;
+use Throwable;
 
 class TwigTemplateValidator {
     /**
@@ -19,7 +23,7 @@ class TwigTemplateValidator {
      * Because the code within Laravel's Validator class runs synchronously,
      * this should always be corresponding to the last field that was `validate`d
      *
-     * @var \Exception
+     * @var Exception
      */
     protected $lastExceptionThrown;
 
@@ -39,18 +43,18 @@ class TwigTemplateValidator {
      * @param string $attribute
      * @param string $value
      * @param array $parameters
-     * @param \Illuminate\Validation\Validator $validator
+     * @param Validator $validator
      * @return bool
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function validate($attribute, $value, $parameters, $validator) {
         if($value === null) {
             return true;
         }
         try {
-            $this->compiler->renderString($value, $attribute);
+            $this->compiler->renderString($value, null);
             return true;
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->lastExceptionThrown = $e;
             return false;
         }
@@ -74,7 +78,7 @@ class TwigTemplateValidator {
         $message = str_replace(':exception.message', $e->getMessage(), $message);
         $message = str_replace(':exception.line', $e->getLine(), $message);
         $message = str_replace(':exception.file', $e->getFile(), $message);
-        $reflect = new \ReflectionClass($e);
+        $reflect = new ReflectionClass($e);
         $message = str_replace(':exception.shortClassName', $reflect->getShortName(), $message);
         $message = str_replace(':exception.className', $reflect->getName(), $message);
         return $message;

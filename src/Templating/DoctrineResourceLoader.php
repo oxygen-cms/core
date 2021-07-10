@@ -4,6 +4,7 @@
 namespace Oxygen\Core\Templating;
 
 use Illuminate\Container\Container;
+use Oxygen\Data\Repository\RepositoryInterface;
 use OxygenModule\Pages\Entity\Page;
 use Twig\Error\LoaderError;
 use Twig\Source;
@@ -19,6 +20,7 @@ class DoctrineResourceLoader implements ResourceLoader {
      * @var Templatable[]
      */
     private $cache;
+
     /**
      * @var Container
      */
@@ -32,6 +34,13 @@ class DoctrineResourceLoader implements ResourceLoader {
     public function __construct(Container $container, string $repositoryClassName) {
         $this->container = $container;
         $this->repositoryClassName = $repositoryClassName;
+    }
+
+    /**
+     * @return TemplatableRepositoryInterface
+     */
+    private function getRepository(): TemplatableRepositoryInterface {
+        return $this->container[$this->repositoryClassName];
     }
 
     /**
@@ -60,7 +69,6 @@ class DoctrineResourceLoader implements ResourceLoader {
      */
     public function isFresh(string $name, int $time): bool {
         $item = $this->getByKey($name);
-//        dd($item->getUpdatedAt()->getTimestamp(), $time);
         return $item->getUpdatedAt()->getTimestamp() < $time;
     }
 
@@ -86,16 +94,46 @@ class DoctrineResourceLoader implements ResourceLoader {
         if(isset($this->cache[$key])) {
             return $this->cache[$key];
         }
-        
-        $item = $this->container[$this->repositoryClassName]->findByTemplateKey($key);
-        if($item === null){
+
+        $parts = explode('::', $key);
+        $modelId = null;
+        if(isset($parts[1]) && is_numeric($parts[1])) {
+            $modelId = (int) $parts[1];
+        }
+
+        if($modelId !== null) {
+            $item = $this->getRepository()->find($modelId);
+        } else {
+            $item = $this->getRepository()->findByTemplateKey($parts[0], true);
+        }
+
+        if($item === null) {
             throw new LoaderError($key . ' not found');
         }
         $this->cache[$key] = $item;
         return $item;
     }
 
+    /**
+     * @param Templatable $item
+     * @return int|string
+     */
     public function preloadItem(Templatable $item) {
-        $this->cache[$item->getResourceKey()] = $item;
+        $key = $item->getResourceKey() . '::' . ($item->isPublished() ? 'published' : $item->getId());
+        $this->cache[$key] = $item;
+        return $key;
     }
+
+    /**
+     * @param string $key
+     * @return Templatable
+     */
+    public function getLatestItemForKey(string $key) {
+        $item = $this->getRepository()->findByTemplateKey($key, false);
+        if($item === null) {
+            throw new LoaderError($key . ' not found');
+        }
+        return $item;
+    }
+
 }

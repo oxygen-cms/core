@@ -18,7 +18,7 @@ class RelationshipType extends BaseType {
         $repo = $metadata->options['repository'];
         $repo = is_callable($repo) ? $repo() : $repo;
 
-        return $repo->getReference((int)$value);
+        return $value === null ? null : $repo->getReference((int)$value);
     }
 
 }

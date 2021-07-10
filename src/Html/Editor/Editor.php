@@ -14,7 +14,6 @@ class Editor implements RenderableInterface {
      *
      * @var int
      */
-
     const TYPE_MAIN = 'editor';
 
     /**
@@ -22,7 +21,6 @@ class Editor implements RenderableInterface {
      *
      * @var int
      */
-
     const TYPE_MINI = 'editor-mini';
 
     /**
@@ -82,6 +80,13 @@ class Editor implements RenderableInterface {
      * @var array
      */
     public $stylesheets;
+
+    /**
+     * The entity being edited, if one was provided.
+     *
+     * @var object
+     */
+    public $entity;
 
     /**
      * Constructs the Editor.
