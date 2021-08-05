@@ -30,7 +30,6 @@ All parts of the framework depend on the Laravel framework to varying degrees.
 
 - [oxygen/mod-auth](https://github.com/oxygen-cms/mod-auth) - authentication - this one is pretty necessary to be able to access the backend interface
 - [oxygen/mod-import-export](https://github.com/oxygen-cms/mod-import-export) - import/export database content
-- [oxygen/mod-preferences](https://github.com/oxygen-cms/mod-preferences) - preferences UI
 
 Things which the CMS can store:
 
@@ -40,7 +39,8 @@ Things which the CMS can store:
 
 Deprecated:
 
-- *oxygen/mod-dashboard* - admin dashboard - **will be integrated into new Vue.JS user interface**
+- *oxygen/mod-preferences* - preferences UI - **integrated into Vue.JS user interface**
+- *oxygen/mod-dashboard* - admin dashboard - **integrated into new Vue.JS user interface**
 - *oxygen/mod-security* - a basic log of all login attempts - **now integrated into the authentication module**
 - *oxygen/mod-marketplace* - a package marketplace - **never took off so decided not worth the maintenance effort**
 
@@ -50,4 +50,4 @@ Deprecated:
 Oxygen uses the Laravel PHP framework, which in turn is based off [Symfony](http://symfony.com/).
 As well as Laravel, Oxygen uses countless other PHP packages from Composer, too many to list them all here.
 
-Oxygen is currently undergoing a modernization process to migrate to a swish new user interface written with Vue.js and built with Webpack. More to come...
+Oxygen is currently undergoing a modernization process to migrate to a swish new user interface written with Vue.js and built with Webpack. Though the individual packages are all currently open-sourced, alas the main application which ties them all together is not. Coming soon...
