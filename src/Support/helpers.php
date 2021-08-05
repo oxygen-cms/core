@@ -102,6 +102,24 @@ if(!function_exists('array_merge_recursive_distinct')) {
             foreach ($nextArrayToMerge as $key => &$value) {
                 if(is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                     $merged[$key] = array_merge_recursive_distinct($merged[$key], $value);
+                } else if($value) {
+                    $merged[$key] = $value;
+                }
+            }
+        }
+
+        return $merged;
+    }
+}
+
+if(!function_exists('array_merge_recursive_ignore_null')) {
+    function array_merge_recursive_ignore_null(array... $arrays): array {
+        $merged = array_shift($arrays);
+
+        foreach($arrays as $nextArrayToMerge) {
+            foreach ($nextArrayToMerge as $key => &$value) {
+                if(is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+                    $merged[$key] = array_merge_recursive_ignore_null($merged[$key], $value);
                 } else if($value !== null) {
                     $merged[$key] = $value;
                 }
