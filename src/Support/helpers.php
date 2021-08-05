@@ -89,13 +89,11 @@ if(!function_exists('array_merge_recursive_distinct')) {
      * array_merge_recursive_distinct(array('key' => 'org value'), array('key' => 'new value'));
      *     => array('key' => array('new value'));
      *
-     * Parameters are passed by reference, though only for performance reasons. They're not
-     * altered by this function.
-     *
      * @param array $arrays
      * @return array
      * @author Daniel <daniel (at) danielsmedegaardbuus (dot) dk>
      * @author Gabriel Sobrinho <gabriel (dot) sobrinho (at) gmail (dot) com>
+     * @author Chris Chamberlain
      */
     function array_merge_recursive_distinct(array... $arrays): array {
         $merged = array_shift($arrays);
@@ -104,7 +102,7 @@ if(!function_exists('array_merge_recursive_distinct')) {
             foreach ($nextArrayToMerge as $key => &$value) {
                 if(is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                     $merged[$key] = array_merge_recursive_distinct($merged[$key], $value);
-                } else {
+                } else if($value !== null) {
                     $merged[$key] = $value;
                 }
             }
