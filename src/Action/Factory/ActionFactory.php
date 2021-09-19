@@ -38,8 +38,8 @@ class ActionFactory implements FactoryInterface {
      * @return array
      */
     protected function parseParameters(array $parameters, $controller) {
-        if(!isset($parameters['uses']) || $parameters['uses'] === null) {
-            if($controller === null) {
+        if(!isset($parameters['uses']) || $parameters['uses'] == null) {
+            if($controller == null) {
                 throw new InvalidArgumentException('No `uses` key provided for Action');
             } else {
                 $parameters['uses'] = $controller . '@' . $parameters['name'];

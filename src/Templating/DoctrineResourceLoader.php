@@ -51,7 +51,7 @@ class DoctrineResourceLoader implements ResourceLoader {
     public function getSourceContext(string $name): Source {
         $item = $this->getByKey($name);
         $code = $item->getTemplateCode();
-        if($code === null) {
+        if($code == null) {
             $code = '';
         }
         return new Source($code, $name);

@@ -25,7 +25,7 @@ class TwigLoader implements LoaderInterface {
     }
 
     /**
-     * @param $resourceName
+     * @param string $resourceName
      * @param ResourceLoader $resourceLoader
      */
     public function addResourceType($resourceName, ResourceLoader $resourceLoader) {
@@ -33,7 +33,7 @@ class TwigLoader implements LoaderInterface {
     }
 
     /**
-     * @param $resourceName
+     * @param string $resourceName
      * @return ResourceLoader
      * @throws LoaderError
      */

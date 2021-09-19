@@ -31,7 +31,7 @@ class Action {
      * Request type of the action.
      * ie: get or post
      *
-     * @var string
+     * @var string|array
      */
     public $method;
 
@@ -84,7 +84,7 @@ class Action {
      * the Route is matched. This is useful for 'catch all'
      * routes that will otherwise override other routes.
      *
-     * @var boolean
+     * @var boolean|string
      */
     public $register;
 
@@ -141,7 +141,7 @@ class Action {
     /**
      * Returns the HTTP method.
      *
-     * @return string
+     * @return string|array
      */
     public function getMethod() {
         return $this->method;
