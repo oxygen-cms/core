@@ -41,14 +41,14 @@ class TwigTemplateValidator {
      * and ensuring it doesn't throw any exceptions.
      *
      * @param string $attribute
-     * @param string $value
+     * @param string|null $value
      * @param array $parameters
      * @param Validator $validator
      * @return bool
      * @throws Throwable
      */
     public function validate($attribute, $value, $parameters, $validator) {
-        if($value === null) {
+        if($value == null) {
             return true;
         }
         try {

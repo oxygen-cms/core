@@ -98,7 +98,7 @@ class TwigTemplateCompiler {
     }
 
     /**
-     * @param string $template
+     * @param string|null $template
      * @param Templatable|null $item
      * @param array $params
      * @return string
@@ -107,7 +107,7 @@ class TwigTemplateCompiler {
      * @throws SyntaxError
      */
     public function renderString($template, Templatable $item = null, array $params = []) {
-        if($template === null) {
+        if($template == null) {
             $template = '';
         }
 

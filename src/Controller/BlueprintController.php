@@ -20,7 +20,7 @@ class BlueprintController extends Controller {
     /**
      * Constructs a BlueprintController.
      *
-     * @param BlueprintManager | Blueprint $blueprint The blueprint or blueprint manager
+     * @param BlueprintManager|Blueprint $blueprint The blueprint or blueprint manager
      * @throws \ReflectionException
      * @throws BlueprintNotFoundException
      */
