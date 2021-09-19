@@ -4,7 +4,7 @@ namespace Oxygen\Core\Action;
 
 class AdminAction extends Action {
 
-    const AUTH_MIDDLEWARE_NAME = 'oxygen.auth';
+    const AUTH_MIDDLEWARE_NAME = 'auth';
     const TWO_FACTOR_AUTH_MIDDLEWARE_NAME = '2fa.require';
 
     /**
