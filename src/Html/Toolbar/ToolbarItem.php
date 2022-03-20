@@ -3,6 +3,7 @@
 namespace Oxygen\Core\Html\Toolbar;
 
 use Oxygen\Core\Html\RenderableInterface;
+use Oxygen\Core\Html\RendererInterface;
 
 interface ToolbarItem extends RenderableInterface {
 

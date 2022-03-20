@@ -72,7 +72,7 @@ class Toolbar {
     /**
      * Sets a shared items pool for the toolbar.
      *
-     * @param $items
+     * @param array $items
      * @return void
      */
     public function setSharedItemsPool(&$items) {

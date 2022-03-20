@@ -22,13 +22,11 @@ All parts of the framework depend on the Laravel framework to varying degrees.
 - [oxygen/data](https://github.com/oxygen-cms/data) - wrapper around Doctrine ORM
 - [oxygen/core](https://github.com/oxygen-cms/core) - core framework, depends on *oxygen/data*
 - [oxygen/crud](https://github.com/oxygen-cms/crud)  - scaffolding for Create-Read-Update-Delete operations, depends on *oxygen/data* and *oxygen/core*
-- [oxygen/theme](https://github.com/oxygen-cms/theme)  - theming support - doesn't depend on any oxygen packages
 - [oxygen/preferences](https://github.com/oxygen-cms/preferences)  - dynamic preferences configuration, depends on *oxygen/core*, *oxygen/data*, *oxygen/theme*
 - [oxygen/auth](https://github.com/oxygen-cms/auth) - authentication, depends on *oxygen/core*, *oxygen/data*, *oxygen/preferences*
 
 **Basic modules** - each of these adds some optional part of the backend interface, they can be mixed and matched as you please.
 
-- [oxygen/mod-auth](https://github.com/oxygen-cms/mod-auth) - authentication - this one is pretty necessary to be able to access the backend interface
 - [oxygen/mod-import-export](https://github.com/oxygen-cms/mod-import-export) - import/export database content
 
 Things which the CMS can store:
@@ -39,6 +37,8 @@ Things which the CMS can store:
 
 Deprecated:
 
+- [oxygen/theme](https://github.com/oxygen-cms/theme) - theming support - integrated into oxygen/core
+- [oxygen/mod-auth](https://github.com/oxygen-cms/mod-auth) - authentication - integrated into oxygen/auth (user-interface into [oxygen-cms/ui](https://github.com/oxygen-cms/ui))
 - *oxygen/mod-preferences* - preferences UI - **integrated into Vue.JS user interface**
 - *oxygen/mod-dashboard* - admin dashboard - **integrated into new Vue.JS user interface**
 - *oxygen/mod-security* - a basic log of all login attempts - **now integrated into the authentication module**

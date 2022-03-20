@@ -2,6 +2,8 @@
 
 namespace Oxygen\Core\Html;
 
+use Exception;
+
 interface RenderableInterface {
 
     /**
