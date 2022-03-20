@@ -36,7 +36,8 @@
                 "Oxygen\\Core\\Console\\ConsoleServiceProvider",
                 "Oxygen\\Core\\Translation\\TranslationServiceProvider",
                 "Oxygen\\Core\\Templating\\TemplatingServiceProvider",
-                "Oxygen\\Core\\Form\\FormServiceProvider"
+                "Oxygen\\Core\\Form\\FormServiceProvider",
+                "Oxygen\\Core\\Theme\\ThemeServiceProvider"
             ]
         }
     },
@@ -45,6 +46,6 @@
         "phpspec/phpspec": "^6.1"
     },
     "scripts": {
-        "test": "vendor/bin/phpspec run && vendor/bin/phpstan analyze src --level 1"
+        "test": "vendor/bin/phpspec run && vendor/bin/phpstan analyze src --level 2"
     }
 }

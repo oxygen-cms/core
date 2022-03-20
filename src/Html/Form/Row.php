@@ -49,7 +49,7 @@ class Row {
     /**
      * Adds a custom class to the row.
      *
-     * @param $name
+     * @param string $name
      */
     public function addClass($name) {
         $this->extraClasses[] = $name;

@@ -62,7 +62,7 @@ class Form implements RenderableInterface {
     /**
      * The id of the form.
      *
-     * @var
+     * @var string|null
      */
     protected $id;
 
@@ -88,7 +88,7 @@ class Form implements RenderableInterface {
     /**
      * Sets the arguments that will be passed to $action->getRouteParameters() later on
      *
-     * @param $arguments
+     * @param array $arguments
      */
     public function setRouteParameterArguments($arguments) {
         $this->routeParameterArguments = $arguments;
