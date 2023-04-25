@@ -12,14 +12,14 @@ class Editor implements RenderableInterface {
     /**
      * A main code editor.
      *
-     * @var int
+     * @var string
      */
     const TYPE_MAIN = 'editor';
 
     /**
      * A mini code editor.
      *
-     * @var int
+     * @var string
      */
     const TYPE_MINI = 'editor-mini';
 

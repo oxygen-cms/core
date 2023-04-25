@@ -3,6 +3,7 @@
 namespace Oxygen\Core\Content;
 
 use Tiptap\Core\Node;
+use Tiptap\Utils\HTML;
 
 class ObjectLinkMark extends Node {
     public static $name = 'objectLink';
@@ -63,7 +64,7 @@ class ObjectLinkMark extends Node {
 
     public function renderHTML($mark, $HTMLAttributes = [])
     {
-        $href = $this->registry->getURL($HTMLAttributes['type'], intval($HTMLAttributes['id']));
+        $href = $this->registry->resolve($HTMLAttributes['type'], intval($HTMLAttributes['id']));
         unset($HTMLAttributes['type']);
         unset($HTMLAttributes['id']);
         return [
