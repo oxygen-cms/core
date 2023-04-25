@@ -41,6 +41,11 @@ class TwigTemplateCompiler {
      */
     private $policy;
 
+    /**
+     * @var Templatable|null
+     */
+    private ?Templatable $tipTapRootElement = null;
+
     public function __construct($cachePath) {
         $this->loader = new TwigLoader();
         $this->stringLoader = new ArrayLoader();
@@ -120,6 +125,17 @@ class TwigTemplateCompiler {
         $key = hash('sha256', $template);
         $this->stringLoader->setTemplate($key, $template);
         return $this->twig->render($key, $params);
+    }
+
+    public function setConvertToTipTap(?Templatable $rootItem) {
+        $this->tipTapRootElement = $rootItem;
+        foreach($this->loader->getResourceLoaders() as $loader) {
+            $loader->setConvertToTipTap($rootItem);
+        }
+    }
+
+    public function shouldConvertToTipTap(): bool {
+        return $this->tipTapRootElement !== null;
     }
 
 }

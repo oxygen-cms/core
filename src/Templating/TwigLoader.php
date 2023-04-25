@@ -98,4 +98,11 @@ class TwigLoader implements LoaderInterface {
         $this->publishedMode = $published;
     }
 
+    /**
+     * @return ResourceLoader[]
+     */
+    public function getResourceLoaders(): array {
+        return $this->resources;
+    }
+
 }

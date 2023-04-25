@@ -26,13 +26,12 @@ class BootThemeMiddleware {
      * Handle an incoming request.
      *
      * @param  mixed  $request
-     * @param  \Closure  $next
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next) {
         try {
-            $currentTheme = $this->themeManager->current();
-            $currentTheme->boot();
+            $this->themeManager->current()->boot();
         } catch(ThemeNotFoundException $e) {
             // no theme to boot
         }

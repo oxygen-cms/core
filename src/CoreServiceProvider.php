@@ -4,6 +4,7 @@ namespace Oxygen\Core;
 
 use Illuminate\Support\ServiceProvider;
 use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
+use Oxygen\Core\Content\ObjectLinkRegistry;
 use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as BlueprintRegistrarContract;
 use Oxygen\Core\Contracts\StaticCoreConfiguration;
@@ -28,6 +29,8 @@ class CoreServiceProvider extends ServiceProvider {
             __DIR__ . '/../resources/lang' => base_path('resources/lang/vendor/oxygen/core')
         ]);
 
+        $this->loadRoutesFrom(__DIR__ . '/../resources/routes.php');
+
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'oxygen/core');
     }
 
@@ -46,6 +49,8 @@ class CoreServiceProvider extends ServiceProvider {
             );
         });
 
+        $this->app->singleton(ObjectLinkRegistry::class, ObjectLinkRegistry::class);
+
         $this->app->bind(BlueprintRegistrarContract::class, BlueprintRegistrar::class);
 
         $this->app->singleton('oxygen.layout', function () {
@@ -60,6 +65,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function provides() {
         return [
+            ObjectLinkRegistry::class,
             BlueprintManager::class,
             CoreConfiguration::class,
             BlueprintRegistrarContract::class

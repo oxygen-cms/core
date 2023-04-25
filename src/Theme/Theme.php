@@ -38,6 +38,10 @@ class Theme {
      * @var callable
      */
     protected $bootCallback;
+    /**
+     * @var false
+     */
+    private bool $booted;
 
     /**
      * Constructs the Theme.
@@ -47,6 +51,7 @@ class Theme {
     public function __construct(string $key) {
         $this->key = $key;
         $this->provides = [];
+        $this->booted = false;
         $this->bootCallback = function() {};
     }
 
@@ -141,8 +146,10 @@ class Theme {
      * @return void
      */
     public function boot() {
-        $callback = $this->bootCallback;
-        $callback();
+        if(!$this->booted) {
+            ($this->bootCallback)();
+            $this->booted = true;
+        }
     }
 
     /**

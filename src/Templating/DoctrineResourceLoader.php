@@ -25,15 +25,23 @@ class DoctrineResourceLoader implements ResourceLoader {
      * @var Container
      */
     private $container;
+    /**
+     * @var Templatable
+     */
+    private ?Templatable $tipTapRootItem = null;
+
+    private $tipTapHtmlConversion;
 
     /**
      * DoctrineResourceLoader constructor.
      * @param Container $container
      * @param string $repositoryClassName
+     * @param callable $tipTapHtmlConversion
      */
-    public function __construct(Container $container, string $repositoryClassName) {
+    public function __construct(Container $container, string $repositoryClassName, callable $tipTapHtmlConversion) {
         $this->container = $container;
         $this->repositoryClassName = $repositoryClassName;
+        $this->tipTapHtmlConversion = $tipTapHtmlConversion;
     }
 
     /**
@@ -50,9 +58,13 @@ class DoctrineResourceLoader implements ResourceLoader {
      */
     public function getSourceContext(string $name): Source {
         $item = $this->getByKey($name);
-        $code = $item->getTemplateCode();
-        if($code == null) {
-            $code = '';
+        if($this->tipTapRootItem !== null && $this->tipTapRootItem !== $item) {
+            $code = ($this->tipTapHtmlConversion)($this, $name);
+        } else {
+            $code = $item->getTemplateCode();
+            if($code == null) {
+                $code = '';
+            }
         }
         return new Source($code, $name);
     }
@@ -68,6 +80,7 @@ class DoctrineResourceLoader implements ResourceLoader {
      * @throws LoaderError
      */
     public function isFresh(string $name, int $time): bool {
+        if($this->tipTapRootItem !== null) { return false; }
         $item = $this->getByKey($name);
         return $item->getUpdatedAt()->getTimestamp() < $time;
     }
@@ -78,7 +91,7 @@ class DoctrineResourceLoader implements ResourceLoader {
      */
     public function exists(string $name) {
         try {
-            $item = $this->getByKey($name);
+            $this->getByKey($name);
             return true;
         } catch (LoaderError $e) {
             return false;
@@ -127,6 +140,7 @@ class DoctrineResourceLoader implements ResourceLoader {
     /**
      * @param string $key
      * @return Templatable
+     * @throws LoaderError
      */
     public function getLatestItemForKey(string $key) {
         $item = $this->getRepository()->findByTemplateKey($key, false);
@@ -134,6 +148,14 @@ class DoctrineResourceLoader implements ResourceLoader {
             throw new LoaderError($key . ' not found');
         }
         return $item;
+    }
+
+    /**
+     * @param Templatable $rootItem
+     * @return void
+     */
+    public function setConvertToTipTap(Templatable $rootItem) {
+        $this->tipTapRootItem = $rootItem;
     }
 
 }
