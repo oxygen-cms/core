@@ -20,4 +20,9 @@ interface ResourceLoader extends LoaderInterface {
      */
     public function getLatestItemForKey(string $key);
 
+    /**
+     * @param Templatable $rootItem
+     * @return void
+     */
+    public function setConvertToTipTap(Templatable $rootItem);
 }
