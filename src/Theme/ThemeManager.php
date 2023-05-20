@@ -20,7 +20,7 @@ class ThemeManager {
     protected $loader;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $themeOverride;
 
@@ -37,9 +37,9 @@ class ThemeManager {
     /**
      * Override the theme for the duration of the request, but do not store it for next time.
      *
-     * @param string $override
+     * @param string|null $override
      */
-    public function temporarilyOverrideTheme(string $override) {
+    public function temporarilyOverrideTheme(?string $override) {
         $this->themeOverride = $override;
     }
 
