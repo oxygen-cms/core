@@ -19,7 +19,8 @@
         "laravel/framework": "^10.0",
         "twig/twig": "^3.0",
         "ueberdosis/tiptap-php": "^1.1",
-        "ext-dom": "*"
+        "ext-dom": "*",
+        "webmozart/assert": "^1.11"
     },
     "autoload": {
         "psr-4": {
@@ -35,10 +36,8 @@
             "providers": [
                 "Oxygen\\Core\\CoreServiceProvider",
                 "Oxygen\\Core\\Console\\ConsoleServiceProvider",
-                "Oxygen\\Core\\Console\\ConsoleServiceProvider",
                 "Oxygen\\Core\\Translation\\TranslationServiceProvider",
                 "Oxygen\\Core\\Templating\\TemplatingServiceProvider",
-                "Oxygen\\Core\\Form\\FormServiceProvider",
                 "Oxygen\\Core\\Theme\\ThemeServiceProvider"
             ]
         }

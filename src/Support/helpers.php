@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Http\Response;
-use Oxygen\Core\Contracts\Routing\ResponseFactory;
-use Oxygen\Core\Http\Notification;
-
 if(!function_exists('html_attributes')) {
 
     /**
@@ -50,26 +46,6 @@ if(!function_exists('html_attribute_element')) {
         }
     }
 
-}
-
-if(!function_exists('notify')) {
-    /**
-     * Creates a response to an API call that handles AJAX requests as well.
-     *
-     * Will display a notification to the user and optionally perform another action such as redirecting or refreshing the page
-     *
-     * $parameters:
-     *    redirect (string)     - redirects the user to the given route
-     *    refresh (bool)        - refreshes the current page
-     *    hardRedirect (bool)   - whether to cause a full page refresh
-     *
-     * @param Notification $notification Notification to display.
-     * @param array        $parameters   Extra parameters
-     * @return Response
-     */
-    function notify(Notification $notification, array $parameters = []) {
-        return app(ResponseFactory::class)->notification($notification, $parameters);
-    }
 }
 
 if(!function_exists('array_merge_recursive_distinct')) {

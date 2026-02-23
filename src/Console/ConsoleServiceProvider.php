@@ -20,9 +20,6 @@ class ConsoleServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->commands(BlueprintListCommand::class);
-        $this->commands(BlueprintDetailCommand::class);
-        $this->commands(FieldSetDetailCommand::class);
     }
 
     /**
@@ -39,11 +36,7 @@ class ConsoleServiceProvider extends ServiceProvider {
      * @return array
      */
     public function provides() {
-        return [
-            BlueprintListCommand::class,
-            BlueprintDetailCommand::class,
-            FieldSetDetailCommand::class
-        ];
+        return [];
     }
 
 }
