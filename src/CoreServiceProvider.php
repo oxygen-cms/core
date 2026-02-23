@@ -2,16 +2,20 @@
 
 namespace Oxygen\Core;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 use Oxygen\Core\Content\ObjectLinkRegistry;
 use Oxygen\Core\Contracts\CoreConfiguration;
 use Oxygen\Core\Contracts\Routing\ResponseFactory as ExtendedResponseFactoryContract;
 use Oxygen\Core\Contracts\StaticCoreConfiguration;
 use Oxygen\Core\Routing\ResponseFactory;
-use Oxygen\Preferences\PreferencesManager;
+use Oxygen\Core\Preferences\PreferencesManager;
+use Oxygen\Core\Preferences\Loader\Database\DoctrinePreferenceRepository;
+use Oxygen\Core\Preferences\Loader\PreferenceRepositoryInterface;
+use Oxygen\Core\Preferences\PreferencesCurrentThemeLoader;
+use Oxygen\Core\Theme\CurrentThemeLoader;
+use Oxygen\Data\BaseServiceProvider;
 
-class CoreServiceProvider extends ServiceProvider {
+class CoreServiceProvider extends BaseServiceProvider {
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -33,6 +37,10 @@ class CoreServiceProvider extends ServiceProvider {
         $this->loadRoutesFrom(__DIR__ . '/../resources/routes.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'oxygen/core');
+
+        // Load preferences
+        $this->app[PreferencesManager::class]->loadDirectory(__DIR__ . '/../resources/preferences');
+        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
     }
 
     /**
@@ -41,9 +49,18 @@ class CoreServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
+        $this->loadEntitiesFrom(__DIR__ . '/Preferences/Loader/Database');
+
         $this->app->bind(CoreConfiguration::class, StaticCoreConfiguration::class);
 
         $this->app->singleton(ObjectLinkRegistry::class, ObjectLinkRegistry::class);
+
+        // Preferences bindings
+        $this->app->bind(CurrentThemeLoader::class, PreferencesCurrentThemeLoader::class);
+        $this->app->bind(PreferenceRepositoryInterface::class, DoctrinePreferenceRepository::class);
+        $this->app->singleton(PreferencesManager::class, function() {
+            return new PreferencesManager();
+        });
 
         $this->app->singleton(ResponseFactoryContract::class, ResponseFactory::class);
         $this->app->singleton(ExtendedResponseFactoryContract::class, ResponseFactory::class);
@@ -72,7 +89,10 @@ class CoreServiceProvider extends ServiceProvider {
             CoreConfiguration::class,
             ResponseFactoryContract::class,
             ExtendedResponseFactoryContract::class,
-            ResponseFactory::class
+            ResponseFactory::class,
+            PreferencesManager::class,
+            PreferenceRepositoryInterface::class,
+            CurrentThemeLoader::class
         ];
     }
 
