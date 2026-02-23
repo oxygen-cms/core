@@ -31,14 +31,14 @@ All parts of the framework depend on the Laravel framework to varying degrees.
 
 Things which the CMS can store:
 
-- [oxygen/mod-events](https://github.com/oxygen-cms/mod-events) - adds events
 - [oxygen/mod-media](https://github.com/oxygen-cms/mod-media) - adds media items (images, videos, audio, PDFs)
 - [oxygen/mod-pages](https://github.com/oxygen-cms/mod-pages) - adds pages
 
 Deprecated:
 
-- [oxygen/theme](https://github.com/oxygen-cms/theme) - theming support - integrated into oxygen/core
-- [oxygen/mod-auth](https://github.com/oxygen-cms/mod-auth) - authentication - integrated into oxygen/auth (user-interface into [oxygen-cms/ui](https://github.com/oxygen-cms/ui))
+- [oxygen/theme](https://github.com/oxygen-cms/theme) - theming support - **integrated into oxygen/core**
+- [oxygen/mod-auth](https://github.com/oxygen-cms/mod-auth) - authentication - **integrated into oxygen/auth (user-interface into [oxygen-cms/ui](https://github.com/oxygen-cms/ui))**
+- [oxygen/mod-events](https://github.com/oxygen-cms/mod-events) - adds events - **not maintained anymore**
 - *oxygen/mod-preferences* - preferences UI - **integrated into Vue.JS user interface**
 - *oxygen/mod-dashboard* - admin dashboard - **integrated into new Vue.JS user interface**
 - *oxygen/mod-security* - a basic log of all login attempts - **now integrated into the authentication module**

@@ -35,10 +35,8 @@
             "providers": [
                 "Oxygen\\Core\\CoreServiceProvider",
                 "Oxygen\\Core\\Console\\ConsoleServiceProvider",
-                "Oxygen\\Core\\Console\\ConsoleServiceProvider",
                 "Oxygen\\Core\\Translation\\TranslationServiceProvider",
                 "Oxygen\\Core\\Templating\\TemplatingServiceProvider",
-                "Oxygen\\Core\\Form\\FormServiceProvider",
                 "Oxygen\\Core\\Theme\\ThemeServiceProvider"
             ]
         }

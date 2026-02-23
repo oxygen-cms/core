@@ -3,12 +3,13 @@
 namespace Oxygen\Core;
 
 use Illuminate\Support\ServiceProvider;
-use Oxygen\Core\Blueprint\BlueprintManager as BlueprintManager;
+use Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 use Oxygen\Core\Content\ObjectLinkRegistry;
 use Oxygen\Core\Contracts\CoreConfiguration;
-use Oxygen\Core\Contracts\Routing\BlueprintRegistrar as BlueprintRegistrarContract;
+use Oxygen\Core\Contracts\Routing\ResponseFactory as ExtendedResponseFactoryContract;
 use Oxygen\Core\Contracts\StaticCoreConfiguration;
-use Oxygen\Core\Routing\BlueprintRegistrar;
+use Oxygen\Core\Routing\ResponseFactory;
+use Oxygen\Preferences\PreferencesManager;
 
 class CoreServiceProvider extends ServiceProvider {
 
@@ -42,19 +43,21 @@ class CoreServiceProvider extends ServiceProvider {
     public function register() {
         $this->app->bind(CoreConfiguration::class, StaticCoreConfiguration::class);
 
-        // bind blueprint manager
-        $this->app->singleton(BlueprintManager::class, function () {
-            return new BlueprintManager(
-                $this->app->make(CoreConfiguration::class)
-            );
-        });
-
         $this->app->singleton(ObjectLinkRegistry::class, ObjectLinkRegistry::class);
 
-        $this->app->bind(BlueprintRegistrarContract::class, BlueprintRegistrar::class);
-
-        $this->app->singleton('oxygen.layout', function () {
-            return $this->app[CoreConfiguration::class]->getAdminLayout();
+        $this->app->singleton(ResponseFactoryContract::class, ResponseFactory::class);
+        $this->app->singleton(ExtendedResponseFactoryContract::class, ResponseFactory::class);
+        $this->app->bind(ResponseFactory::class, function($app) {
+            // lazy load stuff
+            return new ResponseFactory(
+                $app['view'],
+                $app['redirect'],
+                $app['url'],
+                request(),
+                function() {
+                    return $this->app[PreferencesManager::class]->get('user.pageLoad::smoothState.enabled', true);
+                }
+            );
         });
     }
 
@@ -66,9 +69,10 @@ class CoreServiceProvider extends ServiceProvider {
     public function provides() {
         return [
             ObjectLinkRegistry::class,
-            BlueprintManager::class,
             CoreConfiguration::class,
-            BlueprintRegistrarContract::class
+            ResponseFactoryContract::class,
+            ExtendedResponseFactoryContract::class,
+            ResponseFactory::class
         ];
     }
 
