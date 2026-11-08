@@ -1,52 +1,64 @@
 {
-    "name": "oxygen/core",
-    "description": "The Core Framework For Oxygen",
-    "license": "MIT",
-    "keywords": [
-        "cms",
-        "framework",
-        "OxygenExtension"
-    ],
-    "authors": [
-        {
-            "name": "Chris Chamberlain",
-            "email": "chris@chamberlain.id.au"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "oxygen/data": "~0.12.0",
-        "laravel/framework": "^10.0",
-        "twig/twig": "^3.0",
-        "ueberdosis/tiptap-php": "^1.1",
-        "ext-dom": "*",
-        "webmozart/assert": "^1.11"
-    },
-    "autoload": {
-        "psr-4": {
-            "Oxygen\\Core\\": "src/"
-        },
-        "files": [
-            "src/Support/helpers.php"
-        ]
-    },
-    "minimum-stability": "stable",
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Oxygen\\Core\\CoreServiceProvider",
-                "Oxygen\\Core\\Console\\ConsoleServiceProvider",
-                "Oxygen\\Core\\Translation\\TranslationServiceProvider",
-                "Oxygen\\Core\\Templating\\TemplatingServiceProvider",
-                "Oxygen\\Core\\Theme\\ThemeServiceProvider"
-            ]
-        }
-    },
-    "require-dev": {
-        "phpstan/phpstan": "^1.8",
-        "phpspec/phpspec": "^7.0"
-    },
-    "scripts": {
-        "test": "vendor/bin/phpspec run && vendor/bin/phpstan analyze src --level 2"
+  "name": "oxygen/core",
+  "description": "The Core Framework For Oxygen",
+  "license": "MIT",
+  "keywords": [
+    "cms",
+    "framework",
+    "OxygenExtension"
+  ],
+  "authors": [
+    {
+      "name": "Chris Chamberlain",
+      "email": "chris@chamberlain.id.au"
     }
+  ],
+  "require": {
+    "php": "^8.1",
+    "oxygen/data": "~0.12.0",
+    "laravel/framework": "^10.0",
+    "twig/twig": "^3.0",
+    "ueberdosis/tiptap-php": "^2.2",
+    "ext-dom": "*",
+    "webmozart/assert": "^1.11"
+  },
+  "autoload": {
+    "psr-4": {
+      "Oxygen\\Core\\": "src/"
+    },
+    "files": [
+      "src/Support/helpers.php"
+    ]
+  },
+  "minimum-stability": "stable",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Oxygen\\Core\\CoreServiceProvider",
+        "Oxygen\\Core\\Console\\ConsoleServiceProvider",
+        "Oxygen\\Core\\Translation\\TranslationServiceProvider",
+        "Oxygen\\Core\\Templating\\TemplatingServiceProvider",
+        "Oxygen\\Core\\Theme\\ThemeServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "policy": {
+      "advisories": {
+        "ignore": {
+          "laravel/framework": {
+            "constraint": "^10.0",
+            "reason": "deferring Laravel 11 upgrade"
+          }
+        }
+      }
+    }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.8",
+    "phpspec/phpspec": "^7.0"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpspec run && vendor/bin/phpstan analyze src --level 2"
+  }
 }
