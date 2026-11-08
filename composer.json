@@ -16,7 +16,7 @@
   "require": {
     "php": "^8.3",
     "oxygen/data": "~0.12.0",
-    "laravel/framework": "^10.0",
+    "laravel/framework": "^10.0|^11.0",
     "twig/twig": "^3.0",
     "ueberdosis/tiptap-php": "^2.2",
     "ext-dom": "*",
@@ -45,16 +45,6 @@
   "config": {
     "platform": {
       "php": "8.3.0"
-    },
-    "policy": {
-      "advisories": {
-        "ignore": {
-          "laravel/framework": {
-            "constraint": "^10.0",
-            "reason": "deferring Laravel 11 upgrade"
-          }
-        }
-      }
     }
   },
   "require-dev": {
