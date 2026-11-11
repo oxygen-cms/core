@@ -7,23 +7,17 @@ use Oxygen\Data\Validation\Validatable;
 use Oxygen\Core\Preferences\PreferencesStorageInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="preferences")
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'preferences')]
+#[ORM\HasLifecycleCallbacks]
 class PreferenceItem implements Validatable, PreferencesStorageInterface {
 
     use PrimaryKey;
 
-    /**
-     * @ORM\Column(name="``key`", type="string", unique=true)
-     */
+    #[ORM\Column(name: '``key`', type: 'string', unique: true)]
     protected $key;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: 'json')]
     protected $contents;
 
     /**
