@@ -48,7 +48,7 @@
     }
   },
   "require-dev": {
-    "phpstan/phpstan": "^1.8",
+    "phpstan/phpstan": "^2.2",
     "phpspec/phpspec": "^7.0"
   },
   "scripts": {
