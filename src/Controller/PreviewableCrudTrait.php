@@ -50,7 +50,9 @@ trait PreviewableCrudTrait {
                 $renderLayout = $renderLayout === 'true';
             }
 
-            return $this->getContent($templating, $content, $renderLayout, $item);
+            $optionsOverride = $request->get('options', null);
+
+            return $this->getContent($templating, $content, $renderLayout, $item, $optionsOverride);
         } catch(Error $e) {
             return response($e->getMessage());
         }
@@ -63,14 +65,20 @@ trait PreviewableCrudTrait {
      * @param string|null $contentOverride
      * @param bool $renderLayout
      * @param object|null $item
+     * @param array|string|null $optionsOverride unsaved options to preview with (not persisted)
      * @return View
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    protected function getContent(TwigTemplateCompiler $templating, ?string $contentOverride, bool $renderLayout, $item) {
+    protected function getContent(TwigTemplateCompiler $templating, ?string $contentOverride, bool $renderLayout, $item, $optionsOverride = null) {
         if($item !== null) {
             $item = $this->getItem($item);
+            if($optionsOverride !== null && method_exists($item, 'setOptions')) {
+                // Work on a detached copy so the unsaved options are never flushed to the database.
+                $item = clone $item;
+                $item->setOptions($optionsOverride);
+            }
         }
 
         $rendered = $this->renderEntityContent($templating, $contentOverride, $item);
